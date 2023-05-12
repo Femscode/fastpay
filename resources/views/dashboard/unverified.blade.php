@@ -3,17 +3,17 @@
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 
 <head>
-    <title>Paycirclex | Home</title>
+    <title>Verify Email | Fastpay</title>
     <meta charset="utf-8" />
-    <meta name="description" content="Send Money In Bulk" />
-    <meta name="keywords" content="Pay Your Circle" />
+    <meta name="description" content="Payment Portal For CT_Taste" />
+    <meta name="keywords" content="Quick pay with CT_Taste" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:type" content="article" />
-    <meta property="og:title" content="Pay your circle" />
-    <meta property="og:url" content="https://paycirclex.com" />
-    <meta property="og:site_name" content="Paycirclex" />
-    <link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
+    <meta property="og:title" content="CT_Taste" />
+    <meta property="og:url" content="https://cttaste.com" />
+    <meta property="og:site_name" content="CT_Taste" />
+    <link rel="shortcut icon" href="assets/media/logos/fav_01.png" />
 
     <!--begin::Fonts(mandatory for all pages)-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
@@ -106,7 +106,7 @@
                                             <!--begin:Logo-->
                                             <div style="margin-bottom: 10px">
                                                 <a rel="noopener" target="_blank">
-                                                    <img alt="Logo" src="../../assets/media/email/logo-1.svg"
+                                                    <img alt="Logo"  src="assets/media/logos/ct_yellow.png"
                                                         style="height: 35px" />
                                                 </a>
                                             </div>
@@ -159,10 +159,10 @@
                                 <tr>
                                     <td align="center" valign="center"
                                         style="font-size: 13px; padding:0 15px; text-align:center; font-weight: 500; color: #A1A5B7;font-family:Arial,Helvetica,sans-serif">
-                                        <p> &copy Copyright KeenThemes.
+                                        <p> &copy Copyright
                                             <a href="https://keenthemes.com/" rel="noopener" target="_blank"
-                                                style="font-weight: 600;font-family:Arial,Helvetica,sans-serif">Unsubscribe</a>&nbsp;
-                                            from newsletter.
+                                                style="font-weight: 600;font-family:Arial,Helvetica,sans-serif">CT_Taste.</a>&nbsp;
+                                            
                                         </p>
                                     </td>
                                 </tr>

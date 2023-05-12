@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
+use App\Models\Payroll;
 use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
-use App\Models\Payroll;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
 use App\Providers\RouteServiceProvider;
@@ -79,7 +80,7 @@ class RegisterController extends Controller
 
         event(new Registered($user));
         $user->sendEmailVerificationNotification();
-      
+        Auth::login($user);
         return $user;
     }
 }

@@ -7,107 +7,27 @@
 
     <!--end::Subheader-->
     <!--begin::Entry-->
-    <div class="d-flex flex-column-fluid">
+    <div class="d-flex flex-column flex-column-fluid">
         <div  id="kt_app_content" class="app-content  flex-column-fluid ">
         <!--begin::Container-->
         <div class="row">
             <!--begin::Profile Account Information-->
-            <div class="row">
+           
                 <!--begin::Aside-->
-                <div class="col-md-4" id="kt_profile_aside">
+                <div class="col-md-4">
                     <!--begin::Profile Card-->
                     <div class="card card-custom card-stretch">
                         <!--begin::Body-->
                         <div class="card-body pt-4">
                             <!--begin::Toolbar-->
-                            <div class="d-flex justify-content-end">
-                                <div class="dropdown dropdown-inline">
-                                    <a href="#"
-                                        class="btn btn-clean btn-hover-light-primary btn-sm btn-icon"
-                                        data-toggle="dropdown" aria-haspopup="true"
-                                        aria-expanded="false">
-                                        <i class="ki ki-bold-more-hor"></i>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
-                                        <!--begin::Navigation-->
-                                        <ul class="navi navi-hover py-5">
-                                            <li class="navi-item">
-                                                <a href="#" class="navi-link">
-                                                    <span class="navi-icon">
-                                                        <i class="flaticon2-drop"></i>
-                                                    </span>
-                                                    <span class="navi-text">New Group</span>
-                                                </a>
-                                            </li>
-                                            <li class="navi-item">
-                                                <a href="#" class="navi-link">
-                                                    <span class="navi-icon">
-                                                        <i class="flaticon2-list-3"></i>
-                                                    </span>
-                                                    <span class="navi-text">Contacts</span>
-                                                </a>
-                                            </li>
-                                            <li class="navi-item">
-                                                <a href="#" class="navi-link">
-                                                    <span class="navi-icon">
-                                                        <i class="flaticon2-rocket-1"></i>
-                                                    </span>
-                                                    <span class="navi-text">Groups</span>
-                                                    <span class="navi-link-badge">
-                                                        <span
-                                                            class="label label-light-primary label-inline font-weight-bold">new</span>
-                                                    </span>
-                                                </a>
-                                            </li>
-                                            <li class="navi-item">
-                                                <a href="#" class="navi-link">
-                                                    <span class="navi-icon">
-                                                        <i class="flaticon2-bell-2"></i>
-                                                    </span>
-                                                    <span class="navi-text">Calls</span>
-                                                </a>
-                                            </li>
-                                            <li class="navi-item">
-                                                <a href="#" class="navi-link">
-                                                    <span class="navi-icon">
-                                                        <i class="flaticon2-gear"></i>
-                                                    </span>
-                                                    <span class="navi-text">Settings</span>
-                                                </a>
-                                            </li>
-                                            <li class="navi-separator my-3"></li>
-                                            <li class="navi-item">
-                                                <a href="#" class="navi-link">
-                                                    <span class="navi-icon">
-                                                        <i class="flaticon2-magnifier-tool"></i>
-                                                    </span>
-                                                    <span class="navi-text">Help</span>
-                                                </a>
-                                            </li>
-                                            <li class="navi-item">
-                                                <a href="#" class="navi-link">
-                                                    <span class="navi-icon">
-                                                        <i class="flaticon2-bell-2"></i>
-                                                    </span>
-                                                    <span class="navi-text">Privacy</span>
-                                                    <span class="navi-link-badge">
-                                                        <span
-                                                            class="label label-light-danger label-rounded font-weight-bold">5</span>
-                                                    </span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                        <!--end::Navigation-->
-                                    </div>
-                                </div>
-                            </div>
+                          
                             <!--end::Toolbar-->
                             <!--begin::User-->
                             <div class="d-flex align-items-center">
                                 <div
                                     class="symbol symbol-60 symbol-xxl-100 mr-5 align-self-start align-self-xxl-center">
-                                    <div class="symbol-label"
-                                        style="background-image:url('../../../../../theme/html/demo2/dist/assets/media/users/300_21.jpg')">
+                                    <div class="symbol-label fa fa-user m-2"
+                                      >
                                     </div>
                                     <i class="symbol-badge bg-success"></i>
                                 </div>
@@ -250,7 +170,7 @@
                     <!--end::Card-->
                 </div>
                 <!--end::Content-->
-            </div>
+           
             <!--end::Profile Account Information-->
         </div>
         <!--end::Container-->

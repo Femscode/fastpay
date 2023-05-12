@@ -32,7 +32,7 @@
         </div>
 
         <div class="card-toolbar">
-          <button type="reset" class="btn btn-secondary">Back</button>
+          <a @click="myHistory" class="btn btn-secondary">Back na</a>
         </div>
       </div>
       <!--end::Header-->
@@ -112,6 +112,9 @@ export default {
     };
   },
   methods: {
+    myHistory() {
+      alert('nice one')
+    },
     verifyAccount() {
       if (this.account_id.length >= 10) {
         let fd = new FormData();

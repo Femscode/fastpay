@@ -15,15 +15,14 @@
     <meta property="og:site_name" content="CT_Taste" />
     <link rel="shortcut icon" href="assets/media/logos/fav_01.png" />
 
-    <!--begin::Fonts(mandatory for all pages)-->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
-    <!--end::Fonts-->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
+ 
+    <link rel="stylesheet" href="assets/googlefonts/inter.css" />
     <!--end::Fonts-->
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+    {{-- <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet"> --}}
+    <link href="assets/googlefonts/ubuntu.css" rel="stylesheet">
 
     @laravelPWA
 
@@ -191,7 +190,7 @@
 
                         <!--begin::Action-->
                         <a href="/pay_cttaste" class="btn btn-warning">Pay For Food</a>
-                        <a href="/dashboard" class="btn btn-success">Pay For Hostel</a>
+                        <a href="/dashboard" class="btn btn-success">Pay For Utilities</a>
                         <!--end::Action-->
                     </div>
                     <!--end::Heading-->

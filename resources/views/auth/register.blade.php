@@ -1,30 +1,30 @@
 <!DOCTYPE html>
-
 <html lang="en">
-<!--begin::Head-->
-
-<!-- Mirrored from preview.keenthemes.com/metronic8/demo34/authentication/layouts/creative/sign-in.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 06 Feb 2023 08:11:22 GMT -->
-<!-- Added by HTTrack -->
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 
 <head>
-    <title>Paycirclex | Sign Up</title>
+    <title>Fastpay | CT_Taste</title>
     <meta charset="utf-8" />
-    <meta name="description" content="Send Money In Bulk" />
-    <meta name="keywords" content="Pay Your Circle" />
+    <meta name="description" content="Payment Portal For CT_Taste" />
+    <meta name="keywords" content="Quick pay with CT_Taste" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:type" content="article" />
-    <meta property="og:title" content="Pay your circle" />
-    <meta property="og:url" content="https://paycirclex.com" />
-    <meta property="og:site_name" content="Paycirclex" />
-    <link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
+    <meta property="og:title" content="CT_Taste" />
+    <meta property="og:url" content="https://cttaste.com" />
+    <meta property="og:site_name" content="CT_Taste" />
+    <link rel="shortcut icon" href="assets/media/logos/fav_01.png" />
 
+    @laravelPWA
     <!--begin::Fonts(mandatory for all pages)-->
-    {{-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" /> --}}
+
+    <link rel="stylesheet" href="assets/googlefonts/inter.css" />
     <!--end::Fonts-->
 
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    {{-- <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet"> --}}
+    <link href="assets/googlefonts/ubuntu.css" rel="stylesheet">
 
     <!--begin::Global Stylesheets Bundle(mandatory for all pages)-->
     <link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
@@ -91,13 +91,13 @@
                 <div class="d-flex flex-center flex-lg-start flex-column">
                     <!--begin::Logo-->
                     <a href="/index.html" class="mb-7">
-                        <img alt="Logo" src="/assets/media/logos/custom-3.svg" />
+                        <img alt="Logo" src="/assets/media/logos/ct_white.png" style='width:150px;height:40px' />
                     </a>
                     <!--end::Logo-->
 
                     <!--begin::Title-->
                     <h2 class="text-white fw-normal m-0">
-                        Pay your circle, Pay In Bulk
+                        Pay for food, pay for utilities bill.
                     </h2>
                     <!--end::Title-->
                 </div>

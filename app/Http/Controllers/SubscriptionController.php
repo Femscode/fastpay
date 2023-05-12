@@ -49,7 +49,7 @@ class SubscriptionController extends Controller
         //purchase the data
         $curl = curl_init();
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://easyaccess.com.ng/api/data.php",
+            CURLOPT_URL => "https://easyaccessapi.com.ng/api/data.php",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
@@ -64,7 +64,7 @@ class SubscriptionController extends Controller
                 'client_reference' => 'buy_data_' . Str::random(7), //update this on your script to receive webhook notifications
             ),
             CURLOPT_HTTPHEADER => array(
-                "AuthorizationToken:08b9ef13671036cb6c3126e80192708b ", //replace this with your authorization_token
+                "AuthorizationToken: .env('EASY_ACCESS_AUTH')", //replace this with your authorization_token
                 "cache-control: no-cache"
             ),
         ));
@@ -121,7 +121,7 @@ class SubscriptionController extends Controller
         //purchase the data
         $curl = curl_init();
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://easyaccess.com.ng/api/paytv.php",
+            CURLOPT_URL => "https://easyaccessapi.com.ng/api/paytv.php",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
@@ -135,7 +135,7 @@ class SubscriptionController extends Controller
                 'package' => $request->plan,
             ),
             CURLOPT_HTTPHEADER => array(
-                "AuthorizationToken: 08b9ef13671036cb6c3126e80192708b", //replace this with your authorization_token
+                "AuthorizationToken: ".env('EASY_ACCESS_AUTH'), //replace this with your authorization_token
                 "cache-control: no-cache"
             ),
         ));
@@ -185,7 +185,7 @@ class SubscriptionController extends Controller
         //purchase the data
         $curl = curl_init();
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://easyaccess.com.ng/api/payelectricity.php",
+            CURLOPT_URL => "https://easyaccessapi.com.ng/api/payelectricity.php",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
@@ -200,7 +200,7 @@ class SubscriptionController extends Controller
                 'amount' => $discounted_amount,
             ),
             CURLOPT_HTTPHEADER => array(
-                "AuthorizationToken: 08b9ef13671036cb6c3126e80192708b", //replace this with your authorization_token
+                "AuthorizationToken: ".env('EASY_ACCESS_AUTH'), //replace this with your authorization_token
                 "cache-control: no-cache"
             ),
         ));
@@ -248,7 +248,7 @@ class SubscriptionController extends Controller
         //purchase the data
         $curl = curl_init();
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://easyaccess.com.ng/api/airtime.php",
+            CURLOPT_URL => "https://easyaccessapi.com.ng/api/airtime.php",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
@@ -264,7 +264,7 @@ class SubscriptionController extends Controller
                 'client_reference' => 'buy_data_' . Str::random(7), //update this on your script to receive webhook notifications
             ),
             CURLOPT_HTTPHEADER => array(
-                "AuthorizationToken:08b9ef13671036cb6c3126e80192708b ", //replace this with your authorization_token
+                "AuthorizationToken: .env('EASY_ACCESS_AUTH')", //replace this with your authorization_token
                 "cache-control: no-cache"
             ),
         ));
@@ -357,7 +357,7 @@ class SubscriptionController extends Controller
 
         $curl = curl_init();
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://easyaccess.com.ng/api/verifyelectricity.php",
+            CURLOPT_URL => "https://easyaccessapi.com.ng/api/verifyelectricity.php",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
@@ -372,7 +372,7 @@ class SubscriptionController extends Controller
                 'amount' => 1000,
             ),
             CURLOPT_HTTPHEADER => array(
-                "AuthorizationToken: 08b9ef13671036cb6c3126e80192708b", //replace this with your authorization_token
+                "AuthorizationToken: ".env('EASY_ACCESS_AUTH'), //replace this with your authorization_token
                 "cache-control: no-cache"
             ),
         ));
@@ -387,7 +387,7 @@ class SubscriptionController extends Controller
         // dd($request->all(),'decoder_details');
         $curl = curl_init();
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://easyaccess.com.ng/api/verifytv.php",
+            CURLOPT_URL => "https://easyaccessapi.com.ng/api/verifytv.php",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
@@ -402,7 +402,7 @@ class SubscriptionController extends Controller
                 // 'iucno' => '7032054653',
             ),
             CURLOPT_HTTPHEADER => array(
-                "AuthorizationToken: 08b9ef13671036cb6c3126e80192708b", //replace this with your authorization_token
+                "AuthorizationToken: ".env('EASY_ACCESS_AUTH'), //replace this with your authorization_token
                 "cache-control: no-cache"
             ),
         ));

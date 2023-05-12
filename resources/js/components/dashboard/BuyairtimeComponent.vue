@@ -32,7 +32,7 @@
         </div>
 
         <div class="card-toolbar">
-          <button type="reset" class="btn btn-secondary">Back</button>
+          <button onclick="history.back()" class="btn btn-secondary">Back</button>
         </div>
       </div>
       <!--end::Header-->

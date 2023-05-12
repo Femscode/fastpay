@@ -13,81 +13,8 @@
         <div class="row">
             <!--begin::Profile Account Information-->
            
-                <!--begin::Aside-->
-                <div class="col-md-4">
-                    <!--begin::Profile Card-->
-                    <div class="card card-custom card-stretch">
-                        <!--begin::Body-->
-                        <div class="card-body pt-4">
-                            <!--begin::Toolbar-->
-                          
-                            <!--end::Toolbar-->
-                            <!--begin::User-->
-                            <div class="d-flex align-items-center">
-                                <div
-                                    class="symbol symbol-60 symbol-xxl-100 mr-5 align-self-start align-self-xxl-center">
-                                    <div class="symbol-label fa fa-user m-2"
-                                      >
-                                    </div>
-                                    <i class="symbol-badge bg-success"></i>
-                                </div>
-                                <div>
-                                    <a href="#"
-                                        class="font-weight-bolder font-size-h5 text-dark-75 text-hover-primary">Fund
-                                        Wallet</a>
-
-                                    <div class="mt-2">
-                                        {{ $user->email }}
-                                    </div>
-                                </div>
-                            </div>
-                            <!--end::User-->
-                            <!--begin::Contact-->
-                            <div class="py-9">
-                                <form method="POST" action="{{ route('pay') }}" accept-charset="UTF-8"
-                                    class="form-horizontal" role="form">@csrf
-                                    <div class="row" style="margin-bottom:40px;">
-                                        <div class="col-md-12 col-md-offset-2">
-
-                                            <input required type="number" min='150' id='u_amount'
-                                                class="form-control" placeholder="Amount"
-                                                aria-label="Amount">
-                                            <input type="hidden" name="email"
-                                                value="{{ $user->email }}"> {{-- required
-                                            --}}
-
-                                            <input type="hidden" id='amount' name="amount">
-                                            <input type="hidden" name="quantity" value="1">
-                                            <input type="hidden" name="currency" value="NGN">
-                                            <input type="hidden" name="metadata"
-                                                value="{{ json_encode($array = ['phone' => $user->phone,]) }}">
-                                            <input type="hidden" name="reference"
-                                                value="{{ Paystack::genTranxRef() }}">
-
-                                            <p class='mt-2 justify-content-center'
-                                                style='display:flex;justify-content:center'>
-                                                <button class="btn btn-success btn-lg btn-block"
-                                                    type="submit" value="Pay Now!">
-                                                    <i class="fa fa-plus-circle fa-lg"></i>
-                                                    Fund Wallet!
-                                                </button>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                           
-                              
-                            
-                            <!--end::Nav-->
-                        </div>
-                        <!--end::Body-->
-                    </div>
-                    <!--end::Profile Card-->
-                </div>
-                <!--end::Aside-->
                 <!--begin::Content-->
-                <div class="col-md-8">
+                <div class="col-md-12">
                     <!--begin::Card-->
                     <div class="card card-custom">
                         <!--begin::Header-->
@@ -161,12 +88,55 @@
                                 </div>
                                 <!--end::Info-->
 
+                                
+
+                            </div>
+                            <div class="separator separator-content my-14">
+                                <span class=" text-gray-500 fw-bold fs-7"
+                                  >Or fund directly</span
+                                >
+                              </div>
+                            <div class="py-9">
+                                <form method="POST" action="{{ route('pay') }}" accept-charset="UTF-8"
+                                    class="form-horizontal" role="form">@csrf
+                                    <div class="row" style="margin-bottom:40px;">
+                                        <div class="col-md-12 col-md-offset-2">
+
+                                            <input required type="number" min='150' id='u_amount'
+                                                class="form-control" placeholder="Amount"
+                                                aria-label="Amount">
+                                            <input type="hidden" name="email"
+                                                value="{{ $user->email }}"> {{-- required
+                                            --}}
+
+                                            <input type="hidden" id='amount' name="amount">
+                                            <input type="hidden" name="quantity" value="1">
+                                            <input type="hidden" name="currency" value="NGN">
+                                            <input type="hidden" name="metadata"
+                                                value="{{ json_encode($array = ['phone' => $user->phone,]) }}">
+                                            <input type="hidden" name="reference"
+                                                value="{{ Paystack::genTranxRef() }}">
+
+                                            <p class='mt-2 justify-content-center'
+                                                style='display:flex;justify-content:center'>
+                                                <button class="btn btn-success btn-lg btn-block"
+                                                    type="submit" value="Pay Now!">
+                                                    <i class="fa fa-plus-circle fa-lg"></i>
+                                                    Fund Wallet!
+                                                </button>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
 
                             </div>
                         </form>
+
+                        
                         <!--end::Form-->
                     </div>
+
                     <!--end::Card-->
                 </div>
                 <!--end::Content-->

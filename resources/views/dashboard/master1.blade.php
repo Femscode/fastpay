@@ -15,7 +15,7 @@
     <meta property="og:site_name" content="CT_Taste" />
     <link rel="shortcut icon" href="assets/media/logos/fav_01.png" />
 
-    {{-- @laravelPWA --}}
+    @laravelPWA
     <!--begin::Fonts(mandatory for all pages)-->
 
     <link rel="stylesheet" href="assets/googlefonts/inter.css" />

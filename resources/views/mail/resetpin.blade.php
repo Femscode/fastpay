@@ -5,7 +5,7 @@
 			<tr>
 				<td align="center" valign="center" style="text-align:center; padding: 40px">
 					
-                        <h3>Paycirclex</h3>
+                        <h3>CT_Taste</h3>
 						{{-- <img src="https://cthostel.com/myimages/funaablogo.png" style="height:35px;width:150px" alt="logo"> --}}
 							<tr>
 								<td align="left" valign="center">

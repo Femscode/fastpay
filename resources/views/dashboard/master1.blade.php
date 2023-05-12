@@ -15,7 +15,7 @@
     <meta property="og:site_name" content="CT_Taste" />
     <link rel="shortcut icon" href="assets/media/logos/fav_01.png" />
 
-    @laravelPWA
+    {{-- @laravelPWA --}}
     <!--begin::Fonts(mandatory for all pages)-->
 
     <link rel="stylesheet" href="assets/googlefonts/inter.css" />
@@ -25,6 +25,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     {{-- <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet"> --}}
     <link href="assets/googlefonts/ubuntu.css" rel="stylesheet">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
 
     <!--begin::Global Stylesheets Bundle(mandatory for all pages)-->
     <link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />

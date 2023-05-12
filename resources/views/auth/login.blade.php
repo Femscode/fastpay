@@ -168,7 +168,11 @@
                                         />
                                         <!--end::Password-->
                                       </div>
-                                
+                                      <div class="separator separator-content my-14">
+                                        <span class="w-125px text-gray-500 fw-semibold fs-7"
+                                          >Or with social accounts</span
+                                        >
+                                      </div>
                                       <div class="row g-3 mb-9">
                                         <!--begin::Col-->
                                         <div class="col-md-6">

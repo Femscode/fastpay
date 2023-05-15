@@ -14,9 +14,9 @@ return [
     |
     */
     'google' => [
-        'client_id' => '266176284464-jcgoth6amp06vk7r4jaafadq0a89oqqq.apps.googleusercontent.com',
+        'client_id' => env('GOOGLE_CLIENT_ID'),
         'client_secret' => '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',
-        'redirect' => 'https://fastpay.cttaste.com/dashboard',
+        'redirect' => env('GOOGLE_CLIENT_SECRET'),
     ],
 
     'mailgun' => [

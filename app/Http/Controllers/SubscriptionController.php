@@ -77,8 +77,8 @@ class SubscriptionController extends Controller
             // Transaction was successful
             // Do something here
         } else {
-
-            $this->create_transaction('Data Purchase', $response_json['reference_no'], $response_json['true_response'], 'debit', $data->data_price, $user->id, 0);
+            $reference = 'failed_tv_'. Str::random(5);
+            $this->create_transaction('Data Purchase', $reference, 'Failed data purchase', 'debit', $data->data_price, $user->id, 0);
         }
         $this->check_duplicate("Delete", $user->id);
 
@@ -150,9 +150,9 @@ class SubscriptionController extends Controller
             // Transaction was successful
             // Do something here
         } else {
-
+            $reference = 'failed_tv_'. Str::random(5);
             $details = "Failed Tv subscription, amount: " . $amount;
-            $this->create_transaction('Cable Subscription', $response_json['reference_no'], $details, 'debit', $amount, $user->id, 0);
+            $this->create_transaction('Cable Subscription', $reference, $details, 'debit', $amount, $user->id, 0);
         }
         $this->check_duplicate("Delete", $user->id);
 
@@ -278,9 +278,9 @@ class SubscriptionController extends Controller
             // Transaction was successful
             // Do something here
         } else {
-
+            $reference = 'failed_airtime_'. Str::random(5);
             $details = "Airtime Purchase of NGN" . $request->amount . " on " . $request->phone_number;
-            $this->create_transaction('Airtime Purchase', $response_json['reference_no'], $response_json['message'], 'debit', $request->discounted_amount, $user->id, 0);
+            $this->create_transaction('Airtime Purchase', $reference, $response_json['message'], 'debit', $request->discounted_amount, $user->id, 0);
         }
         $this->check_duplicate("Delete", $user->id);
 

@@ -164,7 +164,7 @@
     @endif
         $("#u_amount").on('input',function() {
         var amount = parseInt($("#u_amount").val()) * 100;
-        var charges = 0.020 * amount
+        var charges = 0.02 * amount
       
        
         if(parseInt($("#u_amount").val()) < 2500) {
@@ -172,7 +172,7 @@
         }
         else {
             $("#amount").val((amount) + (0.05 * amount) +10000);    
-            var charges =   (0.020 * amount) + 10000
+            var charges =   (0.02 * amount) + 10000
             
         }
         $("#charges").text('Charges : '+ (charges/100).toLocaleString('en-US', { style: 'currency', currency: 'NGN' }))          

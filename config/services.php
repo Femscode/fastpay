@@ -13,6 +13,11 @@ return [
     | a conventional file to locate the various service credentials.
     |
     */
+    'google' => [
+        'client_id' => '266176284464-jcgoth6amp06vk7r4jaafadq0a89oqqq.apps.googleusercontent.com',
+        'client_secret' => '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',
+        'redirect' => 'https://fastpay.cttaste.com/dashboard',
+    ],
 
     'mailgun' => [
         'domain' => env('MAILGUN_DOMAIN'),

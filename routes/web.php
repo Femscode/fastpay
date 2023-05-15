@@ -7,6 +7,7 @@ use App\Models\Payee;
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LoginWithGoogleController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 Auth::routes();
@@ -36,6 +37,9 @@ Route::any('fixcharges',  function () {
     }
     return true;
 });
+Route::get('authorized/google', [LoginWithGoogleController::class, 'redirectToGoogle']);
+Route::get('authorized/google/callback', [LoginWithGoogleController::class, 'handleGoogleCallback']);
+ 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/', [App\Http\Controllers\FrontendController::class, 'index'])->name('home');
 Route::any('/logout', [App\Http\Controllers\HomeController::class, 'logout'])->name('logout');
@@ -80,6 +84,10 @@ Route::group(['middleware' => 'auth'], function () {
 Route::post('/live_add', [App\Http\Controllers\PayrollController::class, 'live_add'])->name('live_add');
 // Payrll and payee 
 Route::get('/support', [App\Http\Controllers\HomeController::class, 'support'])->name('support');
+Route::group(['middleware' => 'auth'], function () {
+    Route::any('/superadmin', [App\Http\Controllers\SuperController::class, 'superadmin'])->name('superadmin');
+
+});
 Route::group(['middleware' => 'auth'], function () {
     //new routes
     Route::any('/resetpassword', [App\Http\Controllers\UserController::class, 'resetpassword'])->name('resetpassword');
@@ -132,4 +140,6 @@ Route::post('/email/verification-notification', function (Request $request) {
 
     return back()->with('status', 'verification-link-sent');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
+
 Route::get('{slug}', [App\Http\Controllers\PayrollController::class, 'slug'])->name('slug');

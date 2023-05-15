@@ -149,7 +149,7 @@ export default {
   },
   methods: {
     verifyAccount() {
-      if (this.order_id.length >= 14) {
+      if (this.order_id.length >= 8) {
         let fd = new FormData();
         fd.append("order_id", this.order_id);
         axios

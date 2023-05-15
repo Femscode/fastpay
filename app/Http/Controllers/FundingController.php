@@ -48,15 +48,14 @@ class FundingController extends Controller
         $r_amountpaid = ($request->input('data.amount')) / 100;
         $amountpaid = $r_amountpaid - (0.10 * $r_amountpaid);
 
-        $user_id = User::where('email', $email)->firstOrFail()->id;
-        $user = User::find($user_id);
-
+        $user = User::where('email', $email)->firstOrFail();
+       
         $before = $user->balance;
         $uuid = Str::uuid();
 
 
         $details = "Account credited with" . $amountpaid;
-        $this->create_transaction('Account Funded Through Paystack', $request->input('data.reference'), $details, 'credit', $amountpaid, $user_id, 1);
+        $this->create_transaction('Account Funding', $request->input('data.reference'), $details, 'credit', $amountpaid, $user->id, 1);
 
         return response()->json("OK", 200);
     }

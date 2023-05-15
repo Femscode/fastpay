@@ -194,7 +194,7 @@ trait TransactionTrait
             $tranx->after = $nuser->balance;
             $tranx->status = 1;
             $tranx->save();
-        } elseif ($title == 'Account Funded Through Paystack') {
+        } elseif ($title == 'Account Funding') {
 
             $nuser = User::find($user);
             $nuser->balance += $amount;

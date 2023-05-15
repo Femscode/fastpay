@@ -142,7 +142,7 @@ class FundingController extends Controller
             $this->check_duplicate("Delete", $user->id);
             $reference = 'payment_received_' . Str::random(7);
             $details = "Payment of NGN" . $amount . ' from ' . $user->name . ' received successfully!';
-            $this->create_transaction('Payment Received', $reference, $details, 'debit', $amount, $beneficiary->id, 1);
+            $this->create_transaction('Payment Received', $reference, $details, 'credit', $amount, $beneficiary->id, 1);
             return true;
         }
     }

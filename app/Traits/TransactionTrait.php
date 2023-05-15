@@ -192,6 +192,7 @@ trait TransactionTrait
 
             $nuser->save();
             $tranx->after = $nuser->balance;
+            
             $tranx->status = 1;
             $tranx->save();
         } elseif ($title == 'Account Funding') {

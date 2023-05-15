@@ -1,4 +1,4 @@
-@extends('dashboard.master1')
+@extends('super.master')
 
 @section('header')
 @endsection
@@ -167,8 +167,7 @@
                 <div class="card card-custom">
                     <div class="card-header flex-wrap border-0 pt-6 pb-0">
                         <div class="card-title">
-                            <h3 class="card-label">My Transactions
-                                <span class="text-muted pt-2 font-size-sm d-block">{{ $user->email }}</span>
+                            <h3 class="card-label">Payment Transactions
                             </h3>
                         </div>
                      
@@ -181,19 +180,23 @@
                                     <th scope="col">Reference</th>
                                     <th scope="col">Details</th>
                                     <th scope="col">Amount</th>
+                                    <th scope="col">Before</th>
+                                    <th scope="col">After</th>
                                     <th scope="col">Type</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($transactions as $key => $tranx)
+                                @foreach($payments as $key => $tranx)
 
                                 <tr>
 
-                                    <td>{{ $tranx->reference }}</td>
+                                    <td>{{ $tranx->reference }}<br><span class='text-danger'>{{ $tranx->user->name }}</span></td>
                                     <td>{{ $tranx->description }}</td>
-                                    <td>₦{{ number_format($tranx->amount,2) }}</td>
+                                    <td>₦{{ number_format($tranx->amount) }}</td>
+                                    <td>₦{{ number_format($tranx->before) }}</td>
+                                    <td>₦{{ number_format($tranx->after) }}</td>
                                     <td>{{ $tranx->type }}</td>
                                     <td>@if($tranx->status == 1)
                                         <span class='badge badge-light-success'>Success</span>

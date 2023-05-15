@@ -22,6 +22,7 @@ class SubscriptionController extends Controller
     }
     public function buydata(Request $request)
     {
+        dd(env('EASY_ACCESS_AUTH'));
         $user = Auth::user();
         $hashed_pin = hash('sha256', $request->pin);
         if ($user->pin !== $hashed_pin) {
@@ -77,7 +78,7 @@ class SubscriptionController extends Controller
             // Transaction was successful
             // Do something here
         } else {
-            $reference = 'failed_tv_'. Str::random(5);
+            $reference = 'failed_data_'. Str::random(5);
             $this->create_transaction('Data Purchase', $reference, 'Failed data purchase', 'debit', $data->data_price, $user->id, 0);
         }
         $this->check_duplicate("Delete", $user->id);

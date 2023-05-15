@@ -178,7 +178,7 @@
                     <div class="text-center mb-5 mb-lg-10 py-10 py-lg-20">
                         <!--begin::Title-->
                         <h1 class="text-white lh-base fw-bold fs-2x fs-lg-3x mb-15">
-                            Make payment very easily <br />
+                            Make payment easily <br />
                             for
 
                             <span

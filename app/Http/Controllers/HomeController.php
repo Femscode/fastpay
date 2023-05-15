@@ -91,6 +91,7 @@ class HomeController extends Controller
     }
     public function fundwallet()
     {
+       
         $data['user'] = $user = Auth::user();
         $data['active'] = 'fundwallet';
         

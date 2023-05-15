@@ -27,8 +27,7 @@ class FundingController extends Controller
         try {
             return Paystack::getAuthorizationUrl()->redirectNow();
         } catch (\Exception $e) {
-          
-
+            
             return Redirect::back()->withMessage(['msg' => 'The paystack token has expired. Please refresh the page and try again.', 'type' => 'error']);
         }
     }
@@ -48,19 +47,17 @@ class FundingController extends Controller
         file_put_contents(__DIR__ . '/paystacklog.txt', json_encode($request->all(), JSON_PRETTY_PRINT), FILE_APPEND);
         $email = $request->input('data.customer.email');
         $r_amountpaid = ($request->input('data.amount')) / 100;
-        if($r_amountpaid < 2500) {
-            $amountpaid = $r_amountpaid - (0.05 * $r_amountpaid);
+        if($request->input('data.channel') == 'dedicated_nuban') {
+            $amountpaid = $r_amountpaid - 50;
+        }
+        elseif($r_amountpaid < 2500) {
+            $amountpaid = $r_amountpaid - (0.02 * $r_amountpaid);
         } else {
-            $amountpaid = $r_amountpaid - (0.05 * $r_amountpaid + 100);
+            $amountpaid = $r_amountpaid - (0.02 * $r_amountpaid + 100);
             
         }
 
         $user = User::where('email', $email)->firstOrFail();
-       
-        $before = $user->balance;
-        $uuid = Str::uuid();
-
-
         $details = "Account credited with NGN" . $amountpaid;
         $this->create_transaction('Account Funding', $request->input('data.reference'), $details, 'credit', $amountpaid, $user->id, 1);
 

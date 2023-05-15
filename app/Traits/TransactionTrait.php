@@ -123,7 +123,7 @@ trait TransactionTrait
 
         $fields = [
             "customer" => $customer,
-            "preferred_bank" => "access-bank",
+            "preferred_bank" => "wema-bank",
             "phone" => "234" . $user->phone
         ];
 
@@ -153,7 +153,7 @@ trait TransactionTrait
             return 0;
         }
 
-        $user->bank_name = 'Access Bank';
+        $user->bank_name = $c_response['data']['bank']['name'];
         $user->account_name = $c_response['data']['account_name'];
         $user->account_no = $c_response['data']['account_number'];
 

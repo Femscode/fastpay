@@ -48,7 +48,12 @@ class FundingController extends Controller
         file_put_contents(__DIR__ . '/paystacklog.txt', json_encode($request->all(), JSON_PRETTY_PRINT), FILE_APPEND);
         $email = $request->input('data.customer.email');
         $r_amountpaid = ($request->input('data.amount')) / 100;
-        $amountpaid = $r_amountpaid - (0.10 * $r_amountpaid);
+        if($r_amountpaid < 2500) {
+            $amountpaid = $r_amountpaid - (0.05 * $r_amountpaid);
+        } else {
+            $amountpaid = $r_amountpaid - (0.05 * $r_amountpaid + 100);
+            
+        }
 
         $user = User::where('email', $email)->firstOrFail();
        

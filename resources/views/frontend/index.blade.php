@@ -541,7 +541,7 @@
                                 <div class="mb-0">
                                     <!--begin::Value-->
                                     <div class="fs-lg-2hx fs-2x fw-bold text-white d-flex flex-center">
-                                        <div class="min-w-70px" data-kt-countup="true" data-kt-countup-value="700"
+                                        <div class="min-w-70px" data-kt-countup="true" data-kt-countup-value="4500"
                                             data-kt-countup-suffix="+">0</div>
                                     </div>
                                     <!--end::Value-->
@@ -587,7 +587,7 @@
 
                                     <!--begin::Label-->
                                     <span class="text-gray-600 fw-semibold fs-5 lh-0">
-                                        Food Vendors </span>
+                                        Food Orders </span>
                                     <!--end::Label-->
                                 </div>
                                 <!--end::Info-->
@@ -619,14 +619,14 @@
                                 <div class="mb-0">
                                     <!--begin::Value-->
                                     <div class="fs-lg-2hx fs-2x fw-bold text-white d-flex flex-center">
-                                        <div class="min-w-70px" data-kt-countup="true" data-kt-countup-value="35"
-                                            data-kt-countup-suffix="M+">0</div>
+                                        <div class="min-w-70px" data-kt-countup="true" data-kt-countup-value="650"
+                                            data-kt-countup-suffix="+">0</div>
                                     </div>
                                     <!--end::Value-->
 
                                     <!--begin::Label-->
                                     <span class="text-gray-600 fw-semibold fs-5 lh-0">
-                                        Hostel Agents and Landlords </span>
+                                        Hostels </span>
                                     <!--end::Label-->
                                 </div>
                                 <!--end::Info-->
@@ -642,19 +642,19 @@
                     <div class="fs-2 fw-semibold text-muted text-center mb-3">
                         <span class="fs-1 lh-1 text-gray-700">“</span>
 
-                        When you care about your topic, you’ll write about it in a <br /><span
-                            class="text-gray-700 me-1">more powerful</span>, emotionally expressive way
+                        We care about tech solutions that brings value to students <br /><span
+                            class="text-gray-700 me-1">and making school life more</span>easier
 
                         <span class="fs-1 lh-1 text-gray-700">“</span>
                     </div>
                     <!--end::Testimonial-->
 
                     <!--begin::Author-->
-                    <div class="fs-2 fw-semibold text-muted text-center">
-                        <a href="account/security.html" class="link-primary fs-4 fw-bold">Marcus Levy,</a>
+                    {{-- <div class="fs-2 fw-semibold text-muted text-center">
+                        <a href="account/security.html" class="link-primary fs-4 fw-bold"></a>
 
                         <span class="fs-4 fw-bold text-gray-600">cttaste CEO</span>
-                    </div>
+                    </div> --}}
                     <!--end::Author-->
                 </div>
                 <!--end::Container-->
@@ -1628,16 +1628,16 @@
                         <!--begin::Menu-->
                         <ul class="menu menu-gray-600 menu-hover-primary fw-semibold fs-6 fs-md-5 order-1 mb-5 mb-md-0">
                             <li class="menu-item">
-                                <a href="https://cttaste.com/" target="_blank" class="menu-link px-2">About</a>
+                                <a href="https://cttaste.com/about" target="_blank" class="menu-link px-2">About</a>
                             </li>
 
                             <li class="menu-item mx-5">
-                                <a href="https://devs.cttaste.com/" target="_blank"
+                                <a href="mailto:support@cttaste.com" target="_blank"
                                     class="menu-link px-2">Support</a>
                             </li>
 
                             <li class="menu-item">
-                                <a href="#" target="_blank" class="menu-link px-2">Purchase</a>
+                                <a href="https://wa.me/2349058744473" target="_blank" class="menu-link px-2">Invest</a>
                             </li>
                         </ul>
                         <!--end::Menu-->

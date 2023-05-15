@@ -112,7 +112,7 @@ trait TransactionTrait
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            "Authorization: Bearer sk_live_dc09eacf4aed817703251640abf8bd4b4f0d007f",
+            "Authorization: Bearer ".env('PAYSTACK_SECRET_KEY'),
             "Cache-Control: no-cache",
         ));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -137,7 +137,7 @@ trait TransactionTrait
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            "Authorization: Bearer sk_live_dc09eacf4aed817703251640abf8bd4b4f0d007f",
+            "Authorization: Bearer ".env('PAYSTACK_SECRET_KEY'),
             "Cache-Control: no-cache",
         ));
 

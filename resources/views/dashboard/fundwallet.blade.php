@@ -49,7 +49,7 @@
                                 </span>
                             </div> --}}
                             <div class="alert-text font-weight-bold">Transfer to your virtual
-                                account below with a charge of NGN50 and get
+                                account below with a charge of ₦50 and get
                                 credited immediately!</div>
 
 
@@ -109,11 +109,13 @@
 
                                         <input type="hidden" id='amount' name="amount">
                                         <input type="hidden" name="quantity" value="1">
-                                        <input type="hidden" name="currency" value="NGN">
+                                        <input type="hidden" name="currency" value="₦">
                                         <input type="hidden" name="metadata"
                                             value="{{ json_encode($array = ['phone' => $user->phone,]) }}">
                                         <input type="hidden" name="reference" value="{{ Paystack::genTranxRef() }}">
-
+                                        <div id='charges' class='alert alert-info mt-2'>
+                                            Charges : ₦0.00 
+                                        </div>
                                         <p class='mt-2 justify-content-center'
                                             style='display:flex;justify-content:center'>
                                             <button class="btn btn-success btn-lg btn-block" type="submit"
@@ -122,6 +124,7 @@
                                                 Fund Wallet
                                             </button>
                                         </p>
+                                       
                                     </div>
                                 </div>
                             </form>
@@ -156,17 +159,18 @@
     @endif
         $("#u_amount").on('input',function() {
         var amount = parseInt($("#u_amount").val()) * 100;
+        var charges = 0.015 * amount
       
        
         if(parseInt($("#u_amount").val()) < 2500) {
-            $("#amount").val((amount) + (0.05 * amount));
-          
+            $("#amount").val((amount) + charges);
         }
         else {
-            $("#amount").val((amount) + (0.05 * amount) +10000);
-          
-          
+            $("#amount").val((amount) + (0.05 * amount) +10000);    
+            var charges =   (0.015 * amount) + 10000
+            
         }
+        $("#charges").text('Charges '+ (charges/100).toLocaleString('en-US', { style: 'currency', currency: 'NGN' }))          
         
         // alert($("#u_amount").val() * 100)
     })

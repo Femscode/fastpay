@@ -61,7 +61,7 @@ class FundingController extends Controller
         $uuid = Str::uuid();
 
 
-        $details = "Account credited with" . $amountpaid;
+        $details = "Account credited with NGN" . $amountpaid;
         $this->create_transaction('Account Funding', $request->input('data.reference'), $details, 'credit', $amountpaid, $user->id, 1);
 
         return response()->json("OK", 200);

@@ -3,38 +3,7 @@
     <!--begin::Card-->
     <div class="card card-custom">
       <!--begin::Header-->
-      <div class="card-header py-3">
-        <div class="d-flex align-items-center">
-          <div
-            class="symbol symbol-60 symbol-xxl-100 mr-5 align-self-start align-self-xxl-center"
-          >
-            <div
-              class="symbol-label"
-              style="
-                background-image: url('../../../../../theme/html/demo2/dist/assets/media/users/300_21.jpg');
-              "
-            ></div>
-            <i class="symbol-badge bg-success"></i>
-          </div>
-          <div>
-            <a
-              href="#"
-              class="font-weight-bolder font-size-h5 text-dark-75 text-hover-primary"
-              >Wallet Balance</a
-            >
-
-            <div class="mt-2">
-              NGN
-              <span style="font-size: 20px">{{ this.user.balance }}</span
-              >.00
-            </div>
-          </div>
-        </div>
-
-        <div class="card-toolbar">
-          <button onclick="history.back() " class="btn btn-secondary">Back</button>
-        </div>
-      </div>
+     
       <!--end::Header-->
       <!--begin::Form-->
       <form class="form" @submit.prevent="buyElectricity()">

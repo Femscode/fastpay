@@ -18,21 +18,13 @@
                 <!--begin::Card-->
                 <div class="card card-custom">
                     <!--begin::Header-->
-                    <div class="card-header py-3">
-                        <div class="card-title align-items-start flex-column">
-                            <h3 class="card-label font-weight-bolder text-dark">Account Transfer
-                            </h3>
-                            <span class="text-muted font-weight-bold font-size-sm mt-1">Automatic
-                                Funding</span>
-                        </div>
-
-                    </div>
+               
                     <!--end::Header-->
                     <!--begin::Form-->
 
                     <div class="card-body">
                         <!--begin::Heading-->
-                        <div class="alert bg-light-info alert-custom alert-light-info fade show mb-10" role="alert">
+                        <div class="alert bg-light-info alert-custom alert-light-info fade show mb-2" role="alert">
                             {{-- <div class="alert-icon">
                                 <span class="svg-icon svg-icon-3x svg-icon-info">
                                     <!--begin::Svg Icon | path:/metronic/theme/html/demo2/dist/assets/media/svg/icons/Code/Info-circle.svg-->
@@ -93,10 +85,10 @@
 
 
                         </div>
-                        <div class="separator separator-content my-14">
+                        <div class="separator separator-content my-8">
                             <span class=" text-gray-500 fw-bold fs-7">Or fund directly</span>
                         </div>
-                        <div class="py-9">
+                        <div class="py-2">
                             <form method="POST" action="{{ route('pay') }}" accept-charset="UTF-8"
                                 class="form-horizontal" role="form">@csrf
                                 <div class="row" style="margin-bottom:40px;">

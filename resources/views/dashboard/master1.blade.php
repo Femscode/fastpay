@@ -70,13 +70,13 @@
 
 
     <!--begin::App-->
-    <div class="d-flex flex-column flex-root app-root" id="kt_app_root">
+    <div   class="d-flex flex-column flex-root app-root" id="kt_app_root">
         <!--begin::Page-->
         <div class="app-page  flex-column flex-column-fluid " id="kt_app_page">
 
 
             <!--begin::Header-->
-            <div id="kt_app_header" class="app-header " data-kt-sticky="true"
+            <div  id="kt_app_header" class="app-header " data-kt-sticky="true"
                 data-kt-sticky-activate="{default: false, lg: true}" data-kt-sticky-name="app-header-sticky"
                 data-kt-sticky-offset="{default: false, lg: '300px'}">
 
@@ -485,13 +485,13 @@
             </div>
             <!--end::Header-->
             <!--begin::Wrapper-->
-            <div class="app-wrapper  flex-column flex-row-fluid " id="kt_app_wrapper">
+            <div  class="app-wrapper  flex-column flex-row-fluid " id="kt_app_wrapper">
 
                 <!--begin::Toolbar-->
-                <div id="kt_app_toolbar" class="app-toolbar  py-6 ">
+                <div style='background:url(assets/media/logos/header-bg.jpg);background-size:cover' id="kt_app_toolbar" class="app-toolbar  py-6 ">
 
                     <!--begin::Toolbar container-->
-                    <div id="kt_app_toolbar_container" class="app-container  container-xxl d-flex align-items-start ">
+                    <div   id="kt_app_toolbar_container" class="app-container  container-xxl d-flex align-items-start ">
                         <!--begin::Toolbar container-->
                         <div class="d-flex flex-column flex-row-fluid">
                             <!--begin::Toolbar wrapper-->
@@ -549,7 +549,7 @@
                                         <span class="page-desc text-white-700 fw-semibold fs-6 pt-3">
                                             Wallet Balance: NGN{{ number_format($user->balance,2) }} </span>
                                        {{-- <div class='d-flex'> --}}
-                                            <a class='btn btn-info btn-sm' style='margin-right:8px' href='/fundwallet'>Fund Wallet</a>
+                                            <a class='btn btn-success btn-sm' style='margin-right:8px' href='/fundwallet'>Fund Wallet</a>
                                         {{-- <a class='btn btn-success btn-sm' href='/fundwallet'>Withdraw Funds</a> --}}
                                        {{-- </div> --}}
                                         <!--end::Description-->

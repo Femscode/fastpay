@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 
 <head>
@@ -55,7 +55,7 @@
 		}
 
 		if (themeMode === "system") {
-			themeMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+			themeMode = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "light";
 		}
 
 		document.documentElement.setAttribute("data-bs-theme", themeMode);
@@ -72,7 +72,7 @@
         <!--begin::Header Section-->
         <div class="mb-0" id="home">
             <!--begin::Wrapper-->
-            <div class="bgi-no-repeat bgi-size-contain bgi-position-x-center bgi-position-y-bottom landing-dark-bg"
+            <div class="bgi-no-repeat bgi-size-contain bgi-position-x-center bgi-position-y-bottom landing-light-bg"
                 style="background-image: url(assets/media/svg/illustrations/landing.svg)">
                 <!--begin::Header-->
                 <div style='padding:10px' class="landing-header" data-kt-sticky="true" data-kt-sticky-name="landing-header"
@@ -173,11 +173,11 @@
 
 
                 <!--begin::Landing hero-->
-                <div class="d-flex flex-column flex-center w-100 min-h-350px min-h-lg-500px px-9">
+                <div style='background-image: url(assets/media/logos/bg1.jpg);background-size:cover;' class="d-flex flex-column flex-center w-100 min-h-350px min-h-lg-500px px-9">
                     <!--begin::Heading-->
                     <div class="text-center mb-5 mb-lg-10 py-10 py-lg-20">
                         <!--begin::Title-->
-                        <h1 class="text-white lh-base fw-bold fs-2x fs-lg-3x mb-15">
+                        <h1 class="text-dark lh-base fw-bold fs-2x fs-lg-3x mb-15">
                             Make payment easily <br />
                             for
 
@@ -196,42 +196,42 @@
                     <!--end::Heading-->
 
                     <!--begin::Clients-->
-                    <div class="d-flex flex-center flex-wrap position-relative px-5">
+                    <div style='background:#fff' class="d-flex flex-center flex-wrap position-relative px-5">
 
                         <!--begin::Client-->
                         <div class="d-flex flex-center m-3 m-md-6" data-bs-toggle="tooltip" title="Fujifilm">
-                            <img src="assets/media/svg/brand-logos/fujifilm.svg" class="mh-30px mh-lg-40px" alt="" />
+                            <img src="assets/media/logos/hand_of_God.png" class="mh-30px mh-lg-40px" alt="" />
                         </div>
                         <!--end::Client-->
 
                         <!--begin::Client-->
                         <div class="d-flex flex-center m-3 m-md-6" data-bs-toggle="tooltip" title="Vodafone">
-                            <img src="assets/media/svg/brand-logos/vodafone.svg" class="mh-30px mh-lg-40px" alt="" />
+                            <img src="assets/media/logos/tudeetop.jpeg" class="mh-30px mh-lg-40px" alt="" />
                         </div>
                         <!--end::Client-->
 
                         <!--begin::Client-->
                         <div class="d-flex flex-center m-3 m-md-6" data-bs-toggle="tooltip" title="KPMG International">
-                            <img src="assets/media/svg/brand-logos/kpmg.svg" class="mh-30px mh-lg-40px" alt="" />
+                            <img src="assets/media/logos/mhunis.jpeg" class="mh-30px mh-lg-40px" alt="" />
                         </div>
                         <!--end::Client-->
 
                         <!--begin::Client-->
                         <div class="d-flex flex-center m-3 m-md-6" data-bs-toggle="tooltip" title="Nasa">
-                            <img src="assets/media/svg/brand-logos/nasa.svg" class="mh-30px mh-lg-40px" alt="" />
+                            <img src="assets/media/logos/beespicy.jpeg" class="mh-30px mh-lg-40px" alt="" />
                         </div>
                         <!--end::Client-->
 
                         <!--begin::Client-->
                         <div class="d-flex flex-center m-3 m-md-6" data-bs-toggle="tooltip" title="Aspnetzero">
-                            <img src="assets/media/svg/brand-logos/aspnetzero.svg" class="mh-30px mh-lg-40px" alt="" />
+                            <img src="assets/media/logos/mayortoast.jpeg" class="mh-30px mh-lg-40px" alt="" />
                         </div>
                         <!--end::Client-->
 
                         <!--begin::Client-->
                         <div class="d-flex flex-center m-3 m-md-6" data-bs-toggle="tooltip"
                             title="AON - Empower Results">
-                            <img src="assets/media/svg/brand-logos/aon.svg" class="mh-30px mh-lg-40px" alt="" />
+                            <img src="assets/media/logos/dalish2.jpeg" class="mh-30px mh-lg-40px" alt="" />
                         </div>
                         <!--end::Client-->
 
@@ -260,11 +260,11 @@
             <!--end::Wrapper-->
 
             <!--begin::Curve bottom-->
-            <div class="landing-curve landing-dark-color mb-10 mb-lg-20">
+            <div style='background:#fff'class="landing-curve landing-light-color ">
                 <svg viewBox="15 12 1470 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                         d="M0 11C3.93573 11.3356 7.85984 11.6689 11.7725 12H1488.16C1492.1 11.6689 1496.04 11.3356 1500 11V12H1488.16C913.668 60.3476 586.282 60.6117 11.7725 12H0V11Z"
-                        fill="currentColor"></path>
+                        fill="#ebab21"></path>
                 </svg>
             </div>
             <!--end::Curve bottom-->
@@ -272,19 +272,19 @@
         <!--end::Header Section-->
 
         <!--begin::How It Works Section-->
-        <div class="mb-n10 mb-lg-n20 z-index-2">
+        <div class="mb-n10 mb-lg-n20 z-index-2"  style='background:#fff'>
             <!--begin::Container-->
-            <div class="container">
+            <div class="container"  >
                 <!--begin::Heading-->
                 <div class="text-center mb-17">
                     <!--begin::Title-->
-                    <h3 class="fs-2hx text-white mb-5" id="how-it-works"
+                    <h3 class="fs-2hx text-dark mb-5 mt-4" id="how-it-works"
                         data-kt-scroll-offset="{default: 100, lg: 150}">
                         Easy Pay!</h3>
                     <!--end::Title-->
 
                     <!--begin::Text-->
-                    <div class="fs-5 text-muted fw-bold">
+                    <div style='color:#640f11' class="fs-5 fw-bold">
                       Save yourself the stress of waiting for payment confirmation!
                     </div>
                     <!--end::Text-->
@@ -298,7 +298,7 @@
                         <!--begin::Story-->
                         <div class="text-center mb-10 mb-md-0">
                             <!--begin::Illustration-->
-                            <img src="assets/media/illustrations/sketchy-1/2.png" class="mh-125px mb-9" alt="" />
+                            <img src="assets/media/logos/delivery_metronics.png" class="mh-125px mb-9" alt="" />
                             <!--end::Illustration-->
 
                             <!--begin::Heading-->
@@ -308,7 +308,7 @@
                                 <!--end::Badge-->
 
                                 <!--begin::Title-->
-                                <div class="fs-5 fs-lg-3 fw-bold text-white">
+                                <div class="fs-5 fs-lg-3 fw-bold text-dark">
                                     Pay for food orders.</div>
                                 <!--end::Title-->
                             </div>
@@ -332,7 +332,7 @@
                         <!--begin::Story-->
                         <div class="text-center mb-10 mb-md-0">
                             <!--begin::Illustration-->
-                            <img src="assets/media/illustrations/sketchy-1/8.png" class="mh-125px mb-9" alt="" />
+                            <img src="assets/media/logos/hostel_metronics.png" class="mh-125px mb-9" alt="" />
                             <!--end::Illustration-->
 
                             <!--begin::Heading-->
@@ -342,7 +342,7 @@
                                 <!--end::Badge-->
 
                                 <!--begin::Title-->
-                                <div class="fs-5 fs-lg-3 fw-bold text-white">
+                                <div class="fs-5 fs-lg-3 fw-bold text-dark">
                                     Pay for hostel </div>
                                 <!--end::Title-->
                             </div>
@@ -366,7 +366,7 @@
                         <!--begin::Story-->
                         <div class="text-center mb-10 mb-md-0">
                             <!--begin::Illustration-->
-                            <img src="assets/media/illustrations/sketchy-1/12.png" class="mh-125px mb-9" alt="" />
+                            <img src="assets/media/logos/social_metronics.png" class="mh-125px mb-9" alt="" />
                             <!--end::Illustration-->
 
                             <!--begin::Heading-->
@@ -376,7 +376,7 @@
                                 <!--end::Badge-->
 
                                 <!--begin::Title-->
-                                <div class="fs-5 fs-lg-3 fw-bold text-white">
+                                <div class="fs-5 fs-lg-3 fw-bold text-dark">
                                     Pay for utilities </div>
                                 <!--end::Title-->
                             </div>
@@ -385,7 +385,7 @@
                             <!--begin::Description-->
                             <div class="fw-semibold fs-6 fs-lg-4 text-muted">
 
-                                Get your data, airtime, Tv subscription and light bills at the cheapest amount possible!
+                                Get your data, airtime, tv subscription and light bills at the cheapest amount possible!
                             </div>
                             <!--end::Description-->
                         </div>
@@ -485,7 +485,7 @@
         <!--begin::Statistics Section-->
         <div class="mt-sm-n10">
             <!--begin::Curve top-->
-            <div class="landing-curve landing-dark-color ">
+            <div class="landing-curve landing-light-color ">
                 <svg viewBox="15 -1 1470 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                         d="M1 48C4.93573 47.6644 8.85984 47.3311 12.7725 47H1489.16C1493.1 47.3311 1497.04 47.6644 1501 48V47H1489.16C914.668 -1.34764 587.282 -1.61174 12.7725 47H1V48Z"
@@ -495,14 +495,14 @@
             <!--end::Curve top-->
 
             <!--begin::Wrapper-->
-            <div class="pb-15 pt-18 landing-dark-bg">
+            <div class="pb-15 pt-18 landing-light-bg" style='background:#f5f5f5'>
                 <!--begin::Container-->
                 <div class="container">
                     <!--begin::Heading-->
                     <div class="text-center mt-15 mb-18" id="achievements"
                         data-kt-scroll-offset="{default: 100, lg: 150}">
                         <!--begin::Title-->
-                        <h3 class="fs-2hx text-white fw-bold mb-5">We Make Things Better</h3>
+                        <h3 class="fs-2hx text-dark fw-bold mb-5">We Make Things Better</h3>
                         <!--end::Title-->
 
                         <!--begin::Description-->
@@ -639,8 +639,8 @@
                     <!--end::Statistics-->
 
                     <!--begin::Testimonial-->
-                    <div class="fs-2 fw-semibold text-muted text-center mb-3">
-                        <span class="fs-1 lh-1 text-gray-700">“</span>
+                    <div style='color:#640f11' class="fs-2 fw-semibold  text-center mb-3">
+                        <span class="fs-1 lh-1 -700">“</span>
 
                         We care about tech solutions that brings value to students <br /><span
                             class="text-gray-700 me-1">and making school life more</span>easier
@@ -662,7 +662,7 @@
             <!--end::Wrapper-->
 
             <!--begin::Curve bottom-->
-            <div class="landing-curve landing-dark-color ">
+            <div class="landing-curve landing-light-color ">
                 <svg viewBox="15 12 1470 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                         d="M0 11C3.93573 11.3356 7.85984 11.6689 11.7725 12H1488.16C1492.1 11.6689 1496.04 11.3356 1500 11V12H1488.16C913.668 60.3476 586.282 60.6117 11.7725 12H0V11Z"
@@ -683,17 +683,17 @@
         <!--begin::Pricing Section-->
         <div class="mt-sm-n20 ">
             <!--begin::Curve top-->
-            <div class="landing-curve landing-dark-color ">
+            {{-- <div style="background:#fff" class="landing-curve landing-light-color ">
                 <svg viewBox="15 -1 1470 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                         d="M1 48C4.93573 47.6644 8.85984 47.3311 12.7725 47H1489.16C1493.1 47.3311 1497.04 47.6644 1501 48V47H1489.16C914.668 -1.34764 587.282 -1.61174 12.7725 47H1V48Z"
-                        fill="currentColor"></path>
+                        fill="#fff"></path>
                 </svg>
-            </div>
+            </div> --}}
             <!--end::Curve top-->
 
             <!--begin::Wrapper-->
-            {{-- <div class="py-20 landing-dark-bg ">
+            {{-- <div class="py-20 landing-light-bg ">
                 <!--begin::Container-->
                 <div class="container">
                     <!--begin::Plans-->
@@ -713,7 +713,7 @@
                         <!--begin::Pricing-->
                         <div class="text-center" id="kt_pricing">
                             <!--begin::Nav group-->
-                            <div class="nav-group landing-dark-bg d-inline-flex mb-15" data-kt-buttons="true"
+                            <div class="nav-group landing-light-bg d-inline-flex mb-15" data-kt-buttons="true"
                                 style="border: 1px dashed #2B4666;">
                                 <a href="#"
                                     class="btn btn-color-gray-600 btn-active btn-active-success px-6 py-3 me-2 active"
@@ -738,7 +738,7 @@
                                             <!--begin::Heading-->
                                             <div class="mb-7 text-center">
                                                 <!--begin::Title-->
-                                                <h1 class="text-dark mb-5 fw-boldest">Startup</h1>
+                                                <h1 class="text-light mb-5 fw-boldest">Startup</h1>
                                                 <!--end::Title-->
 
                                                 <!--begin::Description-->
@@ -1024,7 +1024,7 @@
                                             <!--begin::Heading-->
                                             <div class="mb-7 text-center">
                                                 <!--begin::Title-->
-                                                <h1 class="text-dark mb-5 fw-boldest">Enterprise</h1>
+                                                <h1 class="text-light mb-5 fw-boldest">Enterprise</h1>
                                                 <!--end::Title-->
 
                                                 <!--begin::Description-->
@@ -1166,13 +1166,13 @@
             <!--end::Wrapper-->
 
             <!--begin::Curve bottom-->
-            <div class="landing-curve landing-dark-color ">
+            {{-- <div class="landing-curve landing-light-color ">
                 <svg viewBox="15 12 1470 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                         d="M0 11C3.93573 11.3356 7.85984 11.6689 11.7725 12H1488.16C1492.1 11.6689 1496.04 11.3356 1500 11V12H1488.16C913.668 60.3476 586.282 60.6117 11.7725 12H0V11Z"
                         fill="currentColor"></path>
                 </svg>
-            </div>
+            </div> --}}
             <!--end::Curve bottom-->
         </div>
         <!--end::Pricing Section-->
@@ -1186,7 +1186,7 @@
                 <!--begin::Heading-->
                 <div class="text-center mb-17">
                     <!--begin::Title-->
-                    <h3 class="fs-2hx text-dark mb-5" id="clients" data-kt-scroll-offset="{default: 125, lg: 150}">What
+                    <h3 class="fs-2hx text-light mb-5" id="clients" data-kt-scroll-offset="{default: 125, lg: 150}">What
                         Our Clients Say</h3>
                     <!--end::Title-->
 
@@ -1229,7 +1229,7 @@
                                 <!--end::Rating-->
 
                                 <!--begin::Title-->
-                                <div class="fs-2 fw-bold text-dark mb-3">
+                                <div class="fs-2 fw-bold text-light mb-3">
 
                                     This is by far the cleanest template <br />
                                     and the most well structured
@@ -1257,7 +1257,7 @@
 
                                 <!--begin::Name-->
                                 <div class="flex-grow-1">
-                                    <a href="#" class="text-dark fw-bold text-hover-primary fs-6">Paul Miles</a>
+                                    <a href="#" class="text-light fw-bold text-hover-primary fs-6">Paul Miles</a>
 
                                     <span class="text-muted d-block fw-bold">Development Lead</span>
                                 </div>
@@ -1300,7 +1300,7 @@
                                 <!--end::Rating-->
 
                                 <!--begin::Title-->
-                                <div class="fs-2 fw-bold text-dark mb-3">
+                                <div class="fs-2 fw-bold text-light mb-3">
 
                                     This is by far the cleanest template <br />
                                     and the most well structured
@@ -1328,7 +1328,7 @@
 
                                 <!--begin::Name-->
                                 <div class="flex-grow-1">
-                                    <a href="#" class="text-dark fw-bold text-hover-primary fs-6">Janya Clebert</a>
+                                    <a href="#" class="text-light fw-bold text-hover-primary fs-6">Janya Clebert</a>
 
                                     <span class="text-muted d-block fw-bold">Development Lead</span>
                                 </div>
@@ -1371,7 +1371,7 @@
                                 <!--end::Rating-->
 
                                 <!--begin::Title-->
-                                <div class="fs-2 fw-bold text-dark mb-3">
+                                <div class="fs-2 fw-bold text-light mb-3">
 
                                     This is by far the cleanest template <br />
                                     and the most well structured
@@ -1399,7 +1399,7 @@
 
                                 <!--begin::Name-->
                                 <div class="flex-grow-1">
-                                    <a href="#" class="text-dark fw-bold text-hover-primary fs-6">Steave Brown</a>
+                                    <a href="#" class="text-light fw-bold text-hover-primary fs-6">Steave Brown</a>
 
                                     <span class="text-muted d-block fw-bold">Development Lead</span>
                                 </div>
@@ -1453,17 +1453,17 @@
         <!--begin::Footer Section-->
         <div class="mb-0">
             <!--begin::Curve top-->
-            <div class="landing-curve landing-dark-color ">
+            <div style='background:#fff' class="landing-curve landing-light-color ">
                 <svg viewBox="15 -1 1470 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                         d="M1 48C4.93573 47.6644 8.85984 47.3311 12.7725 47H1489.16C1493.1 47.3311 1497.04 47.6644 1501 48V47H1489.16C914.668 -1.34764 587.282 -1.61174 12.7725 47H1V48Z"
-                        fill="currentColor"></path>
+                        fill="#ebab21"></path>
                 </svg>
             </div>
             <!--end::Curve top-->
 
             <!--begin::Wrapper-->
-            <div class="landing-dark-bg pt-20">
+            <div class="landing-light-bg pt-20" style='background:#ebab21'>
                 <!--begin::Container-->
                 <div class="container">
                     <!--begin::Row-->
@@ -1471,34 +1471,34 @@
                         <!--begin::Col-->
                         <div class="col-lg-6 pe-lg-16 mb-10 mb-lg-0">
                             <!--begin::Block-->
-                            <div class="rounded landing-dark-border p-9 mb-10">
+                            <div class="rounded landing-light-border p-9 mb-10">
                                 <!--begin::Title-->
-                                <h2 class="text-white">Would you like to reach out to us?</h2>
+                                <h2 style='color:#640f11'>Would you like to reach out to us?</h2>
                                 <!--end::Title-->
 
                                 <!--begin::Text-->
-                                <span class="fw-normal fs-4 text-gray-700">
+                                <span class="fw-normal fs-4 text-gray-900">
                                     Email us to
 
-                                    <a href="support@cttaste.com"
-                                        class="text-white opacity-50 text-hover-primary">support@cttaste.com</a>
+                                    <a href="mailto:support@cttaste.com"
+                                        class="opacity-80 text-white text-hover-secondary">support@cttaste.com</a>
                                 </span>
                                 <!--end::Text-->
                             </div>
                             <!--end::Block-->
 
                             <!--begin::Block-->
-                            <div class="rounded landing-dark-border p-9">
+                            <div class="rounded landing-light-border p-9">
                                 <!--begin::Title-->
-                                <h2 class="text-white">How About Creating Your Own Web Application?</h2>
+                                <h2 style='color:#640f11'>How About Creating Your Own Web Application?</h2>
                                 <!--end::Title-->
 
                                 <!--begin::Text-->
-                                <span class="fw-normal fs-4 text-gray-700">
+                                <span class="fw-normal fs-4 text-gray-900">
                                    We have team of developers and designers that can bring your idea/business to reality!
 
-                                    <a href="https://wa.me/2349058744473"
-                                        class="text-white opacity-50 text-hover-primary">Click to reach out</a>
+                                    <a href="https://wa.me/2349058744473" 
+                                        class="text-hover-secondary text-white">Click to reach out.</a>
                                 </span>
                                 <!--end::Text-->
                             </div>
@@ -1513,27 +1513,27 @@
                                 <!--begin::Links-->
                                 <div class="d-flex fw-semibold flex-column me-20">
                                     <!--begin::Subtitle-->
-                                    <h4 class="fw-bold text-gray-400 mb-6">Quick Links</h4>
+                                    <h4 style='color:#640f11' class="fw-bold mb-6">Quick Links</h4>
                                     <!--end::Subtitle-->
 
                                     <!--begin::Link-->
                                     <a href="https://cttaste.com"
-                                        class="text-white opacity-50 text-hover-primary fs-5 mb-6">CT_Taste</a>
+                                         class="text-hover-secondary text-white fs-5 mb-6">CT_Taste</a>
                                     <!--end::Link-->
 
                                     <!--begin::Link-->
                                     <a href="https://cthostel.com"
-                                        class="text-white opacity-50 text-hover-primary fs-5 mb-6">CT_Hostel</a>
+                                         class="text-hover-secondary text-white fs-5 mb-6">CT_Hostel</a>
                                     <!--end::Link-->
 
                                     <!--begin::Link-->
                                     <a href="https://ctstake.com"
-                                        class="text-white opacity-50 text-hover-primary fs-5 mb-6">CT_Stake</a>
+                                         class="text-hover-secondary text-white fs-5 mb-6">CT_Stake</a>
                                     <!--end::Link-->
 
                                     <!--begin::Link-->
                                     <a href="https://egbami.tech"
-                                        class="text-white opacity-50 text-hover-primary fs-5 mb-6">Egbami Of CTHostel</a>
+                                         class="text-hover-secondary text-white fs-5 mb-6">Egbami Of CTHostel</a>
                                     <!--end::Link-->
 
                                     <!--end::Link-->
@@ -1543,7 +1543,7 @@
                                 <!--begin::Links-->
                                 <div class="d-flex fw-semibold flex-column ms-lg-20">
                                     <!--begin::Subtitle-->
-                                    <h4 class="fw-bold text-gray-400 mb-6">Stay Connected</h4>
+                                    <h4 style='color:#640f11' class="fw-bold mb-6">Stay Connected</h4>
                                     <!--end::Subtitle-->
 
                                     <!--begin::Link-->
@@ -1551,7 +1551,7 @@
                                         <img src="assets/media/svg/brand-logos/facebook-4.svg" class="h-20px me-2"
                                             alt="" />
 
-                                        <span class="text-white opacity-50 text-hover-primary fs-5 mb-6">Facebook</span>
+                                        <span class="text-white text-hover-primary fs-5 mb-6">Facebook</span>
                                     </a>
                                     <!--end::Link-->
 
@@ -1559,7 +1559,7 @@
                                     <a href="https://github.com/cttasteHub" class="mb-6">
                                         <img src="assets/media/svg/brand-logos/github.svg" class="h-20px me-2" alt="" />
 
-                                        <span class="text-white opacity-50 text-hover-primary fs-5 mb-6">Github</span>
+                                        <span class="text-white text-hover-primary fs-5 mb-6">Github</span>
                                     </a>
                                     <!--end::Link-->
 
@@ -1568,7 +1568,7 @@
                                         <img src="assets/media/svg/brand-logos/twitter.svg" class="h-20px me-2"
                                             alt="" />
 
-                                        <span class="text-white opacity-50 text-hover-primary fs-5 mb-6">Twitter</span>
+                                        <span class="text-white text-hover-primary fs-5 mb-6">Twitter</span>
                                     </a>
                                     <!--end::Link-->
 
@@ -1577,7 +1577,7 @@
                                         <img src="assets/media/svg/brand-logos/dribbble-icon-1.svg" class="h-20px me-2"
                                             alt="" />
 
-                                        <span class="text-white opacity-50 text-hover-primary fs-5 mb-6">Dribbble</span>
+                                        <span class="text-white text-hover-primary fs-5 mb-6">Dribbble</span>
                                     </a>
                                     <!--end::Link-->
 
@@ -1587,7 +1587,7 @@
                                             alt="" />
 
                                         <span
-                                            class="text-white opacity-50 text-hover-primary fs-5 mb-6">Instagram</span>
+                                            class="text-white text-hover-primary fs-5 mb-6">Instagram</span>
                                     </a>
                                     <!--end::Link-->
                                 </div>
@@ -1602,7 +1602,7 @@
                 <!--end::Container-->
 
                 <!--begin::Separator-->
-                <div class="landing-dark-separator"></div>
+                <div class="landing-light-separator"></div>
                 <!--end::Separator-->
 
                 <!--begin::Container-->
@@ -1618,7 +1618,7 @@
                             <!--end::Logo image-->
 
                             <!--begin::Logo image-->
-                            <span class="mx-5 fs-6 fw-semibold text-gray-600 pt-1" href="https://cttaste.com/">
+                            <span class="mx-5 fs-6 fw-semibold text-dark pt-1" href="https://cttaste.com/">
                                 &copy; 2023 cttaste Inc.
                             </span>
                             <!--end::Logo image-->
@@ -1626,7 +1626,7 @@
                         <!--end::Copyright-->
 
                         <!--begin::Menu-->
-                        <ul class="menu menu-gray-600 menu-hover-primary fw-semibold fs-6 fs-md-5 order-1 mb-5 mb-md-0">
+                        <ul class="menu menu-dark menu-hover-secondary fw-semibold fs-6 fs-md-5 order-1 mb-5 mb-md-0">
                             <li class="menu-item">
                                 <a href="https://cttaste.com/about" target="_blank" class="menu-link px-2">About</a>
                             </li>

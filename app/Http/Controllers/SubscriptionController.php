@@ -87,7 +87,7 @@ class SubscriptionController extends Controller
 
         curl_close($curl);
         return $response;
-        dd($data);
+      
 
         $data['user'] = Auth::user();
         return view('subscription.buydata', $data);
@@ -111,7 +111,6 @@ class SubscriptionController extends Controller
             }
             $amount = $cable->real_price;
         }
-        dd($amount);
         if ($user->balance < $amount) {
             return "Insufficient balance for the plan you want to get!";
         }
@@ -357,7 +356,7 @@ class SubscriptionController extends Controller
     }
     public function fetch_meter_details(Request $request)
     {
-
+       
         $curl = curl_init();
         curl_setopt_array($curl, array(
             CURLOPT_URL => "https://easyaccessapi.com.ng/api/verifyelectricity.php",

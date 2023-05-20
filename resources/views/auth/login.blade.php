@@ -127,6 +127,16 @@
                                         <!--end::Title-->
                                 
                                       </div>
+                                      @if($errors->any())
+                                      <div class="alert alert-danger">
+                                          <p><strong>Opps Something went wrong</strong></p>
+                                          <ul>
+                                              @foreach ($errors->all() as $error)
+                                              <li>{{ $error }}</li>
+                                              @endforeach
+                                          </ul>
+                                      </div>
+                                      @endif
                                       <!--begin::Heading-->
                                 
                                       <!--begin::Login options-->
@@ -168,7 +178,7 @@
                                         />
                                         <!--end::Password-->
                                       </div>
-                                      <div class="separator separator-content my-14">
+                                     {{--  <div class="separator separator-content my-14">
                                         <span class="w-125px text-gray-500 fw-semibold fs-7"
                                           >Or with social accounts</span
                                         >
@@ -213,10 +223,15 @@
                                           <!--end::Google link--->
                                         </div>
                                         <!--end::Col-->
-                                      </div>
+                                      </div> --}}
                                       <!--end::Input group--->
                                 
                                       <!--begin::Wrapper-->
+                                      <div class="text-gray-500 text-center fw-semibold fs-6">
+                                        Yet to have an account?
+                                  
+                                        <a href="/register" class="link-success"> Sign up </a>
+                                      </div>
                                       <div class="d-flex flex-stack flex-wrap gap-3 fs-base fw-semibold mb-8">
                                         <!--begin::Link-->
                                         <a href="/forgot-password" class="link-primary">
@@ -234,11 +249,7 @@
                                 
                                       <!--begin::Sign up-->
                                     </form>
-                                    <div class="text-gray-500 text-center fw-semibold fs-6">
-                                      Yet to have an account?
-                                
-                                      <a href="/register" class="link-success"> Sign up </a>
-                                    </div>
+                                  
                                   </div>
                                 {{-- <login-component></login-component> --}}
                             </div>

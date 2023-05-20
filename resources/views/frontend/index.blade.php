@@ -173,7 +173,7 @@
 
 
                 <!--begin::Landing hero-->
-                <div style='background-image: url(assets/media/logos/bg1.jpg);background-size:cover;' class="d-flex flex-column flex-center w-100 min-h-350px min-h-lg-500px px-9">
+                <div style='background-image: url(assets/media/logos/bg1.jpg);background-size:cover;background-color:#fff' class="d-flex flex-column flex-center w-100 min-h-350px min-h-lg-500px px-9">
                     <!--begin::Heading-->
                     <div class="text-center mb-5 mb-lg-10 py-10 py-lg-20">
                         <!--begin::Title-->
@@ -182,7 +182,7 @@
                             for
 
                             <span
-                                style="background: linear-gradient(to right, #12CE5D 0%, #FFD80C 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;">
+                                style="background: linear-gradient(to right, #640f11 0%, #ebab21 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;">
                                 <span id="kt_landing_hero_text">all CT-Products!</span>
                             </span>
                         </h1>
@@ -237,13 +237,13 @@
 
                         <!--begin::Client-->
                         <div class="d-flex flex-center m-3 m-md-6" data-bs-toggle="tooltip" title="Hewlett-Packard">
-                            <img src="assets/media/svg/brand-logos/hp-3.svg" class="mh-30px mh-lg-40px" alt="" />
+                            <img src="assets/media/logos/boripe.jpeg" class="mh-30px mh-lg-40px" alt="" />
                         </div>
                         <!--end::Client-->
 
                         <!--begin::Client-->
                         <div class="d-flex flex-center m-3 m-md-6" data-bs-toggle="tooltip" title="Truman">
-                            <img src="assets/media/svg/brand-logos/truman.svg" class="mh-30px mh-lg-40px" alt="" />
+                            <img src="assets/media/logos/sans.jpeg" class="mh-30px mh-lg-40px" alt="" />
                         </div>
                         <!--end::Client-->
                     </div>
@@ -280,7 +280,7 @@
                     <!--begin::Title-->
                     <h3 class="fs-2hx text-dark mb-5 mt-4" id="how-it-works"
                         data-kt-scroll-offset="{default: 100, lg: 150}">
-                        Easy Pay!</h3>
+                        Fast Pay!</h3>
                     <!--end::Title-->
 
                     <!--begin::Text-->

@@ -82,6 +82,13 @@ class FundingController extends Controller
         $data['active'] = 'pay_cttaste';
         return view('dashboard.paycttaste', $data);
     }
+    public function pay_order($order_id)
+    {
+        $data['user'] = Auth::user();
+        $data['active'] = 'pay_cttaste';
+        $data['order_id'] = $order_id;
+        return view('dashboard.paycttaste', $data);
+    }
     public function verify_id(Request $request)
     {
 
@@ -162,7 +169,14 @@ class FundingController extends Controller
         if ($order == null) {
             return "Invalid Order";
         }
-        $amount = $order->total_price;
+        if($order->user_id == 53 || $order->user_id == 38) {
+            $amount = $order->total_price + 50;
+            
+        } else {
+            $amount = $order->total_price;
+
+        }
+        
         $rest = DB::connection('mysql2')->table('users')->where('id', $order->user_id)->first();
         if ($rest == null) {
             return "Beneficiary not found";
@@ -173,13 +187,10 @@ class FundingController extends Controller
         }
         // dd($restaurant_phone);
 
-        $beneficiary = User::where('phone', $restaurant_phone)->first();
-        //check if beneficiary exists
-
         //check for the user balance, then fire the transaction
         if ($user->balance >= $amount) {
             $reference = 'fund_transfer_' . Str::random(7);
-            $details = "Transfer of NGN" . $amount . ' to ' . $beneficiary->name;
+            $details = "Transfer of NGN" . $amount . ' to ' . $rest->name;
             $check = $this->check_duplicate('check', $user->id);
             if ($check == true) {
                 return "Duplicate Transaction";
@@ -187,9 +198,23 @@ class FundingController extends Controller
             $this->create_transaction('Fund Transfer', $reference, $details, 'debit', $amount, $user->id, 1);
             $this->check_duplicate("Delete", $user->id);
             $reference = 'payment_received_' . Str::random(7);
-            $details = "Payment of NGN" . $amount . ' from ' . $user->name . ' received successfully!';
-            $this->create_transaction('Payment Received', $reference, $details, 'debit', $amount, $beneficiary->id, 1);
+            $data = [
+                'order_id' => $order->id,               
+                'rest_id' => $rest->id,
+                'amount' => $amount,
+                'before_balance' => $rest->balance,
+                'after_balance' => $rest->balance + $amount,
+                'reference' => $reference,
+                'type' => 'credit',
+                'title' => 'Payment of order via fastpay',
+                'details' => 'Payment of NGN'.$amount. ' from '.$user->name,
+                'customer_name' => $user->name,
+                'customer_phone' => $user->phone,
+                'status' => 1
+            ];
+            DB::connection('mysql2')->table('transactions')->insert($data);
             DB::connection('mysql2')->table('orders')->where('order_id', $request->order_id)->update(['status' => 1]);
+            DB::connection('mysql2')->table('users')->where('id', $rest->id)->update(['balance' => $rest->balance + $amount]);
             return true;
         }
     }

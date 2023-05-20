@@ -115,6 +115,7 @@
                         <div class="d-flex flex-center flex-column-fluid pb-15 pb-lg-20">
 
                             <!--begin::Form-->
+                           
                             <div id='app'>
                                 <register-component></register-component>
                             </div>

@@ -101,6 +101,7 @@
 </template>
   
   <script>
+  
 export default {
   props: ["user"],
   data() {
@@ -113,7 +114,15 @@ export default {
       delivery_address: "",
       showStatus: false,
       payStatus: false,
+      
     };
+  },
+  mounted() {
+    this.order_id = this.getSlugFromUrl();
+    this.verifyAccount()
+  },
+  updated() {
+   
   },
   computed: {
     formattedBalance() {
@@ -124,25 +133,31 @@ export default {
     numberFormat(value) {
       return value.toLocaleString();
     },
+    getSlugFromUrl() {
+      const url = window.location.href;
+      const parts = url.split('/');
+      const slug = parts[parts.length - 1];
+      return slug;
+    },
     verifyAccount() {
-      if (this.order_id.length >= 8) {
-        Swal.fire({
-          title: "Purchasing data, please wait...",
-          // html: '<div class="text-center"><i class="fa fa-spinner fa-spin fa-3x"></i></div>',
-          showConfirmButton: false,
-          allowOutsideClick: false,
-          allowEscapeKey: false,
-          didOpen: () => {
-            Swal.showLoading();
-          },
-        });
+      if (this.order_id.length >= 14) {
+        // Swal.fire({
+        //   title: "Fetching order details, please wait...",
+        //   // html: '<div class="text-center"><i class="fa fa-spinner fa-spin fa-3x"></i></div>',
+        //   showConfirmButton: false,
+        //   allowOutsideClick: false,
+        //   allowEscapeKey: false,
+        //   didOpen: () => {
+        //     Swal.showLoading();
+        //   },
+        // });
         let fd = new FormData();
         fd.append("order_id", this.order_id);
         axios
           .post("/verify_order", fd)
           .then((response) => {
             console.log(response);
-            Swal.close()
+            // Swal.close()
             if (response.data == false) {
               this.transfer_status = false;
               this.account_name = "Invalid Order ID";
@@ -261,7 +276,7 @@ export default {
           });
           });
       } else {
-        Swal.fire("Insufficient balance");
+        Swal.fire("Insufficient balance, kindly fund your wallet");
       }
     },
   },

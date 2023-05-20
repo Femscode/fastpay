@@ -145,4 +145,5 @@ Route::post('/email/verification-notification', function (Request $request) {
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
 
-Route::get('{slug}', [App\Http\Controllers\PayrollController::class, 'slug'])->name('slug');
+Route::get('{slug}', [App\Http\Controllers\FundingController::class, 'pay_cttaste'])->name('pay_cttaste')->middleware('auth');
+    

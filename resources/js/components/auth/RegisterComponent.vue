@@ -9,13 +9,6 @@
       </div>
       <!--begin::Heading-->
 
-      <!--begin::Login options-->
-    
-      <!--end::Login options-->
-
-      <!--begin::Separator-->
-    
-      <!--end::Separator-->
 
       <!--begin::Input group--->
       <div class="fv-row mb-3">
@@ -153,7 +146,7 @@ export default {
           location.reload()
         })
         .catch((error) => {
-          console.log(error.message);
+          // console.log(error.message, error.response.data.errors);
           Swal.fire('Opps','Something went wrong during registration','error')
         });
     },

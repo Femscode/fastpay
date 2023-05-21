@@ -23,8 +23,8 @@
                         <div class="card card-stretch">
                             <!--begin::Link-->
                             <a href="/transfer"
-                                class="btn btn-flex btn-text-warning btn-icon-gray-400 btn-active-color-primary bg-light-warning flex-column justfiy-content-start align-items-start text-start w-100 p-10">
-                                <!--begin::Svg Icon | path: icons/duotune/ecommerce/ecm007.svg-->
+                            class="btn btn-flex btn-text-gray-800 btn-icon-gray-400 btn-active-color-primary bg-body flex-column justfiy-content-start align-items-start text-start w-100 p-10">
+                            <!--begin::Svg Icon | path: icons/duotune/ecommerce/ecm007.svg-->
                                 <span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo8/dist/../src/media/svg/icons/Shopping/Credit-card.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                         <rect x="0" y="0" width="24" height="24"/>
@@ -49,8 +49,8 @@
                         <div class="card card-stretch">
                             <!--begin::Link-->
                             <a href="/pay_cttaste"
-                                class="btn btn-flex btn-text-success btn-icon-gray-400 btn-active-color-success bg-light-success flex-column justfiy-content-start align-items-start text-start w-100 p-10">
-                                <!--begin::Svg Icon | path: icons/duotune/technology/teh008.svg-->
+                            class="btn btn-flex btn-text-gray-800 btn-icon-gray-400 btn-active-color-primary bg-body flex-column justfiy-content-start align-items-start text-start w-100 p-10">
+                            <!--begin::Svg Icon | path: icons/duotune/technology/teh008.svg-->
                                 <span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo8/dist/../src/media/svg/icons/Cooking/Dinner.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                         <rect x="0" y="0" width="24" height="24"/>

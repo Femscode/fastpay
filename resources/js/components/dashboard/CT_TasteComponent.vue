@@ -140,7 +140,7 @@ export default {
       return slug;
     },
     verifyAccount() {
-      if (this.order_id.length >= 14) {
+      if (this.order_id.length >= 9) {
         // Swal.fire({
         //   title: "Fetching order details, please wait...",
         //   // html: '<div class="text-center"><i class="fa fa-spinner fa-spin fa-3x"></i></div>',

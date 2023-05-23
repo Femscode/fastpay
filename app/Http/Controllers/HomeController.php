@@ -96,7 +96,7 @@ class HomeController extends Controller
             $user->email_resend += 1;
             $user->save();
             $user->sendEmailVerificationNotification();
-            return redirect()->back()->with('message','Verification mail sent successfullyv!');
+            return redirect()->back()->with('message','Verification mail sent successfully!');
         }
         else {
             return redirect()->back()->with('message','Maximum amount of time to resend email reached!');

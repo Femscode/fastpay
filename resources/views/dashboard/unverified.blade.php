@@ -118,23 +118,27 @@
                                                     src="../../assets/media/email/icon-positive-vote-1.svg" />
                                             </div>
                                             <!--end:Media-->
+                                            @if(Session::has('message'))
 
+                                            <div class='alert alert-danger'>{{ Session::get('message') }}</div>
+
+                                            @endif
                                             <!--begin:Text-->
                                             <div
                                                 style="font-size: 14px; font-weight: 500; margin-bottom: 27px; font-family:Arial,Helvetica,sans-serif;">
                                                 <p
                                                     style="margin-bottom:9px; color:#181C32; font-size: 22px; font-weight:700">
-                                                    Hey {{ $user->name }}, thanks for signing up!</p>
-                                                <p style="margin-bottom:2px; color:#7E8299">Kindly check your mailbox for account verification</p>
+                                                    Hey {{ $user->name }}, thank you for signing up!</p>
+                                                <p style="margin-bottom:2px; color:#7E8299">We have just sent a verification email to {{ $user->email }} ,please check your mailbox to complete the account verification process.</p>
                                                
                                             </div>
                                             <!--end:Text-->
 
                                             <!--begin:Action-->
-                                            {{-- <a href='../general/welcome.html' target="_blank"
+                                            <a href='/resend_verification' target="_blank"
                                                 style="background-color:#50cd89; border-radius:6px;display:inline-block; padding:11px 19px; color: #FFFFFF; font-size: 14px; font-weight:500;">
-                                                Activate Account
-                                            </a> --}}
+                                                Resend Verification Mail
+                                            </a>
                                             <!--begin:Action-->
                                         </div>
                                         <!--end:Email content-->

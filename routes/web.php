@@ -52,6 +52,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/setpin', [App\Http\Controllers\HomeController::class, 'setpin'])->name('setpin');
     Route::get('profile', [App\Http\Controllers\HomeController::class, 'profile'])->name('profile');
     Route::get('fundwallet', [App\Http\Controllers\HomeController::class, 'fundwallet'])->name('fundwallet');
+    Route::get('resend_verification', [App\Http\Controllers\HomeController::class, 'resend_verification'])->name('resend_verification');
     Route::get('transactions', [App\Http\Controllers\HomeController::class, 'transactions'])->name('transactions');
     Route::get('transfer', [App\Http\Controllers\FundingController::class, 'transfer'])->name('transfer');
     Route::get('pay_cttaste', [App\Http\Controllers\FundingController::class, 'pay_cttaste'])->name('pay_cttaste');

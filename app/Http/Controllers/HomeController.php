@@ -89,6 +89,18 @@ class HomeController extends Controller
         $data['user'] = Auth::user();
         return view('dashboard.profile', $data);
     }
+    public function resend_verification() {
+        $auth_user = Auth::user();
+        $user = User::where('id',$auth_user->id)->first();
+        if($user->email_resend <= 3) {
+            $user->email_resend += 1;
+            $user->save();
+            $user->sendEmailVerificationNotification();
+        }
+        else {
+            return redirect()->back()->with('message','Maximum amount of time to resend email reached!');
+        }
+    }
     public function fundwallet()
     {
        

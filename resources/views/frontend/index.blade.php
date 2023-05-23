@@ -186,7 +186,6 @@
                                 <span id="kt_landing_hero_text">all CT-Products!</span>
                             </span>
                         </h1>
-                        <i>Buy Airtime, Data, Tv Subscription and Pay Light Bills.</i>
                         <!--end::Title-->
 
                         <!--begin::Action-->

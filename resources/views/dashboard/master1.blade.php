@@ -550,7 +550,7 @@
                                             Wallet Balance: NGN{{ number_format($user->balance,2) }} </span>
                                        <div class='d-flex'>
                                             <a class='btn btn-warning btn-sm' style='margin-right:8px' href='/fundwallet'>Fund Wallet</a>
-                                        <a class='btn btn-success btn-sm' href='/fundwallet'>Withdraw Funds</a>
+                                        <a class='btn btn-success btn-sm' href='/withdraw'>Withdraw Funds</a>
                                        </div>
                                         <!--end::Description-->
                                     </h1>

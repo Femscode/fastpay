@@ -6,6 +6,7 @@ use App\Models\Bank;
 use App\Models\User;
 use App\Models\Payroll;
 use App\Models\Transaction;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Traits\TransactionTrait;
 use Illuminate\Support\Facades\Auth;
@@ -112,6 +113,117 @@ class HomeController extends Controller
             $reserve = $this->reserve_account_paystack();
         }
         return view('dashboard.fundwallet', $data);
+    }
+    public function withdraw()
+    {
+       
+        $data['user'] = $user = Auth::user();
+        $data['active'] = 'fundwallet';
+        
+       
+        return view('dashboard.withdraw', $data);
+    }
+    public function confirm_account(Request $request)
+    {
+        // dd($request->all());
+        $url = "https://api.paystack.co/transferrecipient";
+
+        $fields = [
+            'type' => "nuban",
+            'name' => "",
+            'account_number' => $request->account_no,
+            'bank_code' => $request->bank_code,
+            'currency' => "NGN"
+        ];
+
+        $fields_string = http_build_query($fields);
+
+        //open connection
+        $ch = curl_init();
+
+        //set the url, number of POST vars, POST data
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            "Authorization: Bearer ".env('PAYSTACK_SECRET_KEY'),
+            "Cache-Control: no-cache",
+        ));
+
+        //So that curl_exec returns the contents of the cURL; rather than echoing it
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        //execute post
+        $result = curl_exec($ch);
+        $res_json = json_decode($result, true);
+        if ($res_json['status'] == true) {
+            return $res_json;
+        }
+        return false;
+        dd($res_json);
+    }
+    public function make_transfer(Request $request)
+    {
+        $this->validate($request, [
+            'amount' => 'required'
+        ]);
+        $user = Auth::user();
+        $user_pin = $request->first. $request->second . $request->third . $request->fourth;
+       
+
+        $hashed_pin = hash('sha256', $user_pin);
+        if ($user->pin !== $hashed_pin) {
+            return "Incorrect Pin";
+        }
+        $url = "https://api.paystack.co/transfer";
+        $reference = 'my-unique-reference-'. strtolower(preg_replace('/[0-9]/', '', Str::random(3)));
+        $amount = ($request->amount * 100) + 100;
+        //the pin validation here;
+        
+        if($user->balance < $request->amount) {
+            return "Insufficient balance";
+        }
+        $fields = [
+            'source' => "balance",
+            'amount' => $amount - 100,
+            "reference" => $reference,
+            'recipient' => $request->recipient_code,
+            'reason' => "CT_TASTE VENDOR PAYOUT"
+        ];
+
+        $fields_string = http_build_query($fields);
+
+        //open connection
+        $ch = curl_init();
+
+        //set the url, number of POST vars, POST data
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            "Authorization: Bearer ".env('PAYSTACK_SECRET_KEY'),
+            "Cache-Control: no-cache",
+        ));
+
+        //So that curl_exec returns the contents of the cURL; rather than echoing it
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        //execute post
+        $result = curl_exec($ch);
+        echo $result;
+        $res_json = json_decode($result, true);
+      
+        if ($res_json['status'] == true) {
+            $details = "Withdraw of NGN ". $request->amount. " to ".$request->account_name;
+            $this->create_transaction('Funds Withdraw', $reference, $details, 'debit', $request->amount + 100, $user->id, 1);
+
+                       $user->balance -= $request->amount + 100;
+            $user->save();
+            
+            return $res_json;
+        }
+        return false;
+        dd($res_json);
     }
     public function transactions()
     {

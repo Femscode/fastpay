@@ -7,6 +7,7 @@ use App\Models\Payee;
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginWithGoogleController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
@@ -14,9 +15,9 @@ Auth::routes();
 Route::get('/forgot-password', function () {
     return view('auth.forgot-password');
 })->middleware('guest')->name('password.request');
-Route::any('addfee', function() {
+Route::any('addfee', function () {
     $datas = Cable::all();
-    foreach($datas as $data) {
+    foreach ($datas as $data) {
         $data->real_price = $data->actual_price + (0.1 * $data->actual_price);
         $data->save();
     }
@@ -39,7 +40,7 @@ Route::any('fixcharges',  function () {
 });
 Route::get('authorized/google', [LoginWithGoogleController::class, 'redirectToGoogle']);
 Route::get('authorized/google/callback', [LoginWithGoogleController::class, 'handleGoogleCallback']);
- 
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/', [App\Http\Controllers\FrontendController::class, 'index'])->name('home');
 Route::any('/logout', [App\Http\Controllers\HomeController::class, 'logout'])->name('logout');
@@ -52,6 +53,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/setpin', [App\Http\Controllers\HomeController::class, 'setpin'])->name('setpin');
     Route::get('profile', [App\Http\Controllers\HomeController::class, 'profile'])->name('profile');
     Route::get('fundwallet', [App\Http\Controllers\HomeController::class, 'fundwallet'])->name('fundwallet');
+    Route::get('withdraw', [App\Http\Controllers\HomeController::class, 'withdraw'])->name('withdraw');
+    Route::any('confirm_account', [HomeController::class, 'confirm_account'])->name('confirm_account');
+    Route::any('make_transfer', [HomeController::class, 'make_transfer'])->name('make_transfer');
+
     Route::get('resend_verification', [App\Http\Controllers\HomeController::class, 'resend_verification'])->name('resend_verification');
     Route::get('transactions', [App\Http\Controllers\HomeController::class, 'transactions'])->name('transactions');
     Route::get('transfer', [App\Http\Controllers\FundingController::class, 'transfer'])->name('transfer');
@@ -79,7 +84,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/fetch_cable_plan/{network}', [App\Http\Controllers\SubscriptionController::class, 'fetch_cable_plan']);
     Route::post('/fetch_meter_details', [App\Http\Controllers\SubscriptionController::class, 'fetch_meter_details']);
     Route::post('/fetch_decoder_details', [App\Http\Controllers\SubscriptionController::class, 'fetch_decoder_details']);
-
 });
 
 Route::post('/live_add', [App\Http\Controllers\PayrollController::class, 'live_add'])->name('live_add');
@@ -90,7 +94,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::any('/payment_transactions', [App\Http\Controllers\SuperController::class, 'payment_transactions'])->name('payment_transactions');
     Route::any('/user_management', [App\Http\Controllers\SuperController::class, 'user_management'])->name('user_management');
     Route::any('/user_transaction/{id}', [App\Http\Controllers\SuperController::class, 'user_transaction'])->name('user_transaction');
-
 });
 Route::group(['middleware' => 'auth'], function () {
     //new routes
@@ -147,4 +150,3 @@ Route::post('/email/verification-notification', function (Request $request) {
 
 
 Route::get('{slug}', [App\Http\Controllers\FundingController::class, 'pay_cttaste'])->name('pay_cttaste')->middleware('auth');
-    

@@ -548,10 +548,10 @@
                                         <!--begin::Description-->
                                         <span class="page-desc text-white-700 fw-semibold fs-6 pt-3">
                                             Wallet Balance: NGN{{ number_format($user->balance,2) }} </span>
-                                       {{-- <div class='d-flex'> --}}
-                                            <a class='btn btn-success btn-sm' style='margin-right:8px' href='/fundwallet'>Fund Wallet</a>
-                                        {{-- <a class='btn btn-success btn-sm' href='/fundwallet'>Withdraw Funds</a> --}}
-                                       {{-- </div> --}}
+                                       <div class='d-flex'>
+                                            <a class='btn btn-warning btn-sm' style='margin-right:8px' href='/fundwallet'>Fund Wallet</a>
+                                        <a class='btn btn-success btn-sm' href='/fundwallet'>Withdraw Funds</a>
+                                       </div>
                                         <!--end::Description-->
                                     </h1>
                                     <!--end::Title-->
@@ -644,8 +644,6 @@
 
 
     <script src="{{ mix('js/app.js') }}"></script>
-
-    <!--begin::Global Javascript Bundle(mandatory for all pages)-->
     <script src="assets/plugins/global/plugins.bundle.js"></script>
     <script src="assets/js/scripts.bundle.js"></script>
     <!--end::Global Javascript Bundle-->

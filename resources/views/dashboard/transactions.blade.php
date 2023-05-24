@@ -45,8 +45,8 @@
                                     <td>{{ $tranx->title }}</td>
                                     <td>{{ $tranx->description }}</td>
                                     <td>₦{{ number_format($tranx->amount,2) }}</td>
-                                    <td>₦{{ number_format($tranx->amount,2) }}</td>
-                                    <td>₦{{ number_format($tranx->amount,2) }}</td>
+                                    <td>₦{{ number_format($tranx->before,2) }}</td>
+                                    <td>₦{{ number_format($tranx->after,2) }}</td>
                                     <td>{{ $tranx->type }}</td>
                                     <td>@if($tranx->status == 1)
                                         <span class='badge badge-light-success'>Success</span>

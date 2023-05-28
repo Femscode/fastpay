@@ -137,6 +137,9 @@ export default {
       const url = window.location.href;
       const parts = url.split('/');
       const slug = parts[parts.length - 1];
+      if(slug == 'pay_cttaste') {
+        return null;
+      }
       return slug;
     },
     verifyAccount() {

@@ -128,16 +128,20 @@
                                                 style="font-size: 14px; font-weight: 500; margin-bottom: 27px; font-family:Arial,Helvetica,sans-serif;">
                                                 <p
                                                     style="margin-bottom:9px; color:#181C32; font-size: 22px; font-weight:700">
-                                                    Hey {{ $user->name }}, thank you for signing up!</p>
-                                                <p style="margin-bottom:2px; color:#7E8299">We have just sent a verification email to {{ $user->email }} ,please check your mailbox to complete the account verification process.</p>
+                                                    Hey {{ $user->name }}, thank you for using CT_Taste!</p>
+                                                <p style="margin-bottom:2px; color:#7E8299">Your account has been blocked due to the fact that your email <span style='color:red'>({{ $user->email }})</span> is yet to be verified, kindly verify your email address to continue using our product.</p>
                                                
                                             </div>
                                             <!--end:Text-->
 
                                             <!--begin:Action-->
                                             <a href='/resend_verification' target="_blank"
-                                                style="background-color:#50cd89; border-radius:6px;display:inline-block; padding:11px 19px; color: #FFFFFF; font-size: 14px; font-weight:500;">
+                                                style="background-color:#ebab21; border-radius:6px;display:inline-block; padding:11px 19px; color: #FFFFFF; font-size: 14px; font-weight:500;">
                                                 Resend Verification Mail
+                                            </a>
+                                            <a href='https://wa.me/2349058744473' target="_blank"
+                                                style="background-color:#50cd89; border-radius:6px;display:inline-block; padding:11px 19px; color: #FFFFFF; font-size: 14px; font-weight:500;">
+                                                Message Us
                                             </a>
                                             <!--begin:Action-->
                                         </div>

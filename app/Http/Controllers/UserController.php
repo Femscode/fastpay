@@ -2,17 +2,46 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MySession;
 use App\Models\User;
+use App\Models\Order;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
 
+    public function save_preference(Request $request)
+    {
+        // return $request->all();
+        $user = User::where('email',$request->email)->first();
+        if($user) {
+            
+        //    dd('here');
+      
+            $data['carts'] =  $cart = json_decode($request->cart);
+            MySession::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'user_id' => $user->id,
+                'order_id' => Str::random(5),
+                'rest_id' => $cart->restaurant,
+                'amount' => $cart->totalPrice,
+                'session' => json_encode($request->session),
+
+            ]);
+            return true;
+        }
+        return $request->all();
+     
+    }
     public function resetpassword(Request $request)
     {
         $this->validate($request, [
@@ -72,8 +101,8 @@ class UserController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->with('error', 'Invalid parameters');
         }
-        if(!session()->has('resetpin')) {
-            return redirect()->back()->with('error','Token Expired');
+        if (!session()->has('resetpin')) {
+            return redirect()->back()->with('error', 'Token Expired');
         }
         $user = Auth::user();
         // dd($request->all());
@@ -96,7 +125,7 @@ class UserController extends Controller
     {
         $user = Auth::user();
         $token = Str::random(7);
-        $data = array('user' => $user,'token' => $token);
+        $data = array('user' => $user, 'token' => $token);
         session()->put('resetpin', $token, 5);
         Mail::send('mail.resetpin', $data, function ($message) use ($user) {
             $message->to($user->email)->subject('Reset Your Pin');
@@ -104,8 +133,9 @@ class UserController extends Controller
         });
         return true;
     }
-    public function resetPinWithToken() {
+    public function resetPinWithToken()
+    {
         $data['user'] = Auth::user();
-        return view('dashboard.resetpintoken',$data);
+        return view('dashboard.resetpintoken', $data);
     }
 }

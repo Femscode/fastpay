@@ -61,6 +61,7 @@
           v-model="password"
           placeholder="Password"
           autocomplete=""
+          @input="confirmPassword"
           class="form-control bg-transparent"
           required
         />
@@ -76,10 +77,12 @@
           name="password_confirmation"
           required
           autocomplete=""
+          @input="confirmPassword"
           placeholder="Confirm password"
         />
         <!--end::Password-->
       </div>
+      <div v-if="show_password_confirm" class="alert alert-success">Password matched</div>
       <!--end::Input group--->
 
       <!--begin::Wrapper-->
@@ -87,7 +90,7 @@
 
       <!--begin::Submit button-->
       <div class="d-grid mb-10">
-        <button type="submit" class="btn btn-primary">Sign Up</button>
+        <button :disabled="!sign_in_status"  type="submit" class="btn btn-primary">Sign Up</button>
       </div>
       <!--end::Submit button-->
 
@@ -112,9 +115,23 @@ export default {
       password: "",
       password_confirmation: "",
       user_phone: '',
+      show_password_confirm : false,
+      sign_in_status : false
     };
   },
   methods: {
+    confirmPassword() {
+      if(this.password == this.password_confirmation && this.password.length >= 8) {
+        this.show_password_confirm = true
+        this.sign_in_status = true
+      }
+      else {
+        this.show_password_confirm = false
+        this.sign_in_status = false
+        
+      }
+
+    },
     registerUser() {
       Swal.fire({
                 // icon: "success",
@@ -146,8 +163,8 @@ export default {
           location.reload()
         })
         .catch((error) => {
-          // console.log(error.message, error.response.data.errors);
-          Swal.fire('Opps','Something went wrong during registration','error')
+          console.log(error.response.data.errors);
+          Swal.fire('Opps','Email address already taken!','error')
         });
     },
   },

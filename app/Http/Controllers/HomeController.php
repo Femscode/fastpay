@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Bank;
 use App\Models\User;
 use App\Models\Payroll;
+use App\Models\MySession;
 use App\Models\Transaction;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -25,6 +26,7 @@ class HomeController extends Controller
     {
         $this->middleware('auth');
     }
+    
 
     public function logout()
     {
@@ -67,12 +69,13 @@ class HomeController extends Controller
         $data['user'] = $user = Auth::user();
         // dd($user);
         $data['active'] = 'dashboard';
-        if ($user->email_verified_at == null) {
+        if ($user->block == 1) {
             return view('dashboard.unverified', $data);
         }
         if ($user->pin == null) {
             return view('dashboard.setpin', $data);
         } else {
+          
             if ($user->user_type == 'user') {
 
                 $data['current_payroll'] = $current_payroll =  Payroll::where('user_id', $user->uuid)->with('payee')->latest()->first();
@@ -85,30 +88,43 @@ class HomeController extends Controller
             }
         }
     }
+    public function saved_orders() {
+        $data['user'] = $user = Auth::user();
+        $data['active'] = 'dashboard';
+        $data['sessions'] = MySession::where('email',$user->email)->latest()->get();
+        
+        return view('dashboard.saved_order',$data);
+    }
+    public function delete_order(Request $request) {
+       $session = MySession::find($request->id);
+       $session->delete();
+       return true;
+        
+    }
     public function profile()
     {
         $data['user'] = Auth::user();
         return view('dashboard.profile', $data);
     }
-    public function resend_verification() {
+    public function resend_verification()
+    {
         $auth_user = Auth::user();
-        $user = User::where('id',$auth_user->id)->first();
-        if($user->email_resend <= 3) {
+        $user = User::where('id', $auth_user->id)->first();
+        if ($user->email_resend <= 3) {
             $user->email_resend += 1;
             $user->save();
             $user->sendEmailVerificationNotification();
-            return redirect()->back()->with('message','Verification mail sent successfully!');
-        }
-        else {
-            return redirect()->back()->with('message','Maximum amount of time to resend email reached!');
+            return redirect()->back()->with('message', 'Verification mail sent successfully!');
+        } else {
+            return redirect()->back()->with('message', 'Maximum amount of time to resend email reached!');
         }
     }
     public function fundwallet()
     {
-       
+
         $data['user'] = $user = Auth::user();
         $data['active'] = 'fundwallet';
-        
+
         if ($user->account_no == null) {
             $reserve = $this->reserve_account_paystack();
         }
@@ -116,11 +132,11 @@ class HomeController extends Controller
     }
     public function withdraw()
     {
-       
+
         $data['user'] = $user = Auth::user();
         $data['active'] = 'fundwallet';
-        
-       
+
+
         return view('dashboard.withdraw', $data);
     }
     public function confirm_account(Request $request)
@@ -146,7 +162,7 @@ class HomeController extends Controller
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            "Authorization: Bearer ".env('PAYSTACK_SECRET_KEY'),
+            "Authorization: Bearer " . env('PAYSTACK_SECRET_KEY'),
             "Cache-Control: no-cache",
         ));
 
@@ -168,19 +184,19 @@ class HomeController extends Controller
             'amount' => 'required'
         ]);
         $user = Auth::user();
-        $user_pin = $request->first. $request->second . $request->third . $request->fourth;
-       
+        $user_pin = $request->first . $request->second . $request->third . $request->fourth;
+
 
         $hashed_pin = hash('sha256', $user_pin);
         if ($user->pin !== $hashed_pin) {
             return "Incorrect Pin";
         }
         $url = "https://api.paystack.co/transfer";
-        $reference = 'my-unique-reference-'. strtolower(preg_replace('/[0-9]/', '', Str::random(3)));
+        $reference = 'my-unique-reference-' . strtolower(preg_replace('/[0-9]/', '', Str::random(3)));
         $amount = ($request->amount * 100) + 100;
         //the pin validation here;
-        
-        if($user->balance < $request->amount) {
+
+        if ($user->balance < $request->amount) {
             return "Insufficient balance";
         }
         $fields = [
@@ -201,7 +217,7 @@ class HomeController extends Controller
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            "Authorization: Bearer ".env('PAYSTACK_SECRET_KEY'),
+            "Authorization: Bearer " . env('PAYSTACK_SECRET_KEY'),
             "Cache-Control: no-cache",
         ));
 
@@ -212,14 +228,14 @@ class HomeController extends Controller
         $result = curl_exec($ch);
         echo $result;
         $res_json = json_decode($result, true);
-      
+
         if ($res_json['status'] == true) {
-            $details = "Withdraw of NGN ". $request->amount. " to ".$request->account_name;
+            $details = "Withdraw of NGN " . $request->amount . " to " . $request->account_name;
             $this->create_transaction('Funds Withdraw', $reference, $details, 'debit', $request->amount + 100, $user->id, 1);
 
-                       $user->balance -= $request->amount + 100;
+            $user->balance -= $request->amount + 100;
             $user->save();
-            
+
             return $res_json;
         }
         return false;

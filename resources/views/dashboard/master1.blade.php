@@ -23,7 +23,8 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    {{-- <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet"> --}}
+    {{--
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet"> --}}
     <link href="assets/googlefonts/ubuntu.css" rel="stylesheet">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -70,18 +71,18 @@
 
 
     <!--begin::App-->
-    <div   class="d-flex flex-column flex-root app-root" id="kt_app_root">
+    <div class="d-flex flex-column flex-root app-root" id="kt_app_root">
         <!--begin::Page-->
         <div class="app-page  flex-column flex-column-fluid " id="kt_app_page">
 
 
             <!--begin::Header-->
-            <div  id="kt_app_header" class="app-header " data-kt-sticky="true"
+            <div id="kt_app_header" class="app-header " data-kt-sticky="true"
                 data-kt-sticky-activate="{default: false, lg: true}" data-kt-sticky-name="app-header-sticky"
                 data-kt-sticky-offset="{default: false, lg: '300px'}">
 
                 <!--begin::Header container-->
-                <div class="app-container  container-xxl d-flex align-items-stretch justify-content-between "
+                <div style='background:#ebebeb' class="app-container container-xxl d-flex align-items-stretch justify-content-between "
                     id="kt_app_header_container">
                     <!--begin::Header mobile toggle-->
                     <div class="d-flex align-items-center d-lg-none ms-n2 me-2" title="Show sidebar menu">
@@ -148,56 +149,44 @@
                                 </a>
                                 <!--end:Menu item-->
                                 <!--begin:Menu item-->
-                                <a href='/transfer' class="menu-item  @if($active == 'transfer') here show menu-here-bg @endif menu-lg-down-accordion me-0 me-lg-2">
+                                <a href='/transfer'
+                                    class="menu-item  @if($active == 'transfer') here show menu-here-bg @endif menu-lg-down-accordion me-0 me-lg-2">
                                     <!--begin:Menu link--><span class="menu-link"><span class="menu-title">Make
                                             Transfer</span></span>
 
                                 </a>
-                                <a href='/pay_cttaste' class="menu-item  @if($active == 'pay_cttaste') here show menu-here-bg @endif menu-lg-down-accordion me-0 me-lg-2">
-                                    <!--begin:Menu link--><span class="menu-link"><span class="menu-title">Pay For Order</span></span>
+                                <a href='/pay_cttaste'
+                                    class="menu-item  @if($active == 'pay_cttaste') here show menu-here-bg @endif menu-lg-down-accordion me-0 me-lg-2">
+                                    <!--begin:Menu link--><span class="menu-link"><span class="menu-title">Pay For
+                                            Order</span></span>
 
                                 </a>
-                                <a href='/data' class="menu-item  @if($active == 'data') here show menu-here-bg @endif menu-lg-down-accordion me-0 me-lg-2">
-                                    <!--begin:Menu link--><span class="menu-link"><span class="menu-title">Buy Data</span></span>
+                                <a href='/data'
+                                    class="menu-item  @if($active == 'data') here show menu-here-bg @endif menu-lg-down-accordion me-0 me-lg-2">
+                                    <!--begin:Menu link--><span class="menu-link"><span class="menu-title">Buy
+                                            Data</span></span>
 
                                 </a>
-                                <a href='/airtime' class="menu-item  @if($active == 'airtime') here show menu-here-bg @endif menu-lg-down-accordion me-0 me-lg-2">
-                                    <!--begin:Menu link--><span class="menu-link"><span class="menu-title">Buy Airtime</span></span>
+                                <a href='/airtime'
+                                    class="menu-item  @if($active == 'airtime') here show menu-here-bg @endif menu-lg-down-accordion me-0 me-lg-2">
+                                    <!--begin:Menu link--><span class="menu-link"><span class="menu-title">Buy
+                                            Airtime</span></span>
 
                                 </a>
-                                <a href='/cable' class="menu-item  @if($active == 'cable') here show menu-here-bg @endif menu-lg-down-accordion me-0 me-lg-2">
-                                    <!--begin:Menu link--><span class="menu-link"><span class="menu-title">Tv Subscription</span></span>
+                                <a href='/cable'
+                                    class="menu-item  @if($active == 'cable') here show menu-here-bg @endif menu-lg-down-accordion me-0 me-lg-2">
+                                    <!--begin:Menu link--><span class="menu-link"><span class="menu-title">Tv
+                                            Subscription</span></span>
 
                                 </a>
-                                <a href='/electricity' class="menu-item  @if($active == 'electricity') here show menu-here-bg @endif menu-lg-down-accordion me-0 me-lg-2">
-                                    <!--begin:Menu link--><span class="menu-link"><span class="menu-title">Electricity Bill </span></span>
+                                <a href='/electricity'
+                                    class="menu-item  @if($active == 'electricity') here show menu-here-bg @endif menu-lg-down-accordion me-0 me-lg-2">
+                                    <!--begin:Menu link--><span class="menu-link"><span class="menu-title">Electricity
+                                            Bill </span></span>
 
                                 </a>
                                 <!--end:Menu item-->
                                 <!--begin:Menu item-->
-                                <a href='/change-password'
-                                    class="menu-item @if($active == 'change_password') here show menu-here-bg @endif menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2">
-                                    <!--begin:Menu link--><span class="menu-link"><span class="menu-title">Change
-                                            Password</span></span>
-
-                                </a>
-
-                                <!--end:Menu item-->
-                                <!--begin:Menu item-->
-                                <a href='change-pin'
-                                    class="menu-item @if($active == 'change_pin') here show menu-here-bg @endif menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2">
-                                    <!--begin:Menu link--><span class="menu-link"><span class="menu-title">Change
-                                            Pin</span></span>
-                                    <!--end:Menu link-->
-
-                                </a>
-                                <a href='/transactions'
-                                    class="menu-item  @if($active == 'transaction') here show menu-here-bg @endif menu-sub-lg-down-indention me-0 me-lg-2">
-                                    <!--begin:Menu link--><span class="menu-link"><span class="menu-title">My Transactions
-                                        </span></span>
-                                    <!--end:Menu link-->
-
-                                </a>
                                 <!--end:Menu item-->
                             </div>
                             <!--end::Menu-->
@@ -227,7 +216,7 @@
                                         <div class="menu-content d-flex align-items-center px-3">
                                             <!--begin::Avatar-->
                                             <div class="symbol symbol-50px me-5 fa fa-user">
-                                               
+
                                             </div>
                                             <!--end::Avatar-->
 
@@ -235,7 +224,7 @@
                                             <div class="d-flex flex-column">
                                                 <div class="fw-bold d-flex align-items-center fs-5">
                                                     {{ $user->name }} <span
-                                                        class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">Pro</span>
+                                                        class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">Regular</span>
                                                 </div>
 
                                                 <a href="#" class="fw-semibold text-muted text-hover-primary fs-7">
@@ -265,6 +254,20 @@
                                             <span class="menu-badge">
                                                 <span
                                                     class="badge badge-light-danger badge-circle fw-bold fs-7">3</span>
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div class="menu-item px-5">
+                                        <a href="/change-pin" class="menu-link px-5">
+                                            <span class="menu-text">Change Pin</span>
+                                            <span class="menu-badge">
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div class="menu-item px-5">
+                                        <a href="/change-password" class="menu-link px-5">
+                                            <span class="menu-text">Change Password</span>
+                                            <span class="menu-badge">
                                             </span>
                                         </a>
                                     </div>
@@ -485,13 +488,14 @@
             </div>
             <!--end::Header-->
             <!--begin::Wrapper-->
-            <div  class="app-wrapper  flex-column flex-row-fluid " id="kt_app_wrapper">
+            <div class="app-wrapper  flex-column flex-row-fluid " id="kt_app_wrapper">
 
                 <!--begin::Toolbar-->
-                <div style='background:url(assets/media/logos/header-bg.jpg);background-size:cover' id="kt_app_toolbar" class="app-toolbar  py-6 ">
+                <div style='background:url(assets/media/logos/bg1.jpg);background-size:cover' id="kt_app_toolbar"
+                    class="app-toolbar  py-6 ">
 
                     <!--begin::Toolbar container-->
-                    <div   id="kt_app_toolbar_container" class="app-container  container-xxl d-flex align-items-start ">
+                    <div id="kt_app_toolbar_container" class="app-container  container-xxl d-flex align-items-start ">
                         <!--begin::Toolbar container-->
                         <div class="d-flex flex-column flex-row-fluid">
                             <!--begin::Toolbar wrapper-->
@@ -525,7 +529,7 @@
 
 
                                     <!--begin::Item-->
-                                    <a href='https://cttaste.com' class="breadcrumb-item text-white fw-bold lh-1">
+                                    <a href='https://cttaste.com' class="breadcrumb-item text-dark fw-bold lh-1">
                                         cttaste.com</a>
                                     <!--end::Item-->
 
@@ -542,19 +546,26 @@
                                 <!--begin::Page title-->
                                 <div class="page-title me-5">
                                     <!--begin::Title-->
+
                                     <h1
-                                        class="page-heading d-flex text-white fw-bold fs-2 flex-column justify-content-center my-0">
+                                        class="page-heading d-flex text-black fw-bold fs-2 flex-column justify-content-center my-0">
                                         Welcome back, {{ $user->name }}
                                         <!--begin::Description-->
-                                        <span class="page-desc text-white-700 fw-semibold fs-6 pt-3">
+                                        <span class="page-desc text-black-700 fw-semibold fs-6 pt-3">
                                             Wallet Balance: NGN{{ number_format($user->balance,2) }} </span>
-                                       <div class='d-flex'>
-                                            <a class='btn btn-warning btn-sm' style='margin-right:8px' href='/fundwallet'>Fund Wallet</a>
-                                        <a class='btn btn-success btn-sm' href='/withdraw'>Withdraw Funds</a>
-                                       </div>
+                                        <div class='d-flex'>
+                                            <a class='btn btn-warning btn-sm' style='margin-right:8px'
+                                                href='/fundwallet'>Fund Wallet</a>
+                                            <a class='btn btn-success btn-sm' href='/withdraw'>Withdraw Funds</a>
+                                        </div>
                                         <!--end::Description-->
                                     </h1>
                                     <!--end::Title-->
+                                    @if($user->email_verified_at == null)
+                                    <div class='alert alert-danger mt-2'>Your account is yet to be verified, kindly
+                                        check your email address for verification link or click <a
+                                            href='/resend_verification'> here</a> to resend link.</div>
+                                    @endif
                                 </div>
                                 <!--end::Page title-->
                                 <!--begin::Stats-->

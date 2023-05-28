@@ -8,6 +8,7 @@ use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginWithGoogleController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
@@ -23,21 +24,6 @@ Route::any('addfee', function () {
     }
     return 'fee added';
 });
-Route::any('fixcharges',  function () {
-    $payees = Payee::all();
-    foreach ($payees as $payee) {
-        if ($payee->amount < 10000) {
-            $charges = 30;
-        } elseif ($payee->amount >= 10000 &&  $payee->amount < 50000) {
-            $charges = 50;
-        } else {
-            $charges = 90;
-        }
-        $payee->charges = $charges;
-        $payee->save();
-    }
-    return true;
-});
 Route::get('authorized/google', [LoginWithGoogleController::class, 'redirectToGoogle']);
 Route::get('authorized/google/callback', [LoginWithGoogleController::class, 'handleGoogleCallback']);
 
@@ -49,6 +35,8 @@ Route::get('/sample_import_data', [App\Http\Controllers\PayrollController::class
 Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'dashboard'])->name('dashboard');
+    Route::get('/saved_orders', [App\Http\Controllers\HomeController::class, 'saved_orders'])->name('saved_orders');
+    Route::get('/delete_order', [App\Http\Controllers\HomeController::class, 'delete_order'])->name('delete_order');
     Route::post('/updateprofile', [App\Http\Controllers\HomeController::class, 'updateprofile'])->name('updateprofile');
     Route::post('/setpin', [App\Http\Controllers\HomeController::class, 'setpin'])->name('setpin');
     Route::get('profile', [App\Http\Controllers\HomeController::class, 'profile'])->name('profile');

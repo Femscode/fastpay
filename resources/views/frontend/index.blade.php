@@ -68,7 +68,7 @@
     <!--End::Google Tag Manager (noscript) -->
 
     <!--begin::Root-->
-    <div class="d-flex flex-column flex-root" id="kt_app_root">
+    <div style='background:#ebebeb' class="d-flex flex-column flex-root" id="kt_app_root">
         <!--begin::Header Section-->
         <div class="mb-0" id="home">
             <!--begin::Wrapper-->
@@ -128,7 +128,7 @@
                                         <!--begin::Menu item-->
                                         <div class="menu-item">
                                             <!--begin::Menu link-->
-                                            <a class="menu-link nav-link active py-3 px-4 px-xxl-6" href="#kt_body"
+                                            <a style='color:#ebab21' class="menu-link nav-link active py-3 px-4 px-xxl-6" href="#kt_body"
                                                 data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">
                                                 Home </a>
                                             <!--end::Menu link-->

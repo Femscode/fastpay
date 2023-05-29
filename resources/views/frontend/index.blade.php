@@ -104,7 +104,7 @@
 
                                 <!--begin::Logo image-->
                                 <a href="landing.html">
-                                    <img alt="Logo" src="assets/media/logos/ct_yellow.png"
+                                    <img alt="Logo" src="assets/media/logos/logo-br.png"
                                         class="logo-default h-25px h-lg-30px" />
                                    
                                 </a>
@@ -128,7 +128,7 @@
                                         <!--begin::Menu item-->
                                         <div class="menu-item">
                                             <!--begin::Menu link-->
-                                            <a style='color:#ebab21' class="menu-link nav-link active py-3 px-4 px-xxl-6" href="#kt_body"
+                                            <a style='color:#640f11' class="menu-link nav-link active py-3 px-4 px-xxl-6" href="#kt_body"
                                                 data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">
                                                 Home </a>
                                             <!--end::Menu link-->

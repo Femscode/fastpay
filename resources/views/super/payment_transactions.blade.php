@@ -192,7 +192,7 @@
 
                                 <tr>
 
-                                    <td>{{ $tranx->reference }}<br><span class='text-danger'>{{ $tranx->user->name }}</span></td>
+                                    <td>{{ $tranx->reference }}<br><span class='text-danger'>{{ $tranx->user->name ?? "" }}</span></td>
                                     <td>{{ $tranx->description }}</td>
                                     <td>₦{{ number_format($tranx->amount) }}</td>
                                     <td>₦{{ number_format($tranx->before) }}</td>

@@ -106,8 +106,8 @@
                     <!--begin::Logo-->
                     <div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0 me-lg-18">
                         <a href="index.html">
-                            <img alt="Logo" src="assets/media/logos/ct_yellow.png" class="h-25px d-sm-none" />
-                            <img alt="Logo" src="assets/media/logos/ct_yellow.png" class="h-25px d-none d-sm-block" />
+                            <img alt="Logo" src="assets/media/logos/logo-br.png" class="h-25px d-sm-none" />
+                            <img alt="Logo" src="assets/media/logos/logo-br.png" class="h-25px d-none d-sm-block" />
                         </a>
                     </div>
                     <!--end::Logo-->
@@ -201,11 +201,12 @@
                             <!--begin::User menu-->
                             <div class="app-navbar-item ms-5" id="kt_header_user_menu_toggle">
                                 <!--begin::Menu wrapper-->
-                                <div class="cursor-pointer symbol symbol-35px symbol-md-40px"
+                                <div  class="cursor-pointer symbol symbol-35px symbol-md-40px"
                                     data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent"
                                     data-kt-menu-placement="bottom-end">
-                                    <img class="symbol symbol-circle symbol-35px symbol-md-40px"
-                                        src="assets/media/avatars/300-13.jpg" alt="user" />
+                                    <div style='background:#fff' class="p-5 symbol symbol-50px me-5 fa fa-user">
+
+                                    </div>
                                 </div>
 
                                 <!--begin::User account menu-->

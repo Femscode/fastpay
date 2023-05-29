@@ -44,7 +44,7 @@
                                    
                                     <td>
                                         <a data-id='{{ $tranx->id }}' class='delete_order btn btn-danger btn-sm'>Delete</a>
-                                        <form method='post' action='http://127.0.0.1:8000/api/load_order'>@csrf
+                                        <form method='post' action='{{ env('SECOND_APP') }}/api/load_order'>@csrf
                                             <input type='hidden' name='mysession' value='{{ $tranx->session }}'>
                                         <button type='submit' class='btn btn-success btn-sm'>Load</button>
                                         </form>

@@ -253,6 +253,8 @@ trait TransactionTrait
                 $tranx->save();
             } else {
                 $tranx->description = "Failed Transaction : " . $tranx->description;
+                $nuser->after = $nuser->balance;
+                $nuser->save();
                 $tranx->save();
             }
         } elseif ($title == 'Airtime Purchase') {
@@ -265,6 +267,8 @@ trait TransactionTrait
                 $tranx->save();
             } else {
                 $tranx->description = "Failed Transaction : " . $tranx->description;
+                $nuser->after = $nuser->balance;
+                $nuser->save();
                 $tranx->save();
             }
         } elseif ($title == 'Cable Subscription') {
@@ -277,6 +281,8 @@ trait TransactionTrait
                 $tranx->save();
             } else {
                 $tranx->description = "Failed Transaction : " . $tranx->description;
+                $nuser->after = $nuser->balance;
+                $nuser->save();
                 $tranx->save();
             }
         } elseif ($title == 'Electricity Payment') {
@@ -289,6 +295,8 @@ trait TransactionTrait
                 $tranx->save();
             } else {
                 $tranx->description = "Failed Transaction : " . $tranx->description;
+                $nuser->after = $nuser->balance;
+                $nuser->save();
                 $tranx->save();
             }
         } else {

@@ -72,7 +72,7 @@ class SubscriptionController extends Controller
         $response = curl_exec($curl);
         $response_json = json_decode($response, true);
 
-        if ($response_json && $response_json['success'] === "true") {
+        if ($response_json['success'] === "true") {
             $details = $response_json['network'] . " Data Purchase of " . $response_json['dataplan'] . " on " . $request->phone_number;
             
             $this->create_transaction('Data Purchase', $response_json['reference_no'], $details, 'debit', $data->data_price, $user->id, 1);

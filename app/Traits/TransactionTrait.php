@@ -253,7 +253,7 @@ trait TransactionTrait
                 $tranx->save();
             } else {
                 $tranx->description = "Failed Transaction : " . $tranx->description;
-                $nuser->after = $nuser->balance;
+                $tranx->after = $nuser->balance;
                 $nuser->save();
                 $tranx->save();
             }
@@ -267,7 +267,7 @@ trait TransactionTrait
                 $tranx->save();
             } else {
                 $tranx->description = "Failed Transaction : " . $tranx->description;
-                $nuser->after = $nuser->balance;
+                $tranx->after = $nuser->balance;
                 $nuser->save();
                 $tranx->save();
             }
@@ -281,7 +281,7 @@ trait TransactionTrait
                 $tranx->save();
             } else {
                 $tranx->description = "Failed Transaction : " . $tranx->description;
-                $nuser->after = $nuser->balance;
+                $tranx->after = $nuser->balance;
                 $nuser->save();
                 $tranx->save();
             }
@@ -295,7 +295,7 @@ trait TransactionTrait
                 $tranx->save();
             } else {
                 $tranx->description = "Failed Transaction : " . $tranx->description;
-                $nuser->after = $nuser->balance;
+                $tranx->after = $nuser->balance;
                 $nuser->save();
                 $tranx->save();
             }

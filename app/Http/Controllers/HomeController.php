@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Traits\TransactionTrait;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 
@@ -105,6 +106,15 @@ class HomeController extends Controller
     {
         $data['user'] = Auth::user();
         return view('dashboard.profile', $data);
+    }
+    public function process_order(Request $request) {
+        $response = Http::post(env('SECOND_APP').'/api/process_order', [
+            'order_id' => $request->order_id,
+          
+        ]);
+        return $response;  
+
+        dd($request->all());
     }
     public function resend_verification()
     {

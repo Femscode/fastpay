@@ -26,7 +26,13 @@ class SubscriptionController extends Controller
         $user = Auth::user();
         $hashed_pin = hash('sha256', $request->pin);
         if ($user->pin !== $hashed_pin) {
-            return "Incorrect Pin";
+            $response = [
+                'success' => false,
+                'message' => 'Incorrect Pin!',
+                'auto_refund_status' => 'Nil'
+            ];
+        
+            return response()->json($response);
         }
         $phone_number = $request->phone_number;
         if(strlen($request->phone_number) == 10) {
@@ -35,17 +41,38 @@ class SubscriptionController extends Controller
       
         $data = Data::where('plan_id', $request->plan)->where('network', $request->network)->first();
         if ($data == null) {
-            return "Invalid Plan";
+            $response = [
+                'success' => false,
+                'message' => 'Invalid Plan!',
+                'auto_refund_status' => 'Nil'
+            ];
+        
+            return response()->json($response);
+           
         }
         //check balance
         if ($user->balance < $data->data_price) {
-            return "Insufficient balance for the plan you want to get!";
+            $response = [
+                'success' => false,
+                'message' => 'Insufficient balance for the plan you want to get!',
+                'auto_refund_status' => 'Nil'
+            ];
+        
+            return response()->json($response);
+           
         }
 
         //check duplicate
         $check = $this->check_duplicate('check', $user->id);
         if ($check == true) {
-            return "Duplicate Transaction";
+            $response = [
+                'success' => false,
+                'message' => 'Duplicate Transaction!',
+                'auto_refund_status' => 'Nil'
+            ];
+        
+            return response()->json($response);
+           
         }
         //purchase the data
         $curl = curl_init();
@@ -98,7 +125,13 @@ class SubscriptionController extends Controller
         $user = Auth::user();
         $hashed_pin = hash('sha256', $request->pin);
         if ($user->pin !== $hashed_pin) {
-            return "Incorrect Pin";
+            $response = [
+                'success' => false,
+                'message' => 'Incorrect Pin!',
+                'auto_refund_status' => 'Nil'
+            ];
+        
+            return response()->json($response);
         }
         if ($request->plan == 'renew') {
             $amount = $request->amount;
@@ -107,18 +140,39 @@ class SubscriptionController extends Controller
             //check balance
             $cable = Cable::where('company', $request->cable_type)->where('plan_id', $request->plan)->first();
             if ($cable == null) {
-                return 'Invalid Plan';
+                $response = [
+                    'success' => false,
+                    'message' => 'Invalid Plan!',
+                    'auto_refund_status' => 'Nil'
+                ];
+            
+                return response()->json($response);
+               
             }
             $amount = $cable->real_price;
         }
         if ($user->balance < $amount) {
-            return "Insufficient balance for the plan you want to get!";
+            $response = [
+                'success' => false,
+                'message' => 'Insufficient balance for the plan you want to get!',
+                'auto_refund_status' => 'Nil'
+            ];
+        
+            return response()->json($response);
+           
         }
 
         //check duplicate
         $check = $this->check_duplicate('check', $user->id);
         if ($check == true) {
-            return "Duplicate Transaction";
+            $response = [
+                'success' => false,
+                'message' => 'Duplicate Transaction, try again in few minuetes time!',
+                'auto_refund_status' => 'Nil'
+            ];
+        
+            return response()->json($response);
+          
         }
         //purchase the data
         $curl = curl_init();
@@ -166,7 +220,14 @@ class SubscriptionController extends Controller
         $user = Auth::user();
         $hashed_pin = hash('sha256', $request->pin);
         if ($user->pin !== $hashed_pin) {
-            return "Incorrect Pin";
+            $response = [
+                'success' => false,
+                'message' => 'Incorrect Pin!',
+                'auto_refund_status' => 'Nil'
+            ];
+        
+            return response()->json($response);
+          
         }
         $amount = $request->amount;
         if ($amount >= 1100) {
@@ -176,13 +237,25 @@ class SubscriptionController extends Controller
         }
         // dd($request->all(),$discounted_amount);
         if ($user->balance < $amount) {
-            return "Insufficient balance for the plan you want to get!";
+            $response = [
+                'success' => false,
+                'message' => 'Insufficient balance for the plan you want to get!',
+                'auto_refund_status' => 'Nil'
+            ];
+        
+            return response()->json($response);
         }
 
         //check duplicate
         $check = $this->check_duplicate('check', $user->id);
         if ($check == true) {
-            return "Duplicate Transaction";
+            $response = [
+                'success' => false,
+                'message' => 'Duplicate transactions, please try again in few more minuetes!',
+                'auto_refund_status' => 'Nil'
+            ];
+        
+            return response()->json($response);
         }
         //purchase the data
         $curl = curl_init();
@@ -232,20 +305,39 @@ class SubscriptionController extends Controller
         $user = Auth::user();
         $hashed_pin = hash('sha256', $request->pin);
         if ($user->pin !== $hashed_pin) {
-            return "Incorrect Pin";
+            $response = [
+                'success' => false,
+                'message' => 'Incorrect pin!',
+                'auto_refund_status' => 'Nil'
+            ];
+        
+            return response()->json($response);
+           
         }
         $phone_number = $request->phone_number;
         if(strlen($request->phone_number) == 10) {
             $phone_number = "0".$request->phone_number;
         }
         if ($user->balance < $request->amount) {
-            return "Insufficient balance for the plan you want to get!";
+            $response = [
+                'success' => false,
+                'message' => 'Insufficient Balance for airtime you want to get!',
+                'auto_refund_status' => 'Nil'
+            ];
+        
+            return response()->json($response);
         }
 
         //check duplicate
         $check = $this->check_duplicate('check', $user->id);
         if ($check == true) {
-            return "Duplicate Transaction";
+            $response = [
+                'success' => false,
+                'message' => 'Duplicate transaction, please try again in few minutes time!',
+                'auto_refund_status' => 'Nil'
+            ];
+        
+            return response()->json($response);
         }
         //purchase the data
         $curl = curl_init();

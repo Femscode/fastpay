@@ -391,7 +391,7 @@ export default {
             } else {
               Swal.fire({
                 icon: "error",
-                title: response.data,
+                title: response.data.message,
                 // text: "Updating...",
                 showConfirmButton: true, // updated
                 confirmButtonColor: "#3085d6", // added

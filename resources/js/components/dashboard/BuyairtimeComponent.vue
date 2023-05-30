@@ -48,7 +48,7 @@
             </div>
           </div>
           <div class="form-group row m-2">
-            <h6 class="col-md-3">Plan</h6>
+            <h6 class="col-md-3">Amount</h6>
             <div class="col-md-6">
               <input
                 required
@@ -209,7 +209,7 @@ export default {
             } else {
               Swal.fire({
                 icon: "error",
-                title: response.data,
+                title: response.data.message,
                 // text: "Updating...",
                 showConfirmButton: true, // updated
                 confirmButtonColor: "#3085d6", // added

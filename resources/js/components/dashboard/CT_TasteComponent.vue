@@ -59,7 +59,7 @@
               </div>
             </div>
             <div class="form-group row m-2">
-              <h6 class="col-md-3">Beneficial Name</h6>
+              <h6 class="col-md-3">Payer's Details</h6>
               <div class="col-md-6">
                 <input
                   v-model="beneficial_name"
@@ -88,6 +88,14 @@
                 class="col-md-6 btn btn-success"
               >
                 Make Payment
+              </button>
+              <button v-else
+              @click="processOrder"
+               
+                type="button"
+                class="col-md-6 btn btn-success"
+              >
+                Proceed to whatsapp
               </button>
             </div>
           </div>
@@ -173,7 +181,8 @@ export default {
               this.payStatus = false;
             } else {
               this.showStatus = true;
-              this.payStatus = response.data.status;
+              this.payStatus = false;
+              // this.payStatus = response.data.status;
               this.account_name = response.data.restaurant_name;
               this.amount = response.data.total_price;
               this.beneficial_name =
@@ -192,6 +201,28 @@ export default {
         this.account_name = "";
         this.showStatus = false;
       }
+    },
+    processOrder() {
+      let fd = new FormData()
+      fd.append('order_id',this.order_id)
+      axios
+          .post("/process_order", fd)
+          .then((response) => {
+            console.log(response.data);
+            // Swal.close()
+            if (response.data.success !== true) {
+              Swal.fire('Unable to process this order!','Kindly make a screenshot and send to the vendor','error')
+             
+            } else {
+              window.location.replace(response.data.message)
+             
+            }
+          })
+          .catch((error) => {
+           
+            console.log(error.message);
+          });
+      
     },
     makeTransfer() {
       if (
@@ -262,7 +293,26 @@ export default {
               showConfirmButton: true,
             }).then((result) => {
               if (result.isConfirmed) {
-                  location.reload();
+                let fd = new FormData()
+                  fd.append('order_id',this.order_id)
+                  axios
+                      .post("/process_order", fd)
+                      .then((response) => {
+                        console.log(response.data);
+                        // Swal.close()
+                        if (response.data.success !== true) {
+                          Swal.fire('Unable to process this order!','Kindly make a screenshot and send to the vendor','error')
+                        
+                        } else {
+                          window.location.replace(response.data.message)
+                        
+                        }
+                      })
+                      .catch((error) => {
+                      
+                        console.log(error.message);
+                      });
+                  // location.reload();
                 }
             });
           } else {

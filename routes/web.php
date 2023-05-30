@@ -36,6 +36,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'dashboard'])->name('dashboard');
     Route::get('/saved_orders', [App\Http\Controllers\HomeController::class, 'saved_orders'])->name('saved_orders');
+    Route::post('/process_order', [App\Http\Controllers\HomeController::class, 'process_order'])->name('process_order');
     Route::get('/delete_order', [App\Http\Controllers\HomeController::class, 'delete_order'])->name('delete_order');
     Route::post('/updateprofile', [App\Http\Controllers\HomeController::class, 'updateprofile'])->name('updateprofile');
     Route::post('/setpin', [App\Http\Controllers\HomeController::class, 'setpin'])->name('setpin');

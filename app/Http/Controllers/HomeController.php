@@ -105,6 +105,7 @@ class HomeController extends Controller
     public function profile()
     {
         $data['user'] = Auth::user();
+        $data['active'] = 'profile';
         return view('dashboard.profile', $data);
     }
     public function process_order(Request $request) {

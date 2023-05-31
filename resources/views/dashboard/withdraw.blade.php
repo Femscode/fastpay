@@ -270,8 +270,7 @@
                     <div class="card-footer d-flex justify-content-end py-6 px-9">
                         <button type="reset" class="btn btn-light btn-active-light-primary me-2">Discard</button>
 
-                        <button type="submit" style='display:none' class="btn btn-success" id="transfer_button">Make
-                            transfer</button>
+                        <button type="submit" style='display:none' class="btn btn-success" id="transfer_button">Withdraw</button>
                     </div>
                     <!--end::Actions-->
                     <input type="hidden">

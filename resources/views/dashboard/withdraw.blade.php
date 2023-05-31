@@ -420,8 +420,8 @@
                 processData: false,
                 success: function(response) {
                     console.log(response,'the res')
-                    if(response.status !== false) {
-                        console.log(response.data);
+                    if(response.status == true) {
+                        console.log(response.message);
                         Swal.fire('Withdraw Successful', 'Amount : NGN'+$("#amount").val(), 'success') 
 
                       

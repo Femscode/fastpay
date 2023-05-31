@@ -214,7 +214,7 @@ class HomeController extends Controller
         $amount = ($request->amount * 100) + 100;
         //the pin validation here;
 
-        if ($user->balance < $amount) {
+        if ($user->balance < $request->amount + 100) {
             $response = [
                 'success' => false,
                 'message' => 'Insufficient Balance',

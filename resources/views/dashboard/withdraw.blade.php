@@ -385,9 +385,9 @@
 
         })
         $("#make_transfer").on("submit", async function(e) {
+            e.preventDefault();
             if($("#bank_code").val().length >= 1 && $("#recipient_code").val().length >= 5 && $("#amount").val().length >= 3) {
 
-            e.preventDefault();
             Swal.fire({
           title: "Withdrawing funds, please wait...",
           // html: '<div class="text-center"><i class="fa fa-spinner fa-spin fa-3x"></i></div>',
@@ -441,7 +441,7 @@
                 }
             })
         } else {
-            Swal.fire('error','Please fill in the neccessary fields','error')
+            Swal.fire('error','Please fill in the neccessary fields appropriately','error')
         }
 
         })

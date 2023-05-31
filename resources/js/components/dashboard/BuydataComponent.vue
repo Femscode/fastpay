@@ -242,7 +242,18 @@ export default {
           });
         }) 
       } else {
-        Swal.fire("Insufficient balance");
+        Swal.fire({
+                title: 'Insufficient balance!,',
+                icon: 'info',
+                html:
+                    'Click ' +
+                    '<a href="https://fastpay.cttaste.com/fundwallet">here</a> ' +
+                    'to fund your wallet.',
+                showCloseButton: true,
+                showCancelButton: true,
+                focusConfirm: false,
+              
+                })
       }
     },
   },

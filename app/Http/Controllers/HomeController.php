@@ -196,8 +196,7 @@ class HomeController extends Controller
         ]);
         $user = Auth::user();
         $user_pin = $request->first . $request->second . $request->third . $request->fourth;
-
-
+        
         $hashed_pin = hash('sha256', $user_pin);
         if ($user->pin !== $hashed_pin) {
             return "Incorrect Pin";
@@ -243,6 +242,14 @@ class HomeController extends Controller
         if ($res_json['status'] == true) {
             $details = "Withdraw of NGN " . $request->amount . " to " . $request->account_name;
             $this->create_transaction('Funds Withdraw', $reference, $details, 'debit', $request->amount + 100, $user->id, 1);
+
+            $user->balance -= $request->amount + 100;
+            $user->save();
+
+            return $res_json;
+        } else {
+            $details = "Failed Withdraw of NGN " . $request->amount . " to " . $request->account_name;
+            $this->create_transaction('Funds Withdraw', $reference, $details, 'debit', $request->amount + 100, $user->id, 0);
 
             $user->balance -= $request->amount + 100;
             $user->save();

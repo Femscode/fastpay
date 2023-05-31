@@ -243,7 +243,26 @@ trait TransactionTrait
             }
 
             return $tranx->id;
-        } elseif ($title == 'Data Purchase') {
+        }
+        elseif ($title == 'Funds Withdraw') {
+
+            $nuser = User::find($user);
+            if ($status == 1) {
+                $nuser->balance -= $amount;
+                $nuser->save();
+                $tranx->after = $nuser->balance;
+                $tranx->status = $status;
+                $tranx->save();
+            } else {
+
+                $tranx->after = $nuser->balance;
+                $tranx->status = $status;
+                $tranx->save();
+            }
+
+            return $tranx->id;
+        }
+        elseif ($title == 'Data Purchase') {
             $nuser = User::find($user);
             if ($status == 1) {
                 $nuser->balance -= $amount;

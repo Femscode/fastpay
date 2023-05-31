@@ -226,7 +226,7 @@
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8 mb-2 fv-row fv-plugins-icon-container">
-                                    <input required type="number" name="phone" id='amount'
+                                    <input required type="number" min='100' name="phone" id='amount'
                                         class="form-control form-control-solid" placeholder="Amount">
                                     <input type="hidden" name="phone" id='recipient_code'
                                         class="form-control form-control-solid" placeholder="Amount">

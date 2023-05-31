@@ -27,7 +27,7 @@ class HomeController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
 
     public function logout()
     {
@@ -76,7 +76,7 @@ class HomeController extends Controller
         if ($user->pin == null) {
             return view('dashboard.setpin', $data);
         } else {
-          
+
             if ($user->user_type == 'user') {
 
                 $data['current_payroll'] = $current_payroll =  Payroll::where('user_id', $user->uuid)->with('payee')->latest()->first();
@@ -89,18 +89,19 @@ class HomeController extends Controller
             }
         }
     }
-    public function saved_orders() {
+    public function saved_orders()
+    {
         $data['user'] = $user = Auth::user();
         $data['active'] = 'dashboard';
-        $data['sessions'] = MySession::where('email',$user->email)->latest()->get();
-        
-        return view('dashboard.saved_order',$data);
+        $data['sessions'] = MySession::where('email', $user->email)->latest()->get();
+
+        return view('dashboard.saved_order', $data);
     }
-    public function delete_order(Request $request) {
-       $session = MySession::find($request->id);
-       $session->delete();
-       return true;
-        
+    public function delete_order(Request $request)
+    {
+        $session = MySession::find($request->id);
+        $session->delete();
+        return true;
     }
     public function profile()
     {
@@ -108,12 +109,13 @@ class HomeController extends Controller
         $data['active'] = 'profile';
         return view('dashboard.profile', $data);
     }
-    public function process_order(Request $request) {
-        $response = Http::post(env('SECOND_APP').'/api/process_order', [
+    public function process_order(Request $request)
+    {
+        $response = Http::post(env('SECOND_APP') . '/api/process_order', [
             'order_id' => $request->order_id,
-          
+
         ]);
-        return $response;  
+        return $response;
 
         dd($request->all());
     }
@@ -196,18 +198,31 @@ class HomeController extends Controller
         ]);
         $user = Auth::user();
         $user_pin = $request->first . $request->second . $request->third . $request->fourth;
-        
+
         $hashed_pin = hash('sha256', $user_pin);
         if ($user->pin !== $hashed_pin) {
-            return "Incorrect Pin";
+            $response = [
+                'success' => false,
+                'message' => 'Incorrect Pin',
+
+            ];
+
+            return response()->json($response);
         }
         $url = "https://api.paystack.co/transfer";
         $reference = 'my-unique-reference-' . strtolower(preg_replace('/[0-9]/', '', Str::random(3)));
         $amount = ($request->amount * 100) + 100;
         //the pin validation here;
 
-        if ($user->balance < $request->amount) {
-            return "Insufficient balance";
+        if ($user->balance < $amount) {
+            $response = [
+                'success' => false,
+                'message' => 'Insufficient Balance',
+               
+            ];
+        
+            return response()->json($response);
+          
         }
         $fields = [
             'source' => "balance",

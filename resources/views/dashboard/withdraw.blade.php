@@ -427,7 +427,7 @@
                       
                     }
                     else {
-                        Swal.fire('error', response, 'error')
+                        Swal.fire('error', response.message, 'error')
                     }
                    
                 

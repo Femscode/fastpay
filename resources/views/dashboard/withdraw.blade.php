@@ -437,7 +437,7 @@
                 error: function(data) {
                     console.log(data)
                     Swal.close()
-                    Swal.fire('Opps!', 'Invalid account details', 'error')
+                    Swal.fire('Withdraw Successful', 'Amount : NGN'+$("#amount").val(), 'success') 
                 }
             })
         } else {

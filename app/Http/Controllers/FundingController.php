@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Paystack;
+use Carbon\Carbon;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -23,11 +24,11 @@ class FundingController extends Controller
      */
     public function redirectToGateway()
     {
-     
+
         try {
             return Paystack::getAuthorizationUrl()->redirectNow();
         } catch (\Exception $e) {
-            
+
             return Redirect::back()->withMessage(['msg' => 'The paystack token has expired. Please refresh the page and try again.', 'type' => 'error']);
         }
     }
@@ -47,14 +48,12 @@ class FundingController extends Controller
         file_put_contents(__DIR__ . '/paystacklog.txt', json_encode($request->all(), JSON_PRETTY_PRINT), FILE_APPEND);
         $email = $request->input('data.customer.email');
         $r_amountpaid = ($request->input('data.amount')) / 100;
-        if($request->input('data.channel') == 'dedicated_nuban') {
+        if ($request->input('data.channel') == 'dedicated_nuban') {
             $amountpaid = $r_amountpaid - 50;
-        }
-        elseif($r_amountpaid < 2500) {
+        } elseif ($r_amountpaid < 2500) {
             $amountpaid = $r_amountpaid - (0.02 * $r_amountpaid);
         } else {
             $amountpaid = $r_amountpaid - (0.02 * $r_amountpaid + 100);
-            
         }
 
         $user = User::where('email', $email)->firstOrFail();
@@ -76,10 +75,28 @@ class FundingController extends Controller
         return view('dashboard.transfer', $data);
     }
 
-    public function pay_cttaste()
+    public function pay_cttaste($slug)
     {
         $data['user'] = Auth::user();
         $data['active'] = 'pay_cttaste';
+        $order =  DB::connection('mysql2')->table('orders')->where('order_id', $slug)->first();
+        if ($order) {
+            if ($order->status == 1) {
+                $data['payment_status'] = 'Paid';
+            } else {
+                $data['payment_status'] = 'Not Paid';
+            }
+            if ($order->payment_time == null) {
+                $data['payment_time'] = NULL;
+            } else {
+                $dateTime = $order->payment_time;
+                $data['payment_time'] = Carbon::parse($dateTime)->diffForHumans();
+            }
+        }
+
+
+        // dd($data);
+
         return view('dashboard.paycttaste', $data);
     }
     public function pay_order($order_id)
@@ -169,14 +186,12 @@ class FundingController extends Controller
         if ($order == null) {
             return "Invalid Order";
         }
-        if($order->user_id == 53 || $order->user_id == 38) {
+        if ($order->user_id == 53 || $order->user_id == 38) {
             $amount = $order->total_price + 50;
-            
         } else {
             $amount = $order->total_price;
-
         }
-        
+
         $rest = DB::connection('mysql2')->table('users')->where('id', $order->user_id)->first();
         if ($rest == null) {
             return "Beneficiary not found";
@@ -199,7 +214,7 @@ class FundingController extends Controller
             $this->check_duplicate("Delete", $user->id);
             $reference = 'payment_received_' . Str::random(7);
             $data = [
-                'order_id' => $order->id,               
+                'order_id' => $order->id,
                 'rest_id' => $rest->id,
                 'amount' => $amount,
                 'before_balance' => $rest->balance,
@@ -207,13 +222,13 @@ class FundingController extends Controller
                 'reference' => $reference,
                 'type' => 'credit',
                 'title' => 'Payment of order via fastpay',
-                'details' => 'Payment of NGN'.$amount. ' from '.$user->name,
+                'details' => 'Payment of NGN' . $amount . ' from ' . $user->name,
                 'customer_name' => $user->name,
                 'customer_phone' => $user->phone,
                 'status' => 1
             ];
             DB::connection('mysql2')->table('transactions')->insert($data);
-            DB::connection('mysql2')->table('orders')->where('order_id', $request->order_id)->update(['status' => 1]);
+            DB::connection('mysql2')->table('orders')->where('order_id', $request->order_id)->update(['status' => 1, 'payment_time' => Carbon::now()]);
             DB::connection('mysql2')->table('users')->where('id', $rest->id)->update(['balance' => $rest->balance + $amount]);
             return true;
         }

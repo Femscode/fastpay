@@ -82,7 +82,7 @@
             </div>
             <div class="form-group row m-2">
               <div class="col-md-3"></div>
-              <button v-if="payStatus == false"
+              <button v-if="payStatus == 0"
                 :disabled="!transfer_status"
                 type="submit"
                 class="col-md-6 btn btn-success"
@@ -181,8 +181,8 @@ export default {
               this.payStatus = false;
             } else {
               this.showStatus = true;
-              this.payStatus = false;
-              // this.payStatus = response.data.status;
+              // this.payStatus = false;
+              this.payStatus = response.data.status;
               this.account_name = response.data.restaurant_name;
               this.amount = response.data.total_price;
               this.beneficial_name =

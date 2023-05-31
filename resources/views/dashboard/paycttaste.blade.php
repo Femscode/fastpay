@@ -1,4 +1,4 @@
-@extends('dashboard.master1')
+@extends('dashboard.ctmaster')
 
 @section('header')
 @endsection 

@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:type" content="article" />
-    <meta property="og:title" content="CT_Taste" />
+    <meta property="og:title" content="{{ $payment_status ?? "Not Paid" }}" />
     <meta property="og:url" content="https://cttaste.com" />
     <meta property="og:site_name" content="CT_Taste" />
     <link rel="shortcut icon" href="assets/media/logos/fav_01.png" />

@@ -335,7 +335,7 @@ if (result.isConfirmed) {
        processData: false,
        success: function(data) {
           console.log(data)
-          location.href = 'http://127.0.0.1:8000/reset-pin-with-token';
+          location.href = 'http://fastpay.cttaste.com/reset-pin-with-token';
        },
        error: function(data) {
            console.log(data)

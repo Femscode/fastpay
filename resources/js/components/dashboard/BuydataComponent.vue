@@ -205,6 +205,7 @@ export default {
         axios
           .post("/buydata", fd)
           .then((response) => {
+            console.log(response, 'the res')
             if (response.data.success == "true") {
               Swal.fire({
                 icon: "success",

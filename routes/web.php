@@ -49,7 +49,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('resend_verification', [App\Http\Controllers\HomeController::class, 'resend_verification'])->name('resend_verification');
     Route::get('transactions', [App\Http\Controllers\HomeController::class, 'transactions'])->name('transactions');
     Route::get('transfer', [App\Http\Controllers\FundingController::class, 'transfer'])->name('transfer');
-    Route::get('pay_cttaste', [App\Http\Controllers\FundingController::class, 'pay_cttaste'])->name('pay_cttaste');
+    Route::get('pay_cttaste/{slug}', [App\Http\Controllers\FundingController::class, 'pay_cttaste'])->name('pay_cttaste');
     // Route::post('make_transfer', [App\Http\Controllers\FundingController::class, 'make_transfer'])->name('make_transfer');
     Route::post('pay_for_order', [App\Http\Controllers\FundingController::class, 'pay_for_order'])->name('pay_for_order');
     Route::post('verify_id', [App\Http\Controllers\FundingController::class, 'verify_id'])->name('verify_id');

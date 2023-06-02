@@ -218,7 +218,7 @@ export default {
         console.log(this.service_type, this.meter_number, this.meter_type);
         Swal.fire({
           title: "Fetching meter details, please wait...",
-          html: '<div class="text-center"><i class="fa fa-spinner fa-spin fa-3x"></i></div>',
+          // html: '<div class="text-center"><i class="fa fa-spinner fa-spin fa-3x"></i></div>',
           showConfirmButton: false,
           allowOutsideClick: false,
           allowEscapeKey: false,
@@ -367,7 +367,7 @@ export default {
           });
       } else {
         Swal.fire({
-                title: 'Insufficient balanc!,',
+                title: 'Insufficient balance!,',
                 icon: 'info',
                 html:
                     'Click ' +

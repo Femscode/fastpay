@@ -129,7 +129,7 @@ class UserController extends Controller
         session()->put('resetpin', $token, 5);
         Mail::send('mail.resetpin', $data, function ($message) use ($user) {
             $message->to($user->email)->subject('Reset Your Pin');
-            $message->from('support@egbami.tech', 'Paycirclex');
+            $message->from('support@cttaste.com', 'CT_Taste');
         });
         return true;
     }

@@ -283,7 +283,7 @@ class SubscriptionController extends Controller
         $response_json = json_decode($response, true);
 
         if ($response_json['success'] === "true") {
-            $details = "Payment for" . $response_json['message']['content']['transactions']['product_name'] . "on " . $response_json['meterNumber'] . ". Amount : " . $amount . $response_json['message']['purchased_code'];
+            $details = "Payment for" . $response_json['message']['content']['transactions']['product_name'] . "on " . $response_json['message']['meterNumber'] . ". Amount : " . $amount . $response_json['message']['purchased_code'];
             $this->create_transaction('Electricity Payment', $response_json['requestId'], $details, 'debit', $amount, $user->id, 1);
 
             // Transaction was successful

@@ -58,7 +58,12 @@
                                         <a href='' class='btn btn-success btn-sm m-2'>Fund Wallet</a>
                                         <a href='/user_transaction/{{ $user->uuid }}' class='btn btn-info btn-sm m-2'>Transactions</a>
                                         <a href='/user_purchase/{{ $user->uuid }}' class='btn btn-warning btn-sm m-2'>Payment History</a>
-                                        <a href='/block_user/{{ $user->uuid }}' class='btn btn-light-danger btn-sm m-2'>Block User</a>
+                                        @if($user->block == 1)
+                                        <a onclick='return confirm("Are you sure you want to unblock this user?")' href='/block_user/{{ $user->uuid }}' class='btn btn-secondary btn-sm m-2'>Unblock User</a>
+                                        @else 
+                                        <a onclick='return confirm("Are you sure you want to block this user?")' href='/block_user/{{ $user->uuid }}' class='btn btn-light-danger btn-sm m-2'>Block User</a>
+                                        @endif
+
                                         <a href='/delete_user/{{ $user->uuid }}' class='btn btn-danger btn-sm m-2'>Delete User</a>
                                     </td>
                                 </tr>

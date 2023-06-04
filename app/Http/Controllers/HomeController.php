@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bank;
+use App\Models\ComingSoon;
 use App\Models\User;
 use App\Models\Payroll;
 use App\Models\MySession;
@@ -43,6 +44,16 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+    public function notify(Request $request) {
+      
+        $check = ComingSoon::where('email',$request->email)->first();
+        if($check) {
+            return redirect()->back()->with('message', 'Email address already included in the waiting list, thanks for your anticipation!');
+        } else {
+            ComingSoon::create(['email' => $request->email]);
+            return redirect()->back()->with('message', 'Email address included in the waiting list, thanks for your anticipation!');
+        }
+    }
     public function index()
     {
         return redirect()->route('dashboard');

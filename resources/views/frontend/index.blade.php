@@ -1547,7 +1547,9 @@
                                     <!--end::Subtitle-->
 
                                     <!--begin::Link-->
-                                    <a href="https://www.facebook.com/cttaste" class="mb-6">
+                                    
+                                   
+                                    <a href="https://www.facebook.com/107641935325820/posts/pfbid02HNSTgXffyTr5iEeSqs1aiXhNmN9RDaLcfCZTJC63EsVRXz36y7aw8RfSNHqRRhncl/?sfnsn=scwspmo" class="mb-6">
                                         <img src="assets/media/svg/brand-logos/facebook-4.svg" class="h-20px me-2"
                                             alt="" />
 
@@ -1555,16 +1557,10 @@
                                     </a>
                                     <!--end::Link-->
 
-                                    <!--begin::Link-->
-                                    <a href="https://github.com/cttasteHub" class="mb-6">
-                                        <img src="assets/media/svg/brand-logos/github.svg" class="h-20px me-2" alt="" />
-
-                                        <span class="text-white text-hover-primary fs-5 mb-6">Github</span>
-                                    </a>
-                                    <!--end::Link-->
+                                 
 
                                     <!--begin::Link-->
-                                    <a href="https://twitter.com/cttaste" class="mb-6">
+                                    <a href="https://twitter.com/ct_taste?s=20&t=izEI3zXAe5nU69qdNJINTA" class="mb-6">
                                         <img src="assets/media/svg/brand-logos/twitter.svg" class="h-20px me-2"
                                             alt="" />
 
@@ -1572,17 +1568,9 @@
                                     </a>
                                     <!--end::Link-->
 
-                                    <!--begin::Link-->
-                                    <a href="https://dribbble.com/cttaste" class="mb-6">
-                                        <img src="assets/media/svg/brand-logos/dribbble-icon-1.svg" class="h-20px me-2"
-                                            alt="" />
-
-                                        <span class="text-white text-hover-primary fs-5 mb-6">Dribbble</span>
-                                    </a>
-                                    <!--end::Link-->
 
                                     <!--begin::Link-->
-                                    <a href="https://www.instagram.com/cttaste" class="mb-6">
+                                    <a href="https://www.instagram.com/ct_taste/?igshid=YmMyMTA2M2Y%3D" class="mb-6">
                                         <img src="assets/media/svg/brand-logos/instagram-2-1.svg" class="h-20px me-2"
                                             alt="" />
 

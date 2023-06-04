@@ -34,6 +34,7 @@ class SuperController extends Controller
         $data['payments'] = Transaction::where('title', 'Account Funding')
             ->orWhere('title', 'Fund Transfer')
             ->orWhere('title', 'Payment Received')
+            ->orWhere('title', 'Funds Withdraw')
             ->latest()->get();
         return view('super.payment_transactions', $data);
     }
@@ -50,9 +51,9 @@ class SuperController extends Controller
     }
     public function user_transaction($id)
     {
-      $data['user'] =  $user = User::where('uuid', $id)->first();
+        $data['user'] =  $user = User::where('uuid', $id)->first();
         // dd($user);
-      
+
         $data['transactions'] = Transaction::where('user_id', $user->id)
             // ->where('title', 'Data Purchase')
             // ->orWhere('title', 'Airtime Purchase')
@@ -62,5 +63,21 @@ class SuperController extends Controller
         $data['active'] = 'super';
 
         return view('super.index', $data);
+    }
+    public function block_user($id)
+    {
+        $data['user'] =  $user = User::where('uuid', $id)->first();
+
+        if ($user) {
+            if ($user->block == 1) {
+                $user->block = 0;
+                $user->save();
+                return redirect()->back()->with('message', "User Unblocked Successfully!");
+            } else {
+                $user->block = 1;
+                $user->save();
+                return redirect()->back()->with('message', "User Blocked Successfully!");
+            }
+        }
     }
 }

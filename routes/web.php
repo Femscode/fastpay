@@ -13,6 +13,7 @@ use App\Http\Controllers\LoginWithGoogleController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 Auth::routes();
+Route::view('/','coming_soon');
 Route::get('/forgot-password', function () {
     return view('auth.forgot-password');
 })->middleware('guest')->name('password.request');
@@ -28,7 +29,8 @@ Route::get('authorized/google', [LoginWithGoogleController::class, 'redirectToGo
 Route::get('authorized/google/callback', [LoginWithGoogleController::class, 'handleGoogleCallback']);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/', [App\Http\Controllers\FrontendController::class, 'index'])->name('home');
+Route::any('/notify', [App\Http\Controllers\HomeController::class, 'notify'])->name('notify');
+// Route::get('/', [App\Http\Controllers\FrontendController::class, 'index'])->name('home');
 Route::any('/logout', [App\Http\Controllers\HomeController::class, 'logout'])->name('logout');
 Route::get('/sample_import_data', [App\Http\Controllers\PayrollController::class, 'sample_import_data'])->name('sample_import_data');
 
@@ -83,6 +85,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::any('/payment_transactions', [App\Http\Controllers\SuperController::class, 'payment_transactions'])->name('payment_transactions');
     Route::any('/user_management', [App\Http\Controllers\SuperController::class, 'user_management'])->name('user_management');
     Route::any('/user_transaction/{id}', [App\Http\Controllers\SuperController::class, 'user_transaction'])->name('user_transaction');
+    Route::any('/block_user/{id}', [App\Http\Controllers\SuperController::class, 'block_user'])->name('block_user');
 });
 Route::group(['middleware' => 'auth'], function () {
     //new routes

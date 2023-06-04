@@ -20,13 +20,23 @@
     <!-- Custom Animation CSS -->
     <link rel="stylesheet" href="{{ asset('coming_soon/css/fxt-animation.css')}}">
     <!-- Google Web Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+    {{-- <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"> --}}
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ asset('coming_soon/style.css')}}">
     
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    {{--
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet"> --}}
+    <link href="assets/googlefonts/ubuntu.css" rel="stylesheet">
+    
+
+    <link rel="stylesheet" href="assets/googlefonts/inter.css" />
+    
 </head>
 
-<body>
+<body >
     <!--[if lt IE 8]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->   
@@ -39,11 +49,11 @@
             <div class="fxt-figure-holder">
                 <div class="fxt-banner" data-bg-image="{{ asset('coming_soon/media/figure/banner.png')}}"></div>  
             </div> 
-            <div class="fxt-main-content">   
+            <div class="fxt-main-content" style="background:#f5f5dc;font-family: 'Ubuntu', sans-serif">   
                 <div class="fxt-logo">
-                    <a href="#"><img class='h-15px h-md-20px' style='height:50px; width:200px' src="assets/media/logos/ct_yellow.png" alt="Logo"></a>
+                    <a href="#"><img class='h-15px h-md-20px' style='height:40px; width:150px' src="assets/media/logos/logo-br.png" alt="Logo"></a>
                 </div>                 
-                <h1 class="fxt-main-title">New Payment Option For <span style='color:#ebab21'>CT_Taste</span> Ready to Launch!</h1>
+                <h1 style="font-family: 'Ubuntu', sans-serif" class="fxt-main-title">New Payment Option For <span style='color:#ebab21'>CT_Taste</span> Ready to Launch!</h1>
                 <p class="fxt-paragraph" style="text-align:left">The time has come to make things even more easier on CT_Taste.<br> The perfect, easist and the fastest way to pay for your food orders on CT_Taste.</p>  
                 <div class="fxt-countdown">
                     <div class="countdown"></div>

@@ -29,7 +29,7 @@ Route::get('authorized/google', [LoginWithGoogleController::class, 'redirectToGo
 Route::get('authorized/google/callback', [LoginWithGoogleController::class, 'handleGoogleCallback']);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::any('/notify', [App\Http\Controllers\HomeController::class, 'notify'])->name('notify');
+Route::any('/notify', [App\Http\Controllers\SubscriptionController::class, 'notify'])->name('notify');
 // Route::get('/', [App\Http\Controllers\FrontendController::class, 'index'])->name('home');
 Route::any('/logout', [App\Http\Controllers\HomeController::class, 'logout'])->name('logout');
 Route::get('/sample_import_data', [App\Http\Controllers\PayrollController::class, 'sample_import_data'])->name('sample_import_data');

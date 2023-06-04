@@ -215,6 +215,16 @@ class SubscriptionController extends Controller
         curl_close($curl);
         return $response;
     }
+    public function notify(Request $request) {
+      
+        $check = ComingSoon::where('email',$request->email)->first();
+        if($check) {
+            return redirect()->back()->with('message', 'Email address already included in the waiting list, thanks for your anticipation!');
+        } else {
+            ComingSoon::create(['email' => $request->email]);
+            return redirect()->back()->with('message', 'Email address included in the waiting list, thanks for your anticipation!');
+        }
+    }
     public function buyElectricity(Request $request)
     {
         $user = Auth::user();

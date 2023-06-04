@@ -51,10 +51,10 @@
             </div> 
             <div class="fxt-main-content" style="background:#f5f5dc;font-family: 'Ubuntu', sans-serif">   
                 <div class="fxt-logo">
-                    <a href="#"><img class='h-15px h-md-20px' style='height:30px; width:150px' src="assets/media/logos/logo-br.png" alt="Logo"></a>
+                    <a href="#"><img class='h-15px h-md-20px' style='height:40px; width:150px' src="assets/media/logos/logo-br.png" alt="Logo"></a>
                 </div>                 
                 <h1 style="font-family: 'Ubuntu', sans-serif" class="fxt-main-title">New Payment Option For <span style='color:#ebab21'>CT_Taste</span> Ready to Launch!</h1>
-                <p class="fxt-paragraph" style="text-align:left">The time has come to make things even more easier on CT_Taste.<br> The easiest and the fastest way to pay for your food orders on <b>CT_Taste</b> to be lauched in:</p>  
+                <p class="fxt-paragraph" style="text-align:left">The time has come to make things even more easier on CT_Taste.<br> The easiest and the fastest way to pay for your food orders on <b><span style='color:#ebab21'>CT_Taste</span></b> to be lauched in:</p>  
                 <div class="fxt-countdown">
                     <div class="countdown"></div>
                 </div>  

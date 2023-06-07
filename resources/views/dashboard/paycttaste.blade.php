@@ -13,6 +13,9 @@
           
             <!--end::Aside-->
             <!--begin::Content-->
+            <div class="alert alert-info">
+                Payment Time : {{ $payment_time ?? "Not Yet Paid"  }}
+              </div>
          <cttaste-component  @if($payment_time !== null):payment_time='{{ $payment_time }}'@endif :user='{{ $user }}'></cttaste-component>
             <!--end::Content-->
         </div>

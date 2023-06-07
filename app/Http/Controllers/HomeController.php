@@ -44,7 +44,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-   
+
     public function index()
     {
         return redirect()->route('dashboard');
@@ -80,9 +80,6 @@ class HomeController extends Controller
         } else {
 
             if ($user->user_type == 'user') {
-
-                $data['current_payroll'] = $current_payroll =  Payroll::where('user_id', $user->uuid)->with('payee')->latest()->first();
-                $data['payrolls'] = $payroll =  Payroll::where('user_id', $user->uuid)->with('payee')->latest()->get();
                 $data['banks'] = Bank::all();
                 return view('dashboard.index', $data);
             } else {
@@ -220,11 +217,10 @@ class HomeController extends Controller
             $response = [
                 'success' => false,
                 'message' => 'Insufficient Balance',
-               
+
             ];
-        
+
             return response()->json($response);
-          
         }
         $fields = [
             'source' => "balance",

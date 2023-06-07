@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Data;
 use App\Models\User;
+use App\Models\Cable;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,6 +25,44 @@ class SuperController extends Controller
             ->latest()->get();
 
         return view('super.index', $data);
+    }
+
+    public function data_price() {
+        $data['user'] = $user =  Auth::user();
+        if ($user->email !== 'fasanyafemi@gmail.com') {
+            return redirect()->route('dashboard');
+        }
+        $data['active'] = 'super';
+        $data['datas'] = Data::latest()->get();
+
+        return view('super.data_price', $data);
+    }
+    public function update_data(Request $request) {
+        $data = Data::where('plan_id',$request->plan_id)->firstOrFail();
+        $data->plan_name = $request->plan_name;
+        $data->actual_price = $request->actual_price;
+        $data->data_price = $request->data_price;
+        $data->save();
+        return true;
+    }
+
+    public function cable_price() {
+        $data['user'] = $user =  Auth::user();
+        if ($user->email !== 'fasanyafemi@gmail.com') {
+            return redirect()->route('dashboard');
+        }
+        $data['active'] = 'super';
+        $data['cables'] = Cable::latest()->get();
+
+        return view('super.cable_price', $data);
+    }
+    public function update_cable(Request $request) {
+        $cable = Cable::where('plan_id',$request->plan_id)->firstOrFail();
+        $cable->plan_name = $request->plan_name;
+        $cable->actual_price = $request->actual_price;
+        $cable->real_price = $request->real_price;
+        $cable->save();
+        return true;
     }
     public function payment_transactions()
     {

@@ -56,7 +56,7 @@
                                     
                                     </td>
                                     <td>
-                                        <a href='' class='btn btn-success btn-sm'>Print</a>
+                                        <a href='/print_transaction_receipt/{{ $tranx->id }}' class='btn btn-success btn-sm'>Print</a>
                                     </td>
                                 </tr>
                                 @endforeach

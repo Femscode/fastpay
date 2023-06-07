@@ -205,7 +205,20 @@ trait TransactionTrait
             $tranx->status = 1;
             $tranx->save();
             return $tranx->id;
-        } elseif ($title == 'Account Funded Through Transfer') {
+        } 
+        elseif ($title == 'Bonus Credited') {
+
+            $nuser = User::find($user);
+            $nuser->bonus += $amount;
+
+            $nuser->save();
+            $tranx->after = $nuser->balance;
+            $tranx->status = 1;
+            $tranx->save();
+            return $tranx->id;
+        } 
+        
+        elseif ($title == 'Account Funded Through Transfer') {
 
             $nuser = User::find($user);
             $nuser->balance += $amount;

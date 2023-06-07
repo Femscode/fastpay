@@ -30,8 +30,8 @@
 
 
     <!--begin::Global Stylesheets Bundle(mandatory for all pages)-->
-    <link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/plugins/global/plugins.bundle.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/css/style.bundle.css')}}" rel="stylesheet" type="text/css" />
 
     @yield('header')
 </head>
@@ -106,8 +106,8 @@
                     <!--begin::Logo-->
                     <div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0 me-lg-18">
                         <a href="index.html">
-                            <img alt="Logo" src="assets/media/logos/logo-br.png" class="h-25px d-sm-none" />
-                            <img alt="Logo" src="assets/media/logos/logo-br.png" class="h-25px d-none d-sm-block" />
+                            <img alt="Logo" src="{{ asset('assets/media/logos/logo-br.png')}}" class="h-25px d-sm-none" />
+                            <img alt="Logo" src="{{ asset('assets/media/logos/logo-br.png')}}" class="h-25px d-none d-sm-block" />
                         </a>
                     </div>
                     <!--end::Logo-->
@@ -492,7 +492,7 @@
             <div class="app-wrapper  flex-column flex-row-fluid " id="kt_app_wrapper">
 
                 <!--begin::Toolbar-->
-                <div style='background:url(assets/media/logos/bg1.jpg);background-size:cover' id="kt_app_toolbar"
+                <div style='background:url({{ asset('assets/media/logos/bg1.jpg') }});background-size:cover' id="kt_app_toolbar"
                     class="app-toolbar  py-6 ">
 
                     <!--begin::Toolbar container-->
@@ -554,6 +554,8 @@
                                         <!--begin::Description-->
                                         <span class="page-desc text-black-700 fw-semibold fs-6 pt-3">
                                             Wallet Balance: NGN{{ number_format($user->balance,2) }} </span>
+                                        <span class="page-desc text-black-700 fw-semibold fs-6 pt-3">
+                                            Welcome Bonus: NGN{{ number_format($user->bonus,2) }} </span>
                                         <div class='d-flex'>
                                             <a class='btn btn-warning btn-sm' style='margin-right:8px'
                                                 href='/fundwallet'>Fund Wallet</a>

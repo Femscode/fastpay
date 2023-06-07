@@ -201,6 +201,8 @@ class SubscriptionController extends Controller
         $response_json = json_decode($response, true);
 
         if ($response_json['success'] === "true") {
+            file_put_contents(__DIR__ . '/cablelog.txt', json_encode($response_json, JSON_PRETTY_PRINT), FILE_APPEND);
+       
             $details = $response_json['package'] . "subscription made successfully, amount: " . $amount;
             $this->create_transaction('Cable Subscription', $response_json['reference_no'], $details, 'debit', $amount, $user->id, 1);
 
@@ -294,8 +296,10 @@ class SubscriptionController extends Controller
         $response_json = json_decode($response, true);
 
         if ($response_json['success'] === "true") {
-            $details = "Payment for" . $response_json['message']['content']['transactions']['product_name'] . "on " . $response_json['message']['meterNumber'] . ". Amount : " . $amount . $response_json['message']['purchased_code'];
-            $this->create_transaction('Electricity Payment', $response_json['requestId'], $details, 'debit', $amount, $user->id, 1);
+            file_put_contents(__DIR__ . '/electricitylog.txt', json_encode( $response_json, JSON_PRETTY_PRINT), FILE_APPEND);
+       
+            $details = "Payment for " . $response_json['message']['content']['transactions']['product_name'] . ", Meter No: " . $request->meter_number . ". Amount : NGN" . $amount ." ". $response_json['message']['purchased_code'];
+            $this->create_transaction('Electricity Payment', $response_json['message']['requestId'], $details, 'debit', $amount, $user->id, 1);
 
             // Transaction was successful
             // Do something here

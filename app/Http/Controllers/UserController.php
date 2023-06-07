@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\MySession;
 use App\Models\User;
 use App\Models\Order;
+use App\Models\MySession;
+use App\Models\Transaction;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -17,7 +18,14 @@ use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
+    public function print_transaction_receipt($id) {
+        $data['transaction'] = $transaction = Transaction::find($id);
+        $data['user'] = Auth::user();
+        $data['active'] = 'transactions';
+        // dd($transaction);
+        return view('dashboard.receipt',$data);
 
+    }
     public function save_preference(Request $request)
     {
         // return $request->all();

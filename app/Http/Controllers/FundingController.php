@@ -58,9 +58,9 @@ class FundingController extends Controller
         $user = User::where('email', $email)->firstOrFail();
         $details = "Account credited with NGN" . $amountpaid;
         $this->create_transaction('Account Funding', $request->input('data.reference'), $details, 'credit', $amountpaid, $user->id, 1);
-        if($user->first_time == 0) {
+        if ($user->first_time == 0) {
             $bonus = 0.1 * $amountpaid;
-            $details = "You've received a welcome bonus of NGN".$bonus;
+            $details = "You've received a welcome bonus of NGN" . $bonus;
             $this->create_transaction('Bonus Credited', $request->input('data.reference'), $details, 'credit', $amountpaid, $user->id, 1);
             $user->first_time = 1;
             $user->save();
@@ -97,6 +97,9 @@ class FundingController extends Controller
                 $dateTime = $order->payment_time;
                 $data['payment_time'] = Carbon::parse($dateTime)->diffForHumans();
             }
+        } else {
+            $data['payment_status'] = NULL;
+            $data['payment_time'] = NULL;
         }
 
 

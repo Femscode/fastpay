@@ -13,7 +13,7 @@
           
             <!--end::Aside-->
             <!--begin::Content-->
-         <cttaste-component :user='{{ $user }}'></cttaste-component>
+         <cttaste-component :payment_time='{{ $payment_time }}' :payment_status='{{ $payment_status }}' :user='{{ $user }}'></cttaste-component>
             <!--end::Content-->
         </div>
         <!--end::Profile Account Information-->

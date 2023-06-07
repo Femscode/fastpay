@@ -192,9 +192,10 @@ class FundingController extends Controller
             return "Invalid Order";
         }
         if ($order->user_id == 53 || $order->user_id == 38) {
-            $amount = $order->total_price + $order->delivery_amount + 50;
+            // $amount = $order->total_price + $order->delivery_amount + 50;
+            $amount = $order->total_price + 50;
         } else {
-            $amount = $order->total_price + $order->delivery_amount;
+            $amount = $order->total_price;
         }
 
         $rest = DB::connection('mysql2')->table('users')->where('id', $order->user_id)->first();

@@ -105,7 +105,7 @@
 
                     <!--begin::Logo-->
                     <div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0 me-lg-18">
-                        <a href="index.html">
+                        <a href="https://fastpay.cttaste.com">
                             <img alt="Logo" src="{{ asset('assets/media/logos/logo-br.png')}}" class="h-25px d-sm-none" />
                             <img alt="Logo" src="{{ asset('assets/media/logos/logo-br.png')}}" class="h-25px d-none d-sm-block" />
                         </a>

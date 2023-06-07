@@ -13,7 +13,7 @@
             <label class="col-xl-3"></label>
             <div class="col-lg-9 col-xl-6">
               <div class="alert alert-info">
-                Last Paid : {{ $payment_time }}
+                Last Paid : {{ payment_time }}
               </div>
               <h5 class="font-weight-bolder mb-6">PAY FOR CT_TASTE ORDER</h5>
             </div>

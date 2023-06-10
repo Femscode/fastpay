@@ -26,6 +26,7 @@ Route::any('addfee', function () {
     }
     return 'fee added';
 });
+Route::view('offline','offline');
 Route::any('fetch_email', function () {
     $datas = User::get()->pluck('email');
    

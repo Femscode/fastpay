@@ -134,10 +134,10 @@ text-transform: uppercase;
         <div class="notfound"> 
             <iframe src="https://giphy.com/embed/8L0Pky6C83SzkzU55a" width="280" height="280" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p></p>          
 
-            <h2>You are offline</h2>
-            <p>You are currently not connected to any networks. </p>
+            <h2>Page Expired!</h2>
+            <p>Page expired, kindly re-login to access this page. </p>
             
-           <a style='background:#ebab21' href="https://fastpay.cttaste.com">Go To Homepage</a>
+           <a style='background:#ebab21' href="https://fastpay.cttaste.com/logout">Back To Login</a>
 
         </div>
     </div>

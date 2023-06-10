@@ -160,11 +160,11 @@
       
        
         if(parseInt($("#u_amount").val()) < 2500) {
-            $("#amount").val((amount) + charges);
+            $("#amount").val(amount + charges);
         }
         else {
-            $("#amount").val((amount) + (0.05 * amount) +10000);    
-            var charges =   (0.02 * amount) + 10000
+            $("#amount").val(amount + (0.05 * amount) +10000);    
+            var charges =   0.02 * amount + 10000
             
         }
         $("#charges").text('Charges : '+ (charges/100).toLocaleString('en-US', { style: 'currency', currency: 'NGN' }))          

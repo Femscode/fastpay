@@ -47,19 +47,19 @@ class FundingController extends Controller
     {
         file_put_contents(__DIR__ . '/paystacklog.txt', json_encode($request->all(), JSON_PRETTY_PRINT), FILE_APPEND);
         $email = $request->input('data.customer.email');
-        $r_amountpaid = ($request->input('data.amount')) / 100;
+        $r_amountpaid = intval(($request->input('data.amount')) / 100);
         if ($request->input('data.channel') == 'dedicated_nuban') {
             $amountpaid = $r_amountpaid - 50;
         } elseif ($r_amountpaid < 2500) {
-            $amountpaid = $r_amountpaid - (0.02 * $r_amountpaid);
+            $amountpaid = intval($r_amountpaid - (0.02 * $r_amountpaid));
         } else {
-            $amountpaid = $r_amountpaid - (0.02 * $r_amountpaid + 100);
+            $amountpaid = intval($r_amountpaid - (0.02 * $r_amountpaid + 100));
         }
         $user = User::where('email', $email)->firstOrFail();
         $details = "Account credited with NGN" . $amountpaid;
         $this->create_transaction('Account Funding', $request->input('data.reference'), $details, 'credit', $amountpaid, $user->id, 1);
         if ($user->first_time == 0) {
-            $bonus = 0.1 * $amountpaid;
+            $bonus = intval(0.1 * $amountpaid);
             $details = "You've received a welcome bonus of NGN" . $bonus;
             $this->create_transaction('Bonus Credited', $request->input('data.reference'), $details, 'credit',  $bonus, $user->id, 1);
             $user->first_time = 1;

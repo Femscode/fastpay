@@ -61,7 +61,7 @@ class FundingController extends Controller
         if ($user->first_time == 0) {
             $bonus = 0.1 * $amountpaid;
             $details = "You've received a welcome bonus of NGN" . $bonus;
-            $this->create_transaction('Bonus Credited', $request->input('data.reference'), $details, 'credit', $amountpaid, $user->id, 1);
+            $this->create_transaction('Bonus Credited', $request->input('data.reference'), $details, 'credit',  $bonus, $user->id, 1);
             $user->first_time = 1;
             $user->save();
         }

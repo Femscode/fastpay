@@ -51,9 +51,9 @@ class FundingController extends Controller
         if ($request->input('data.channel') == 'dedicated_nuban') {
             $amountpaid = $r_amountpaid - 50;
         } elseif ($r_amountpaid < 2500) {
-            $amountpaid = intval($r_amountpaid - (0.02 * $r_amountpaid));
+            $amountpaid = $r_amountpaid - intval((0.02 * $r_amountpaid));
         } else {
-            $amountpaid = intval($r_amountpaid - (0.02 * $r_amountpaid + 100));
+            $amountpaid = $r_amountpaid - intval((0.02 * $r_amountpaid + 100));
         }
         $user = User::where('email', $email)->firstOrFail();
         $details = "Account credited with NGN" . $amountpaid;

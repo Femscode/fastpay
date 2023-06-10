@@ -12,8 +12,11 @@
 
           <div class="row">
             <label class="col-xl-3"></label>
-            <div class="col-lg-9 col-xl-6">
+            <div class="col-xl-6">
               <h5 class="font-weight-bold mb-6">Buy Data</h5>
+            </div>
+            <div class="col-xl-3">
+              <h5 class="btn-sm btn btn-secondary">Back</h5>
             </div>
           </div>
           <!--begin::Form Group-->

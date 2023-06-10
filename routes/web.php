@@ -26,6 +26,11 @@ Route::any('addfee', function () {
     }
     return 'fee added';
 });
+Route::any('fetch_email', function () {
+    $datas = User::get()->pluck('email');
+   
+    return $datas;
+});
 Route::get('authorized/google', [LoginWithGoogleController::class, 'redirectToGoogle']);
 Route::get('authorized/google/callback', [LoginWithGoogleController::class, 'handleGoogleCallback']);
 

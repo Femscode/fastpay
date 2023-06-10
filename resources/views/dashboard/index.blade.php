@@ -168,7 +168,7 @@
                                 </span>
                                 <!--end::Svg Icon-->
                                 <span class="fs-4 fw-bold">
-                                    Tv Subscriptions </span>
+                                    Tv Subscription </span>
                             </a>
                             <!--end::Link-->
                         </div>

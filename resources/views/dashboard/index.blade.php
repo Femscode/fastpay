@@ -22,7 +22,7 @@
                         <!--begin::Card-->
                         <div class="card card-stretch">
                             <!--begin::Link-->
-                            <a href="/transfer"
+                            <a href="/fundwallet"
                                 class="btn btn-flex btn-text-gray-800 btn-icon-gray-400 btn-active-color-primary bg-body flex-column justfiy-content-start align-items-start text-start w-100 p-10">
                                 <!--begin::Svg Icon | path: icons/duotune/ecommerce/ecm007.svg-->
                                 <span class="svg-icon svg-icon-primary svg-icon-2x">
@@ -42,7 +42,7 @@
                                 </span>
                                 <!--end::Svg Icon-->
                                 <span class="fs-4 fw-bold">
-                                    Make Transfer </span>
+                                    Fund Wallet </span>
                             </a>
                             <!--end::Link-->
                         </div>

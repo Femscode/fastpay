@@ -564,11 +564,11 @@
                                         <!--end::Description-->
                                     </h1>
                                     <!--end::Title-->
-                                    @if($user->email_verified_at == null)
+                                    {{-- @if($user->email_verified_at == null)
                                     <div class='alert alert-danger mt-2'>Your account is yet to be verified, kindly
                                         check your email address for verification link or click <a
                                             href='/resend_verification'> here</a> to resend link.</div>
-                                    @endif
+                                    @endif --}}
                                 </div>
                                 <!--end::Page title-->
                                 <!--begin::Stats-->

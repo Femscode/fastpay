@@ -55,7 +55,7 @@
                         <!--begin::Card-->
                         <div class="card card-stretch custom-box shadow-lg">
                             <!--begin::Link-->
-                            <a href="/pay_cttaste"  style='border-right:5px solid #0d6efd';
+                            <a href="/pay_cttaste"  style='border-left:5px solid #0d6efd';
                                 class="btn btn-flex btn-text-gray-800 btn-icon-gray-400 btn-active-color-primary bg-body flex-column justfiy-content-start align-items-start text-start w-100 p-10">
                                 <!--begin::Svg Icon | path: icons/duotune/technology/teh008.svg-->
                                 <span class="svg-icon svg-icon-primary svg-icon-2x">
@@ -148,7 +148,7 @@
                         <!--begin::Card-->
                         <div class="card card-stretch custom-box shadow-lg">
                             <!--begin::Link-->
-                            <a href="/cable"  style='border-right:5px solid blue'
+                            <a href="/cable"  style='border-bottom:5px solid blue'
                                 class="btn btn-flex btn-text-gray-800 btn-icon-gray-400 btn-active-color-primary bg-body flex-column justfiy-content-start align-items-start text-start w-100 p-10">
                                 <!--begin::Svg Icon | path: icons/duotune/technology/teh008.svg-->
                                 <span class="svg-icon svg-icon-primary svg-icon-2x">

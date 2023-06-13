@@ -55,7 +55,7 @@
                         <!--begin::Card-->
                         <div class="card card-stretch custom-box shadow-lg">
                             <!--begin::Link-->
-                            <a href="/pay_cttaste"  style='border-left:5px solid #0d6efd';
+                            <a href="/pay_cttaste"  style='border-left:5px solid #00BFFF ';
                                 class="btn btn-flex btn-text-gray-800 btn-icon-gray-400 btn-active-color-primary bg-body flex-column justfiy-content-start align-items-start text-start w-100 p-10">
                                 <!--begin::Svg Icon | path: icons/duotune/technology/teh008.svg-->
                                 <span class="svg-icon svg-icon-primary svg-icon-2x">
@@ -95,7 +95,7 @@
                         <!--begin::Card-->
                         <div class="card card-stretch custom-box shadow-lg">
                             <!--begin::Link-->
-                            <a href="/data"  style='border-left:5px solid #dc3545';
+                            <a href="/data"  style='border-left:5px solid #FF4500 ';
                                 class="btn btn-flex btn-text-gray-800 btn-icon-gray-400 btn-active-color-primary bg-body flex-column justfiy-content-start align-items-start text-start w-100 p-10">
                                 <!--begin::Svg Icon | path: icons/duotune/technology/teh008.svg-->
                                 <span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo8/dist/../src/media/svg/icons/Devices/LTE2.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -148,7 +148,7 @@
                         <!--begin::Card-->
                         <div class="card card-stretch custom-box shadow-lg">
                             <!--begin::Link-->
-                            <a href="/cable"  style='border-bottom:5px solid blue'
+                            <a href="/cable"  style='border-bottom:5px solid #8A2BE2 '
                                 class="btn btn-flex btn-text-gray-800 btn-icon-gray-400 btn-active-color-primary bg-body flex-column justfiy-content-start align-items-start text-start w-100 p-10">
                                 <!--begin::Svg Icon | path: icons/duotune/technology/teh008.svg-->
                                 <span class="svg-icon svg-icon-primary svg-icon-2x">
@@ -246,7 +246,7 @@
                         <!--begin::Card-->
                         <div class="card card-stretch custom-box shadow-lg">
                             <!--begin::Link-->
-                            <a href="/saved_orders"  style='border-bottom:5px solid green'
+                            <a href="/saved_orders"  style='border-bottom:5px solid #2E8B57   '
                                 class="btn btn-flex btn-text-gray-800 btn-icon-gray-400 btn-active-color-primary bg-body flex-column justfiy-content-start align-items-start text-start w-100 p-10">
                                 <!--begin::Svg Icon | path: icons/duotune/abstract/abs025.svg-->
                                 <span class="svg-icon svg-icon-primary svg-icon-2x">

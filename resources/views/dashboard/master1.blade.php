@@ -563,7 +563,7 @@
                                                 <!--end::Currency-->
     
                                                 <!--begin::Amount-->
-                                                <span style='color:#ebab21' class="fs-2hx fw-bold me-2 lh-1 ls-n2">{{ number_format($user->balance,2) }}</span>
+                                                <span style='color:#ebab21; font-weight:700 !important' class="fs-2hx fw-bolder me-2 lh-1 ls-n2">{{ number_format($user->balance,2) }}</span>
                                                 <!--end::Amount-->
     
                                                 <!--begin::Badge-->
@@ -581,7 +581,7 @@
                                                     </span>
                                                     Bonus:
                                                     <!--end::Svg Icon-->
-                                                    {{ number_format($user->bonus,2) }}
+                                                    ₦{{ number_format($user->bonus,2) }}
                                                 </span>
                                                 <!--end::Badge-->
                                             </div>

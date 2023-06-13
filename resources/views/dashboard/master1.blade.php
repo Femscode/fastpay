@@ -82,7 +82,8 @@
                 data-kt-sticky-offset="{default: false, lg: '300px'}">
 
                 <!--begin::Header container-->
-                <div style='background:#ebebeb' class="app-container container-xxl d-flex align-items-stretch justify-content-between "
+                <div style='background:#ebebeb'
+                    class="app-container container-xxl d-flex align-items-stretch justify-content-between "
                     id="kt_app_header_container">
                     <!--begin::Header mobile toggle-->
                     <div class="d-flex align-items-center d-lg-none ms-n2 me-2" title="Show sidebar menu">
@@ -106,8 +107,10 @@
                     <!--begin::Logo-->
                     <div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0 me-lg-18">
                         <a href="https://fastpay.cttaste.com">
-                            <img alt="Logo" src="{{ asset('assets/media/logos/logo-br.png')}}" class="h-25px d-sm-none" />
-                            <img alt="Logo" src="{{ asset('assets/media/logos/logo-br.png')}}" class="h-25px d-none d-sm-block" />
+                            <img alt="Logo" src="{{ asset('assets/media/logos/logo-br.png')}}"
+                                class="h-25px d-sm-none" />
+                            <img alt="Logo" src="{{ asset('assets/media/logos/logo-br.png')}}"
+                                class="h-25px d-none d-sm-block" />
                         </a>
                     </div>
                     <!--end::Logo-->
@@ -201,7 +204,7 @@
                             <!--begin::User menu-->
                             <div class="app-navbar-item ms-5" id="kt_header_user_menu_toggle">
                                 <!--begin::Menu wrapper-->
-                                <div  class="cursor-pointer symbol symbol-35px symbol-md-40px"
+                                <div class="cursor-pointer symbol symbol-35px symbol-md-40px"
                                     data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent"
                                     data-kt-menu-placement="bottom-end">
                                     <div style='background:#fff' class="p-5 symbol symbol-50px me-5 fa fa-user">
@@ -492,8 +495,8 @@
             <div class="app-wrapper  flex-column flex-row-fluid " id="kt_app_wrapper">
 
                 <!--begin::Toolbar-->
-                <div style='background:url({{ asset('assets/media/logos/bg1.jpg') }});background-size:cover' id="kt_app_toolbar"
-                    class="app-toolbar  py-6 ">
+                <div style='background:url({{ asset('assets/media/logos/bg1.jpg') }});background-size:cover'
+                    id="kt_app_toolbar" class="app-toolbar  py-6 ">
 
                     <!--begin::Toolbar container-->
                     <div id="kt_app_toolbar_container" class="app-container  container-xxl d-flex align-items-start ">
@@ -549,13 +552,46 @@
                                     <!--begin::Title-->
 
                                     <h1
-                                        class="page-heading d-flex text-black fw-bold fs-2 flex-column justify-content-center my-0">
+                                        class="page-heading d-flex text-black fw-semibold fs-2 flex-column justify-content-center my-0 mb-2">
                                         Welcome back, {{ $user->name }}
                                         <!--begin::Description-->
-                                        <span class="page-desc text-black-700 fw-semibold fs-6 pt-3">
-                                            Wallet Balance: NGN{{ number_format($user->balance,2) }} </span>
-                                        <span class="page-desc text-black-700 fw-semibold fs-6 pt-3">
-                                            Welcome Bonus: NGN{{ number_format($user->bonus,2) }} </span>
+                                        <div class="card-title d-flex flex-column mt-4">
+                                            <!--begin::Info-->
+                                            <div class="d-flex align-items-center">
+                                                <!--begin::Currency-->
+                                                <span  style='color:#ebab21 !important' class="fs-4 fw-semibold text-gray-400 me-1 align-self-start">₦</span>
+                                                <!--end::Currency-->
+    
+                                                <!--begin::Amount-->
+                                                <span style='color:#ebab21' class="fs-2hx fw-bold me-2 lh-1 ls-n2">{{ number_format($user->balance,2) }}</span>
+                                                <!--end::Amount-->
+    
+                                                <!--begin::Badge-->
+                                                <span onclick='Swal.fire("Almost There!","Perform more transactions to unlock your bonus.","info")' class="badge badge-light-success fs-base">
+                                                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr066.svg-->
+                                                    <span class="svg-icon svg-icon-5 svg-icon-success ms-n1"><svg width="24"
+                                                            height="24" viewBox="0 0 24 24" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <rect opacity="0.5" x="13" y="6" width="13" height="2" rx="1"
+                                                                transform="rotate(90 13 6)" fill="currentColor"></rect>
+                                                            <path
+                                                                d="M12.5657 8.56569L16.75 12.75C17.1642 13.1642 17.8358 13.1642 18.25 12.75C18.6642 12.3358 18.6642 11.6642 18.25 11.25L12.7071 5.70711C12.3166 5.31658 11.6834 5.31658 11.2929 5.70711L5.75 11.25C5.33579 11.6642 5.33579 12.3358 5.75 12.75C6.16421 13.1642 6.83579 13.1642 7.25 12.75L11.4343 8.56569C11.7467 8.25327 12.2533 8.25327 12.5657 8.56569Z"
+                                                                fill="currentColor"></path>
+                                                        </svg>
+                                                    </span>
+                                                    Bonus:
+                                                    <!--end::Svg Icon-->
+                                                    {{ number_format($user->bonus,2) }}
+                                                </span>
+                                                <!--end::Badge-->
+                                            </div>
+                                            <!--end::Info-->
+    
+                                            <!--begin::Subtitle-->
+                                            <span class="text-gray-400 pt-1 fw-semibold fs-6">Wallet Balance</span>
+                                            <!--end::Subtitle-->
+                                        </div>
+                                       
                                         <div class='d-flex'>
                                             <a class='btn btn-warning btn-sm' style='margin-right:8px'
                                                 href='/fundwallet'>Fund Wallet</a>
@@ -563,6 +599,7 @@
                                         </div>
                                         <!--end::Description-->
                                     </h1>
+                               
                                     <!--end::Title-->
                                     {{-- @if($user->email_verified_at == null)
                                     <div class='alert alert-danger mt-2'>Your account is yet to be verified, kindly

@@ -10,10 +10,12 @@
           <!--begin::Heading-->
 
           <div class="row">
-            <label class="col-xl-3"></label>
-            <div class="col-lg-9 col-xl-6">
-             
-              <h5 class="font-weight-bolder mb-6">PAY FOR CT_TASTE ORDER</h5>
+            <label class="col-md-3"></label>
+            <div class="col">
+              <div class="font-weight-bold">Pay For Food Order</div>
+            </div>
+            <div class="col text-end">
+              <a onclick="window.history.back()" class="btn-sm btn btn-secondary">Back</a>
             </div>
           </div>
           <!--begin::Form Group-->

@@ -31,6 +31,7 @@ Vue.component('buydata-component', require('./components/dashboard/BuydataCompon
 Vue.component('buyairtime-component', require('./components/dashboard/BuyairtimeComponent.vue').default);
 Vue.component('electricity-component', require('./components/dashboard/ElectricityComponent.vue').default);
 Vue.component('cable-component', require('./components/dashboard/CableComponent.vue').default);
+Vue.component('my-analysis', require('./components/dashboard/MyAnalysis.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

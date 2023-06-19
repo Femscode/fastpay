@@ -73,7 +73,7 @@
         <div class="mb-0" id="home">
             <!--begin::Wrapper-->
             <div class="bgi-no-repeat bgi-size-contain bgi-position-x-center bgi-position-y-bottom landing-light-bg"
-                style="background-image: url(assets/media/svg/illustrations/landing.svg)">
+                style="background-image: url(assets/media/logos/fastpay_bg.jpg)">
                 <!--begin::Header-->
                 <div style='padding:10px' class="landing-header" data-kt-sticky="true" data-kt-sticky-name="landing-header"
                     data-kt-sticky-offset="{default: '200px', lg: '300px'}">
@@ -173,7 +173,7 @@
 
 
                 <!--begin::Landing hero-->
-                <div style='background-image: url(assets/media/logos/bg1.jpg);background-size:cover;background-color:#fff' class="d-flex flex-column flex-center w-100 min-h-350px min-h-lg-500px px-9">
+                <div style='background-image: url(assets/media/logos/fastpay_bg2.jpg);background-size:cover;background-color:#fff' class="d-flex flex-column flex-center w-100 min-h-350px min-h-lg-500px px-9">
                     <!--begin::Heading-->
                     <div class="text-center mb-5 mb-lg-10 py-10 py-lg-20">
                         <!--begin::Title-->
@@ -189,14 +189,14 @@
                         <!--end::Title-->
 
                         <!--begin::Action-->
-                        <a href="/pay_cttaste" class="btn btn-warning">Pay For Food</a>
-                        <a href="/dashboard" class="btn btn-success">Pay For Utilities</a>
+                        <a href="/login" class="btn btn-secondary">Login</a>
+                        <a href="/register" class="btn btn-warning" >Create New Account</a>
                         <!--end::Action-->
                     </div>
                     <!--end::Heading-->
 
                     <!--begin::Clients-->
-                    <div style='background:#fff' class="d-flex flex-center flex-wrap position-relative px-5">
+                    <div style='background:#fff;' class="d-flex flex-center flex-wrap position-relative px-5">
 
                         <!--begin::Client-->
                         <div class="d-flex flex-center m-3 m-md-6" data-bs-toggle="tooltip" title="Fujifilm">

@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Bank;
-use App\Models\ComingSoon;
 use App\Models\User;
 use App\Models\Payroll;
 use App\Models\MySession;
+use App\Models\ComingSoon;
 use App\Models\Transaction;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Traits\TransactionTrait;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Session;
@@ -27,6 +29,62 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+    }
+
+    public function analysis(Request $request)
+    {
+        $data['user'] = $user = Auth::user();
+        if($request->has('phone')) {
+            $phone1 = $request->phone;
+            $phone2 = "0" . $request->phone;
+            $phone3 = "+234" . $request->phone;
+            $phone4 = "+234" . substr($request->phone, 0);
+            $phone5 = "234" . $request->phone;
+            $phone6 = "234" . substr($request->phone, 0);
+            $data['phone'] = $request->phone;
+        }
+        else {
+            $data['active'] = 'analysis';
+            $phone1 = $user->phone;
+            $phone2 = "0" . $user->phone;
+            $phone3 = "+234" . $user->phone;
+            $phone4 = "+234" . substr($user->phone, 0);
+            $phone5 = "234" . $user->phone;
+            $phone6 = "234" . substr($user->phone, 0);
+            $data['phone'] = $user->phone;
+        }
+        $data['active'] = 'analysis';
+
+       
+        $orders = DB::connection('mysql2')->table('orders')
+            ->whereIn('phone', [$phone1, $phone2, $phone3, $phone4, $phone5, $phone6])
+            ->get();
+        $data['this_year'] = DB::connection('mysql2')->table('orders')
+            ->whereIn('phone', [$phone1, $phone2, $phone3, $phone4, $phone5, $phone6])->whereBetween('created_at', [Carbon::now()->startOfYear(), Carbon::today()])
+            ->get()->sum('total_price');
+        $data['this_month'] = DB::connection('mysql2')->table('orders')
+            ->whereIn('phone', [$phone1, $phone2, $phone3, $phone4, $phone5, $phone6])->whereBetween('created_at', [Carbon::now()->startOfMonth(), Carbon::today()])
+            ->get()->sum('total_price');
+
+        $data['total_price'] = $orders->sum('total_price');
+
+        $data['total_price_by_restaurant'] = $totalPriceByRestaurant = $orders->groupBy('user_id')->map(function ($orders) {
+            $restaurantName = DB::connection('mysql2')->table('users')->where('id', $orders->first()->user_id)->pluck('name')->implode(', ');
+            $totalPrice = $orders->sum('total_price');
+            $count = $orders->count();
+
+            return [
+                'count' => $count,
+                'restaurant_name' => $restaurantName,
+                'total_price' => $totalPrice
+            ];
+        })->sortByDesc('total_price');
+        // dd($orders);
+
+      
+        // dd($data, $orders, $user);
+        return view('dashboard.analysis', $data);
+        dd($user);
     }
 
 

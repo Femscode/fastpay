@@ -495,7 +495,7 @@
             <div class="app-wrapper  flex-column flex-row-fluid " id="kt_app_wrapper">
 
                 <!--begin::Toolbar-->
-                <div style='background:url({{ asset('assets/media/logos/bg1.jpg') }});background-size:cover'
+                <div style='background:url({{ asset('assets/media/logos/fastpay_bg2.jpg') }});background-size:cover'
                     id="kt_app_toolbar" class="app-toolbar  py-6 ">
 
                     <!--begin::Toolbar container-->

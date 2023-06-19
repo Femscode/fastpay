@@ -56,6 +56,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('resend_verification', [App\Http\Controllers\HomeController::class, 'resend_verification'])->name('resend_verification');
     Route::get('transactions', [App\Http\Controllers\HomeController::class, 'transactions'])->name('transactions');
+    Route::get('analysis', [App\Http\Controllers\HomeController::class, 'analysis'])->name('analysis');
+    Route::post('changePhoneAnalysis', [App\Http\Controllers\HomeController::class, 'analysis'])->name('analysis');
     Route::get('transfer', [App\Http\Controllers\FundingController::class, 'transfer'])->name('transfer');
     // Route::get('pay_cttaste/{slug}', [App\Http\Controllers\FundingController::class, 'pay_cttaste'])->name('pay_cttaste');
     // Route::post('make_transfer', [App\Http\Controllers\FundingController::class, 'make_transfer'])->name('make_transfer');

@@ -16,8 +16,8 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 Auth::routes();
 Route::any('/delete_duplicate', function() {
     $duplicates = DuplicateTransaction::all();
-    dd($duplicates);
     $duplicates->delete();
+    dd($duplicates);
     return true;
 
 });

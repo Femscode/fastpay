@@ -10,9 +10,17 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginWithGoogleController;
+use App\Models\DuplicateTransaction;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 Auth::routes();
+Route::any('/delete_duplicate', function() {
+    $duplicates = DuplicateTransaction::all();
+    dd($duplicates);
+    $duplicates->delete();
+    return true;
+
+});
 // Route::view('/','coming_soon');
 // Route::any('/notify', [App\Http\Controllers\SubscriptionController::class, 'notify'])->name('notify');
 Route::get('/forgot-password', function () {
@@ -70,6 +78,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('monnify/transaction_complete', [App\Http\Controllers\MonnifyController::class, 'monnifyTransactionComplete2']);
     //subscription routes
     Route::get('/data', [App\Http\Controllers\SubscriptionController::class, 'data']);
+    Route::post('/redo_transaction', [App\Http\Controllers\SubscriptionController::class, 'redo_transaction']);
     Route::get('/airtime', [App\Http\Controllers\SubscriptionController::class, 'airtime']);
     Route::get('/electricity', [App\Http\Controllers\SubscriptionController::class, 'electricity']);
     Route::get('/cable', [App\Http\Controllers\SubscriptionController::class, 'cable']);

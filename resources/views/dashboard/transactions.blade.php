@@ -27,6 +27,7 @@
                         <table class="datatable table table-striped">
                             <thead>
                                 <tr>
+                                  
                                     <th scope="col">Title</th>
                                     <th scope="col">Details</th>
                                     <th scope="col">Amount</th>
@@ -38,11 +39,17 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <input value='{{ $user->balance }}' id='user_amount'/>
                                 @foreach($transactions as $key => $tranx)
 
                                 <tr>
+                                    
 
-                                    <td>{{ $tranx->title }}</td>
+                                    <td>{{ $tranx->title }}<br>
+                                        @if($tranx->title == "Data Purchase" || $tranx->title == "Airtime Purchase" || $tranx->title =='Electricity Payment' || $tranx->title == 'Cable Subscription' )
+                                        <a data-transaction_id="{{ $tranx->id }}" data-title="{{ $tranx->title }}" data-amount = "{{ $tranx->amount }}" data-description='{{ $tranx->description }}' data-id='{{ $tranx->id }}' class='redo btn btn-secondary btn-sm'>Redo</a>
+                                        @endif
+                                    </td>
                                     <td>{{ $tranx->description }}</td>
                                     <td>₦{{ number_format($tranx->amount,2) }}</td>
                                     <td>₦{{ number_format($tranx->before,2) }}</td>
@@ -87,6 +94,132 @@
         @if (session('message'))
         Swal.fire('Success!',"{{ session('message') }}",'success');
     @endif
+    $("body").on('click','.redo', function() {
+        var description = $(this).data('description')
+        var title = $(this).data('title')
+        var transaction_id = $(this).data('transaction_id')
+       if($(this).data('amount') < $("#user_amount").val()) {
+       
+        Swal.fire({
+          title: "Redo " + title,
+          html: "  You are about to redo " +
+           description +
+            "<br>Input your four(4) digit pin to proceed " ,
+          icon: "warning",
+          input: "password",
+          inputAttributes: {
+            inputmode: "numeric",
+            maxlength: 4,
+            autocomplete: "new-password",
+            name: "my-pin",
+            autocapitalize: "off",
+            pattern: "[0-9]*",
+            style: "text-align:center;font-size:24px;letter-spacing: 20px",
+          },
+          showCancelButton: true,
+          confirmButtonColor: "#ebab21",
+          cancelButtonColor: "grey",
+          confirmButtonText: "Buy Data",
+          allowOutsideClick: false,
+          allowEscapeKey: false,
+          preConfirm: () => {
+            const confirmButton = Swal.getConfirmButton();
+            confirmButton.textContent = "Validating ";
+            confirmButton.disabled = true;
+            confirmButton.insertAdjacentHTML(
+              "beforeend",
+              `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>`
+            );
+            return new Promise((resolve) => {
+              // You can perform any necessary validation here, e.g. making a server call.
+              // Once validation is complete, call resolve() to close the modal.
+              setTimeout(() => {
+                resolve();
+              }, 500);
+            });
+          },
+
+          inputValidator: (text) => {
+            if (!/^\d{4}$/.test(text)) {
+              return "Please enter a four-digit PIN";
+            }
+          },
+        }).then((result) => {
+        
+        Swal.fire({
+          title: "Processing transaction, please wait...",
+          // html: '<div class="text-center"><i class="fa fa-spinner fa-spin fa-3x"></i></div>',
+          showConfirmButton: false,
+          allowOutsideClick: false,
+          allowEscapeKey: false,
+          didOpen: () => {
+            Swal.showLoading();
+          },
+        });
+        let fd = new FormData();
+        fd.append("transaction_id", transaction_id);
+        fd.append("pin", result.value);
+       
+      
+        axios
+          .post("/redo_transaction", fd)
+          .then((response) => {
+            console.log(response, 'the res')
+            if (response.data.success == "true") {
+              Swal.fire({
+                icon: "success",
+                title: "Purchase successful!",
+                showConfirmButton: true, // updated
+                confirmButtonColor: "#3085d6", // added
+                confirmButtonText: "Ok", // added
+                allowOutsideClick: false, // added to prevent dismissing the modal by clicking outside
+                allowEscapeKey: false, // added to prevent dismissing the modal by pressing Esc key
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  location.reload();
+                }
+              });
+            } else {
+              Swal.fire({
+                icon: "error",
+                title: response.data.message,
+                // text: "Updating...",
+                showConfirmButton: true, // updated
+                confirmButtonColor: "#3085d6", // added
+                confirmButtonText: "Ok", // added
+                allowOutsideClick: false, // added to prevent dismissing the modal by clicking outside
+                allowEscapeKey: false, // added to prevent dismissing the modal by pressing Esc key
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  // location.reload();
+                }
+              });
+            }
+          })
+          .catch((error) => {
+            console.log(error.message);
+            Swal.fire(error.message);
+          });
+        }) 
+      } else {
+        Swal.fire({
+                title: 'Insufficient balance!,',
+                icon: 'info',
+                html:
+                    'Click ' +
+                    '<a href="https://fastpay.cttaste.com/fundwallet">here</a> ' +
+                    'to fund your wallet.',
+                showCloseButton: true,
+                showCancelButton: true,
+                focusConfirm: false,
+              
+                })
+            
+
+            }
+     
+    })
+  
         
     })
 

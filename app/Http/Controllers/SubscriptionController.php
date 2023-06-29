@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Data;
 use App\Models\Cable;
 use App\Models\ComingSoon;
+use App\Models\Transaction;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Traits\TransactionTrait;
@@ -119,6 +120,124 @@ class SubscriptionController extends Controller
 
         $data['user'] = Auth::user();
         return view('subscription.buydata', $data);
+    }
+    public function redo_transaction(Request $request) {
+        $user = Auth::user();
+        $hashed_pin = hash('sha256', $request->pin);
+        if ($user->pin !== $hashed_pin) {
+            $response = [
+                'success' => false,
+                'message' => 'Incorrect Pin!',
+                'auto_refund_status' => 'Nil'
+            ];
+            return response()->json($response);
+        }
+        $tranx = Transaction::find($request->transaction_id);
+        if($tranx->title == "Airtime Purchase") {
+
+        }
+        elseif($tranx->title == "Data Purchase") {
+            $phone_number = $request->phone_number;
+            if(strlen($request->phone_number) == 10) {
+                $phone_number = "0".$request->phone_number;
+            }
+          
+            $data = Data::where('plan_id', $request->plan)->where('network', $request->network)->first();
+            if ($data == null) {
+                $response = [
+                    'success' => false,
+                    'message' => 'Invalid Plan!',
+                    'auto_refund_status' => 'Nil'
+                ];
+            
+                return response()->json($response);
+               
+            }
+            //check balance
+            if ($user->balance < $data->data_price) {
+                $response = [
+                    'success' => false,
+                    'message' => 'Insufficient balance for the plan you want to get!',
+                    'auto_refund_status' => 'Nil'
+                ];
+            
+                return response()->json($response);
+               
+            }
+    
+            //check duplicate
+            $check = $this->check_duplicate('check', $user->id);
+            if ($check == true) {
+                $response = [
+                    'success' => false,
+                    'message' => 'Duplicate Transaction!',
+                    'auto_refund_status' => 'Nil'
+                ];
+            
+                return response()->json($response);
+               
+            }
+            //purchase the data
+            $curl = curl_init();
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => "https://easyaccessapi.com.ng/api/data.php",
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => "",
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => "POST",
+                CURLOPT_POSTFIELDS => array(
+                    'network' => $request->network,
+                    'mobileno' => $phone_number,
+                    'dataplan' => $request->plan,
+                    'client_reference' => 'buy_data_' . Str::random(7), //update this on your script to receive webhook notifications
+                ),
+                CURLOPT_HTTPHEADER => array(
+                    "AuthorizationToken: ".env('EASY_ACCESS_AUTH'), //replace this with your authorization_token
+                    "cache-control: no-cache"
+                ),
+            ));
+            $response = curl_exec($curl);
+            $response_json = json_decode($response, true);
+    
+            if ($response_json['success'] === "true") {
+                $details = $response_json['network'] . " Data Purchase of " . $response_json['dataplan'] . " on " . $request->phone_number;
+                
+                $this->create_transaction('Data Purchase', $response_json['reference_no'], $details, 'debit', $data->data_price, $user->id, 1);
+    
+                // Transaction was successful
+                // Do something here
+            } else {
+                $reference = 'failed_data_'. Str::random(5);
+                $this->create_transaction('Data Purchase', $reference, 'Failed data purchase', 'debit', $data->data_price, $user->id, 0);
+            }
+            $this->check_duplicate("Delete", $user->id);
+    
+            curl_close($curl);
+            return $response;
+          
+    
+
+        }
+        elseif($tranx->title == 'Cable Subscription') {
+
+        }
+        elseif($tranx->title == 'Electricity Payment') {
+
+        }
+        else {
+            $response = [
+                'success' => false,
+                'message' => 'Invalid Transaction!',
+                'auto_refund_status' => 'Nil'
+            ];
+            return response()->json($response);
+        }
+
+
+        dd($request->all(),$tranx);
     }
 
     public function buyCable(Request $request)

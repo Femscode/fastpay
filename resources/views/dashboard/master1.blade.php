@@ -188,6 +188,12 @@
                                             Bill </span></span>
 
                                 </a>
+                                <a href='/transactions'
+                                    class="menu-item  @if($active == 'electricity') here show menu-here-bg @endif menu-lg-down-accordion me-0 me-lg-2">
+                                    <!--begin:Menu link--><span class="menu-link"><span class="menu-title">My Transactions
+                                             </span></span>
+
+                                </a>
                                 <!--end:Menu item-->
                                 <!--begin:Menu item-->
                                 <!--end:Menu item-->

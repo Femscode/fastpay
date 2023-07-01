@@ -355,6 +355,10 @@ export default {
             }
           },
         }).then((result) => {
+          if(result.isConfirmed == false) {
+          return;
+
+          }
         Swal.fire({
           title: "Purchasing data, please wait...",
           // html: '<div class="text-center"><i class="fa fa-spinner fa-spin fa-3x"></i></div>',

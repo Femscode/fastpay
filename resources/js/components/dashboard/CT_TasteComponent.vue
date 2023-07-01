@@ -280,6 +280,10 @@ export default {
             }
           },
         }).then((result) => {
+          if(result.isConfirmed == false) {
+          return;
+
+          }
         Swal.fire("Paying for order, please wait...");
         let fd = new FormData();
         fd.append("order_id", this.order_id);

@@ -217,24 +217,25 @@
                                                     <div class="col-md-5 border-top pt-14 pb-10 pb-md-18">
                                                         <div class="d-flex flex-column flex-md-row">
                                                             <div class="d-flex flex-column">
-                                                                <div class="font-weight-bold font-size-h6 mb-3">BANK
-                                                                    TRANSFER</div>
+                                                                <div class="font-weight-bold font-size-h6 mb-3">MORE DETAILS
+                                                                    </div>
                                                                 <div
                                                                     class="d-flex justify-content-between font-size-lg mb-3">
                                                                     <span class="font-weight-bold mr-15">Account
                                                                         Name:</span>
-                                                                    <span class="text-right">Barclays UK</span>
+                                                                    <span class="text-right">{{ $user->name }}</span>
                                                                 </div>
                                                                 <div
                                                                     class="d-flex justify-content-between font-size-lg mb-3">
-                                                                    <span class="font-weight-bold mr-15">Account
-                                                                        Number:</span>
-                                                                    <span class="text-right">1234567890934</span>
+                                                                    <span class="font-weight-bold mr-15">Date
+                                                                        :</span>
+                                                                    <span class="text-right">{{ Date('jS \of F, Y',strtotime($transaction->created_at)) }}</span>
                                                                 </div>
                                                                 <div
                                                                     class="d-flex justify-content-between font-size-lg">
-                                                                    <span class="font-weight-bold mr-15">Code:</span>
-                                                                    <span class="text-right">BARC0032UK</span>
+                                                                    <span class="font-weight-bold mr-15">Time:</span>
+                                                                    <span class="text-right">{{ \Carbon\Carbon::parse($transaction->created_at)->diffForHumans() }}
+                                                                    </span>
                                                                 </div>
                                                             </div>
                                                         </div>

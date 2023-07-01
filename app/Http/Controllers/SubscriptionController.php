@@ -104,8 +104,13 @@ class SubscriptionController extends Controller
         if ($response_json['success'] === "true") {
             $details = $response_json['network'] . " Data Purchase of " . $response_json['dataplan'] . " on " . $request->phone_number;
             
-            $this->create_transaction('Data Purchase', $response_json['reference_no'], $details, 'debit', $data->data_price, $user->id, 1);
-
+           $trans_id = $this->create_transaction('Data Purchase', $response_json['reference_no'], $details, 'debit', $data->data_price, $user->id, 1);
+            $transaction = Transaction::find($trans_id);
+            $transaction->phone = $phone_number;
+            $transaction->network = $request->network;
+            $transaction->plan_id = $request->plan_id;
+            $transaction->redo = 1;
+            $transaction->save();
             // Transaction was successful
             // Do something here
         } else {
@@ -134,15 +139,82 @@ class SubscriptionController extends Controller
         }
         $tranx = Transaction::find($request->transaction_id);
         if($tranx->title == "Airtime Purchase") {
+            $phone_number = $tranx->phone_number;
+            
+            if ($user->balance < $tranx->amount) {
+                $response = [
+                    'success' => false,
+                    'message' => 'Insufficient Balance for airtime you want to get!',
+                    'auto_refund_status' => 'Nil'
+                ];
+            
+                return response()->json($response);
+            }
+    
+            //check duplicate
+            $check = $this->check_duplicate('check', $user->id);
+            if ($check == true) {
+                $response = [
+                    'success' => false,
+                    'message' => 'Duplicate transaction, please try again in few minutes time!',
+                    'auto_refund_status' => 'Nil'
+                ];
+            
+                return response()->json($response);
+            }
+            //purchase the data
+            $curl = curl_init();
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => "https://easyaccessapi.com.ng/api/airtime.php",
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => "",
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => "POST",
+                CURLOPT_POSTFIELDS => array(
+                    'network' => $tranx->network,
+                    'mobileno' => $phone_number,
+                    'amount' => $tranx->amount,
+                    'airtime_type' => 001,
+                    'client_reference' => 'buy_airtime_' . Str::random(7), //update this on your script to receive webhook notifications
+                ),
+                CURLOPT_HTTPHEADER => array(
+                    "AuthorizationToken: ".env('EASY_ACCESS_AUTH'), //replace this with your authorization_token
+                    "cache-control: no-cache"
+                ),
+            ));
+            $response = curl_exec($curl);
+            $response_json = json_decode($response, true);
+    
+            if ($response_json['success'] === "true") {
+                $details = $response_json['network'] . " Airtime Purchase of NGN" . $tranx->amount . " on " . $phone_number;
+                $trans_id = $this->create_transaction('Airtime Purchase', $response_json['reference_no'], $details, 'debit', $tranx->discounted_amount, $user->id, 1);
+                $transaction = Transaction::find($trans_id);
+                $transaction->phone = $phone_number;
+                $transaction->network = $tranx->network;
+                $transaction->discounted_amount = $tranx->discounted_amount;
+                $transaction->redo = 1;
+                $transaction->save();
+                // Transaction was successful
+                // Do something here
+            } else {
+                $reference = 'failed_airtime_'. Str::random(5);
+                $details = "Airtime Purchase of NGN" . $request->amount . " on " . $request->phone_number;
+                $this->create_transaction('Airtime Purchase', $reference, $response_json['message'], 'debit', $request->discounted_amount, $user->id, 0);
+            }
+            $this->check_duplicate("Delete", $user->id);
+    
+            curl_close($curl);
+            return $response;
 
         }
         elseif($tranx->title == "Data Purchase") {
-            $phone_number = $request->phone_number;
-            if(strlen($request->phone_number) == 10) {
-                $phone_number = "0".$request->phone_number;
-            }
+            $phone_number = $tranx->phone_number;
+           
           
-            $data = Data::where('plan_id', $request->plan)->where('network', $request->network)->first();
+            $data = Data::where('plan_id', $tranx->plan_id)->where('network', $tranx->network)->first();
             if ($data == null) {
                 $response = [
                     'success' => false,
@@ -189,9 +261,9 @@ class SubscriptionController extends Controller
                 CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
                 CURLOPT_CUSTOMREQUEST => "POST",
                 CURLOPT_POSTFIELDS => array(
-                    'network' => $request->network,
+                    'network' => $tranx->network,
                     'mobileno' => $phone_number,
-                    'dataplan' => $request->plan,
+                    'dataplan' => $tranx->plan,
                     'client_reference' => 'buy_data_' . Str::random(7), //update this on your script to receive webhook notifications
                 ),
                 CURLOPT_HTTPHEADER => array(
@@ -203,10 +275,15 @@ class SubscriptionController extends Controller
             $response_json = json_decode($response, true);
     
             if ($response_json['success'] === "true") {
-                $details = $response_json['network'] . " Data Purchase of " . $response_json['dataplan'] . " on " . $request->phone_number;
+                $details = $response_json['network'] . " Data Purchase of " . $response_json['dataplan'] . " on " . $phone_number;
                 
-                $this->create_transaction('Data Purchase', $response_json['reference_no'], $details, 'debit', $data->data_price, $user->id, 1);
-    
+                $trans_id = $this->create_transaction('Data Purchase', $response_json['reference_no'], $details, 'debit', $data->data_price, $user->id, 1);
+                $transaction = Transaction::find($trans_id);
+                $transaction->phone = $phone_number;
+                $transaction->network = $tranx->network;
+                $transaction->plan_id = $tranx->plan_id;
+                $transaction->redo = 1;
+                $transaction->save();
                 // Transaction was successful
                 // Do something here
             } else {
@@ -501,8 +578,13 @@ class SubscriptionController extends Controller
 
         if ($response_json['success'] === "true") {
             $details = $response_json['network'] . " Airtime Purchase of NGN" . $request->amount . " on " . $request->phone_number;
-            $this->create_transaction('Airtime Purchase', $response_json['reference_no'], $details, 'debit', $request->discounted_amount, $user->id, 1);
-
+            $trans_id = $this->create_transaction('Airtime Purchase', $response_json['reference_no'], $details, 'debit', $request->discounted_amount, $user->id, 1);
+            $transaction = Transaction::find($trans_id);
+            $transaction->phone = $phone_number;
+            $transaction->network = $request->network;
+            $transaction->discounted_amount = $request->discounted_amount;
+            $transaction->redo = 1;
+            $transaction->save();
             // Transaction was successful
             // Do something here
         } else {

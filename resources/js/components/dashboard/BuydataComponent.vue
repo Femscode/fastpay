@@ -189,6 +189,10 @@ export default {
             }
           },
         }).then((result) => {
+          if(result.isConfirmed == false) {
+          return;
+
+          }
         
         Swal.fire({
           title: "Purchasing data, please wait...",

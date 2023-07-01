@@ -39,14 +39,15 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <input value='{{ $user->balance }}' id='user_amount'/>
+                                <input style='visibility:hidden' value='{{ $user->balance }}' id='user_amount'/>
                                 @foreach($transactions as $key => $tranx)
 
                                 <tr>
                                     
 
                                     <td>{{ $tranx->title }}<br>
-                                        @if($tranx->title == "Data Purchase" || $tranx->title == "Airtime Purchase" || $tranx->title =='Electricity Payment' || $tranx->title == 'Cable Subscription' )
+                                        @if($tranx->title == "Data Purchase" && $tranx->status == 1 || $tranx->title == "Airtime Purchase" && $tranx->status == 1 )
+                                        {{-- @if($tranx->title == "Data Purchase" && $tranx->status == 1 || $tranx->title == "Airtime Purchase" && $tranx->status == 1 || $tranx->title =='Electricity Payment' && $tranx->status == 1 || $tranx->title == 'Cable Subscription' && $tranx->status == 1 ) --}}
                                         <a data-transaction_id="{{ $tranx->id }}" data-title="{{ $tranx->title }}" data-amount = "{{ $tranx->amount }}" data-description='{{ $tranx->description }}' data-id='{{ $tranx->id }}' class='redo btn btn-secondary btn-sm'>Redo</a>
                                         @endif
                                     </td>
@@ -98,13 +99,12 @@
         var description = $(this).data('description')
         var title = $(this).data('title')
         var transaction_id = $(this).data('transaction_id')
+        console.log($(this).data('amount'),  $("#user_amount").val(), 'price different' )
        if($(this).data('amount') < $("#user_amount").val()) {
        
         Swal.fire({
-          title: "Redo " + title,
-          html: "  You are about to redo " +
-           description +
-            "<br>Input your four(4) digit pin to proceed " ,
+          title: "You are about to redo " + description,
+          html: " <span class='text-warning'>Input your four(4) digit pin to proceed</span> " ,
           icon: "warning",
           input: "password",
           inputAttributes: {
@@ -145,6 +145,11 @@
             }
           },
         }).then((result) => {
+          if(result.isConfirmed == false) {
+          return;
+
+          }
+          console.log(result, 'the result')
         
         Swal.fire({
           title: "Processing transaction, please wait...",

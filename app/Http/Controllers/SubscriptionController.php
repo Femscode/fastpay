@@ -108,7 +108,7 @@ class SubscriptionController extends Controller
             $transaction = Transaction::find($trans_id);
             $transaction->phone_number = $phone_number;
             $transaction->network = $request->network;
-            $transaction->plan_id = $request->plan_id;
+            $transaction->plan_id = $request->plan;
             $transaction->redo = 1;
             $transaction->save();
             // Transaction was successful

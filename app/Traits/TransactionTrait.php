@@ -298,7 +298,7 @@ trait TransactionTrait
                 $nuser->save();
                 $tranx->after = $nuser->balance;
                 $tranx->save();
-                return $tranx;
+                return $tranx->id;
             } else {
                 $tranx->description = "Failed Transaction : " . $tranx->description;
                 $tranx->after = $nuser->balance;

@@ -100,7 +100,7 @@
         var title = $(this).data('title')
         var transaction_id = $(this).data('transaction_id')
         console.log($(this).data('amount'),  $("#user_amount").val(), 'price different' )
-       if($(this).data('amount') < $("#user_amount").val()) {
+       if(parseInt( $("#user_amount").val()) > parseInt($(this).data('amount'))) {
        
         Swal.fire({
           title: "You are about to redo " + description,

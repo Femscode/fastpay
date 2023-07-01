@@ -15,14 +15,15 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 Auth::routes();
 Route::any('delete_duplicate', function() {
+  
     $duplicates = DuplicateTransaction::all();
 
     if ($duplicates->isEmpty()) {
-        return false; // List is empty
+        return 0; // List is empty
     }
     
     $duplicates->delete();
-    return true;
+    return 1;
 
 })->name('delete_duplicate');
 // Route::view('/','coming_soon');

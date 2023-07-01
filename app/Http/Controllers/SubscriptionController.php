@@ -263,7 +263,7 @@ class SubscriptionController extends Controller
                 CURLOPT_POSTFIELDS => array(
                     'network' => $tranx->network,
                     'mobileno' => $phone_number,
-                    'dataplan' => $tranx->plan,
+                    'dataplan' => $tranx->plan_id,
                     'client_reference' => 'buy_data_' . Str::random(7), //update this on your script to receive webhook notifications
                 ),
                 CURLOPT_HTTPHEADER => array(

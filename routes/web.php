@@ -14,7 +14,7 @@ use App\Models\DuplicateTransaction;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 Auth::routes();
-Route::any('/delete_duplicate', function() {
+Route::any('delete_duplicate', function() {
     $duplicates = DuplicateTransaction::all();
 
     if ($duplicates->isEmpty()) {
@@ -24,7 +24,7 @@ Route::any('/delete_duplicate', function() {
     $duplicates->delete();
     return true;
 
-});
+})->name('delete_duplicate');
 // Route::view('/','coming_soon');
 // Route::any('/notify', [App\Http\Controllers\SubscriptionController::class, 'notify'])->name('notify');
 Route::get('/forgot-password', function () {

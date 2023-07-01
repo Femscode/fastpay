@@ -176,7 +176,7 @@ class SubscriptionController extends Controller
                 CURLOPT_POSTFIELDS => array(
                     'network' => $tranx->network,
                     'mobileno' => $phone_number,
-                    'amount' => $tranx->amount,
+                    'amount' => $tranx->real_amount,
                     'airtime_type' => 001,
                     'client_reference' => 'buy_airtime_' . Str::random(7), //update this on your script to receive webhook notifications
                 ),
@@ -583,6 +583,7 @@ class SubscriptionController extends Controller
             $transaction->phone_number = $phone_number;
             $transaction->network = $request->network;
             $transaction->discounted_amount = $request->discounted_amount;
+            $transaction->real_amount = $request->amount;
             $transaction->redo = 1;
             $transaction->save();
             // Transaction was successful

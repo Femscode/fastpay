@@ -189,7 +189,7 @@ class SubscriptionController extends Controller
             $response_json = json_decode($response, true);
     
             if ($response_json['success'] === "true") {
-                $details = $response_json['network'] . " Airtime Purchase of NGN" . $tranx->amount . " on " . $phone_number;
+                $details = $response_json['network'] . " Airtime Purchase of NGN" . $tranx->real_amount . " on " . $phone_number;
                 $trans_id = $this->create_transaction('Airtime Purchase', $response_json['reference_no'], $details, 'debit', $tranx->discounted_amount, $user->id, 1);
                 $transaction = Transaction::find($trans_id);
                 $transaction->phone_number = $phone_number;

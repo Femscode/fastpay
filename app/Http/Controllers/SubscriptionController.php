@@ -106,7 +106,7 @@ class SubscriptionController extends Controller
             
            $trans_id = $this->create_transaction('Data Purchase', $response_json['reference_no'], $details, 'debit', $data->data_price, $user->id, 1);
             $transaction = Transaction::find($trans_id);
-            $transaction->phone = $phone_number;
+            $transaction->phone_number = $phone_number;
             $transaction->network = $request->network;
             $transaction->plan_id = $request->plan_id;
             $transaction->redo = 1;
@@ -192,7 +192,7 @@ class SubscriptionController extends Controller
                 $details = $response_json['network'] . " Airtime Purchase of NGN" . $tranx->amount . " on " . $phone_number;
                 $trans_id = $this->create_transaction('Airtime Purchase', $response_json['reference_no'], $details, 'debit', $tranx->discounted_amount, $user->id, 1);
                 $transaction = Transaction::find($trans_id);
-                $transaction->phone = $phone_number;
+                $transaction->phone_number = $phone_number;
                 $transaction->network = $tranx->network;
                 $transaction->discounted_amount = $tranx->discounted_amount;
                 $transaction->redo = 1;
@@ -279,7 +279,7 @@ class SubscriptionController extends Controller
                 
                 $trans_id = $this->create_transaction('Data Purchase', $response_json['reference_no'], $details, 'debit', $data->data_price, $user->id, 1);
                 $transaction = Transaction::find($trans_id);
-                $transaction->phone = $phone_number;
+                $transaction->phone_number = $phone_number;
                 $transaction->network = $tranx->network;
                 $transaction->plan_id = $tranx->plan_id;
                 $transaction->redo = 1;
@@ -580,7 +580,7 @@ class SubscriptionController extends Controller
             $details = $response_json['network'] . " Airtime Purchase of NGN" . $request->amount . " on " . $request->phone_number;
             $trans_id = $this->create_transaction('Airtime Purchase', $response_json['reference_no'], $details, 'debit', $request->discounted_amount, $user->id, 1);
             $transaction = Transaction::find($trans_id);
-            $transaction->phone = $phone_number;
+            $transaction->phone_number = $phone_number;
             $transaction->network = $request->network;
             $transaction->discounted_amount = $request->discounted_amount;
             $transaction->redo = 1;

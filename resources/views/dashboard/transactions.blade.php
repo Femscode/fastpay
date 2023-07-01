@@ -46,7 +46,7 @@
                                     
 
                                     <td>{{ $tranx->title }}<br>
-                                        @if($tranx->title == "Data Purchase" && $tranx->status == 1 || $tranx->title == "Airtime Purchase" && $tranx->status == 1 )
+                                        @if($tranx->title == "Data Purchase" && $tranx->status == 1 && $tranx->redo == 1 || $tranx->title == "Airtime Purchase" && $tranx->status == 1 && $tranx->redo == 1 )
                                         {{-- @if($tranx->title == "Data Purchase" && $tranx->status == 1 || $tranx->title == "Airtime Purchase" && $tranx->status == 1 || $tranx->title =='Electricity Payment' && $tranx->status == 1 || $tranx->title == 'Cable Subscription' && $tranx->status == 1 ) --}}
                                         <a data-transaction_id="{{ $tranx->id }}" data-title="{{ $tranx->title }}" data-amount = "{{ $tranx->amount }}" data-description='{{ $tranx->description }}' data-id='{{ $tranx->id }}' class='redo btn btn-secondary btn-sm'>Redo</a>
                                         @endif

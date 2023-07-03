@@ -25,7 +25,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     {{--
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet"> --}}
-    <link href="assets/googlefonts/ubuntu.css" rel="stylesheet">
+    {{-- <link href="assets/googlefonts/ubuntu.css" rel="stylesheet"> --}}
+    <link href="https://fonts.googleapis.com/css2?family=Lato&family=Ubuntu&display=swap" rel="stylesheet">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
 
@@ -232,9 +233,9 @@
 
                                             <!--begin::Username-->
                                             <div class="d-flex flex-column">
-                                                <div class="fw-bold d-flex align-items-center fs-5">
+                                                <div class=" d-flex align-items-center fs-5">
                                                     {{ $user->name }} <span
-                                                        class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">Regular</span>
+                                                        class="badge badge-light-success  fs-8 px-2 py-1 ms-2">Regular</span>
                                                 </div>
 
                                                 <a href="#" class="fw-semibold text-muted text-hover-primary fs-7">
@@ -263,7 +264,7 @@
                                             <span class="menu-text">My Transactions</span>
                                             <span class="menu-badge">
                                                 <span
-                                                    class="badge badge-light-danger badge-circle fw-bold fs-7">3</span>
+                                                    class="badge badge-light-danger badge-circle  fs-7">3</span>
                                             </span>
                                         </a>
                                     </div>
@@ -515,9 +516,9 @@
                                 <ul class="breadcrumb breadcrumb-separatorless fw-semibold">
 
                                     <!--begin::Item-->
-                                    <li class="breadcrumb-item text-white fw-bold lh-1">
+                                    <li class="breadcrumb-item text-white  lh-1">
                                         <a href="https://cttaste.com" class="text-white">
-                                            <i class="fonticon-home text-gray-700 fw-bold fs-3"></i>
+                                            <i class="fonticon-home text-gray-700  fs-3"></i>
                                         </a>
                                     </li>
                                     <!--end::Item-->
@@ -539,7 +540,7 @@
 
 
                                     <!--begin::Item-->
-                                    <a href='https://cttaste.com' class="breadcrumb-item text-dark fw-bold lh-1">
+                                    <a href='https://cttaste.com' class="breadcrumb-item text-dark  lh-1">
                                         cttaste.com</a>
                                     <!--end::Item-->
 
@@ -557,7 +558,7 @@
                                 <div class="page-title me-5">
                                     <!--begin::Title-->
 
-                                    <h1
+                                    <h1 style=" 'Lato', sans-serif;"
                                         class="page-heading d-flex text-black fw-semibold fs-2 flex-column justify-content-center my-0 mb-2">
                                         Welcome back, {{ $user->name }}
                                         <!--begin::Description-->
@@ -569,7 +570,7 @@
                                                 <!--end::Currency-->
     
                                                 <!--begin::Amount-->
-                                                <span style='color:#ebab21; font-weight:700 !important' class="fs-2hx fw-bolder me-2 lh-1 ls-n2">{{ number_format($user->balance,2) }}</span>
+                                                <span style='color:#ebab21; font-weight:700 !important' class="fs-2hx er me-2 lh-1 ls-n2">{{ number_format($user->balance,2) }}</span>
                                                 <!--end::Amount-->
     
                                                 <!--begin::Badge-->

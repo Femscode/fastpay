@@ -4,93 +4,111 @@
 @endsection
 
 @section('content')
+
 <div class="d-flex flex-column flex-column-fluid">
-    <!--begin::Container-->
-    <div id="kt_app_content" class="app-content  flex-column-fluid ">
-        <!--begin::Profile Account Information-->
-        <div class="row">
-           
-            <!--begin::Content-->
-            <div class="col-md-12">
-                <!--begin::Card-->
-                <div class="card card-custom">
-                    <div class="card-header flex-wrap border-0 pt-6 pb-0">
-                        <div class="card-title">
-                            <h3 class="card-label">My Transactions
-                                <span class="text-muted pt-2 font-size-sm d-block">{{ $user->email }}</span>
-                            </h3>
-                        </div>
-                     
-                    </div>
-                    <div class="card-body">
+  <!--begin::Container-->
+  <div id="kt_app_content" class="app-content  flex-column-fluid ">
+    <!--begin::Profile Account Information-->
+    <div class="row">
 
-                        <table class="datatable table table-striped">
-                            <thead>
-                                <tr>
-                                  
-                                    <th scope="col">Title</th>
-                                    <th scope="col">Details</th>
-                                    <th scope="col">Amount</th>
-                                    <th scope="col">Previous Balance</th>
-                                    <th scope="col">Later Balance</th>
-                                    <th scope="col">Type</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <input style='visibility:hidden' value='{{ $user->balance }}' id='user_amount'/>
-                                @foreach($transactions as $key => $tranx)
+      <!--begin::Content-->
+      <div class="col-md-12">
+        <!--begin::Card-->
+        <div class="card card-custom">
+          <div class="card-header flex-wrap border-0 pt-6 pb-0">
+            <div class="card-title">
+              <h3 class="card-label">My Transactions
+                <span class="text-muted pt-2 font-size-sm d-block">{{ $user->email }}</span>
+              </h3>
 
-                                <tr>
-                                    
 
-                                    <td>{{ $tranx->title }}<br>
-                                        @if($tranx->title == "Data Purchase" && $tranx->status == 1 && $tranx->redo == 1 || $tranx->title == "Airtime Purchase" && $tranx->status == 1 && $tranx->redo == 1 )
-                                        {{-- @if($tranx->title == "Data Purchase" && $tranx->status == 1 || $tranx->title == "Airtime Purchase" && $tranx->status == 1 || $tranx->title =='Electricity Payment' && $tranx->status == 1 || $tranx->title == 'Cable Subscription' && $tranx->status == 1 ) --}}
-                                        <a data-transaction_id="{{ $tranx->id }}" data-title="{{ $tranx->title }}" data-amount = "{{ $tranx->amount }}" data-description='{{ $tranx->description }}' data-id='{{ $tranx->id }}' class='redo btn btn-secondary btn-sm'>Redo</a>
-                                        @endif
-                                    </td>
-                                    <td>{{ $tranx->description }}</td>
-                                    <td>₦{{ number_format($tranx->amount,2) }}</td>
-                                    <td>₦{{ number_format($tranx->before,2) }}</td>
-                                    <td>₦{{ number_format($tranx->after,2) }}</td>
-                                    <td>{{ $tranx->type }}</td>
-                                    <td>@if($tranx->status == 1)
-                                        <span class='badge badge-light-success'>Success</span>
-                                        @else
-                                        <span class='badge badge-light-danger'>Failed</span>
-                                        @endif
-                                    
-                                    </td>
-                                    <td>
-                                        <a href='/print_transaction_receipt/{{ $tranx->id }}' class='btn btn-success btn-sm'>Print</a>
-                                    </td>
-                                </tr>
-                                @endforeach
-
-                            </tbody>
-                        </table>
-                        <!--end: Datatable-->
-                    </div>
-                </div>
-                <!--end::Card-->
             </div>
-            <!--end::Content-->
+
+          </div>
+          <div class="card-body">
+            <div class='col-md-6'>
+            <input type="text" class="form-control" placeholder="Search..." id="searchTable">
+            </div>
+                           
+
+            <table class="datatable table table-striped">
+              <thead>
+                <tr>
+
+                  <th scope="col">Title</th>
+                  <th scope="col">Details</th>
+                  <th scope="col">Amount</th>
+                  <th scope="col">Previous Balance</th>
+                  <th scope="col">Later Balance</th>
+                  <th scope="col">Type</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <input style='visibility:hidden' value='{{ $user->balance }}' id='user_amount' />
+                @foreach($transactions as $key => $tranx)
+
+                <tr>
+
+
+                  <td>{{ $tranx->title }}<br>
+                    @if($tranx->title == "Data Purchase" && $tranx->status == 1 && $tranx->redo == 1 || $tranx->title ==
+                    "Airtime Purchase" && $tranx->status == 1 && $tranx->redo == 1 || $tranx->title == "Electricity
+                    Payment" && $tranx->status == 1 && $tranx->redo == 1 )
+                    {{-- @if($tranx->title == "Data Purchase" && $tranx->status == 1 || $tranx->title == "Airtime
+                    Purchase" && $tranx->status == 1 || $tranx->title =='Electricity Payment' && $tranx->status == 1 ||
+                    $tranx->title == 'Cable Subscription' && $tranx->status == 1 ) --}}
+                    <a data-transaction_id="{{ $tranx->id }}" data-title="{{ $tranx->title }}"
+                      data-amount="{{ $tranx->amount }}" data-description='{{ $tranx->description }}'
+                      data-id='{{ $tranx->id }}' class='redo btn btn-secondary btn-sm'>Redo</a>
+                    @endif
+                  </td>
+                  <td>{{ $tranx->description }}</td>
+                  <td>₦{{ number_format($tranx->amount,2) }}</td>
+                  <td>₦{{ number_format($tranx->before,2) }}</td>
+                  <td>₦{{ number_format($tranx->after,2) }}</td>
+                  <td>{{ $tranx->type }}</td>
+                  <td>@if($tranx->status == 1)
+                    <span class='badge badge-light-success'>Success</span>
+                    @else
+                    <span class='badge badge-light-danger'>Failed</span>
+                    @endif
+
+                  </td>
+                  <td>
+                    <a href='/print_transaction_receipt/{{ $tranx->id }}' class='btn btn-success btn-sm'>Print</a>
+                  </td>
+                </tr>
+                @endforeach
+
+              </tbody>
+            </table>
+            <!--end: Datatable-->
+          </div>
         </div>
-        <!--end::Profile Account Information-->
+        <!--end::Card-->
+      </div>
+      <!--end::Content-->
     </div>
-    <!--end::Container-->
+    <!--end::Profile Account Information-->
+  </div>
+  <!--end::Container-->
 </div>
 @endsection
 
 @section('script')
 <script>
-    $(document).ready(function() {
+  $(document).ready(function() {
         var oTable = $('.datatable').DataTable({
             ordering: false,
             searching: true
             });   
+
+
+            $('#searchTable').on('keyup', function() {
+              oTable.search(this.value).draw();
+            });
 
         @if (session('message'))
         Swal.fire('Success!',"{{ session('message') }}",'success');
@@ -119,7 +137,7 @@
           showCancelButton: true,
           confirmButtonColor: "#ebab21",
           cancelButtonColor: "grey",
-          confirmButtonText: "Buy Data",
+          confirmButtonText: "Proceed",
           allowOutsideClick: false,
           allowEscapeKey: false,
           preConfirm: () => {

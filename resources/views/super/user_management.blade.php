@@ -22,7 +22,9 @@
                      
                     </div>
                     <div class="card-body">
-
+                        <div class='col-md-6'>
+                            <input type="text" class="form-control" placeholder="Search..." id="searchTable">
+                            </div>
                         <table class="datatable table table-striped">
                             <thead>
                                 <tr>
@@ -91,6 +93,9 @@
             ordering: false,
             searching: true
             });   
+            $('#searchTable').on('keyup', function() {
+              oTable.search(this.value).draw();
+            });
 
         @if (session('message'))
         Swal.fire('Success!',"{{ session('message') }}",'success');

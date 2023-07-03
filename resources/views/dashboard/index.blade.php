@@ -41,7 +41,7 @@
                                     <!--end::Svg Icon-->
                                 </span>
                                 <!--end::Svg Icon-->
-                                <span class="fs-4 fw-bold">
+                                <span class="fs-4 fw-normal">
                                     Make Transfer </span>
                             </a>
                             <!--end::Link-->
@@ -84,7 +84,7 @@
                                     <!--end::Svg Icon-->
                                 </span>
                                 <!--end::Svg Icon-->
-                                <span class="fs-4 fw-bold">
+                                <span class="fs-4 fw-normal">
                                     Pay For Food Order </span>
                             </a>
                             <!--end::Link-->
@@ -106,7 +106,7 @@
                                     </g>
                                 </svg><!--end::Svg Icon--></span>
                                 <!--end::Svg Icon-->
-                                <span class="fs-4 fw-bold">
+                                <span class="fs-4 fw-normal">
                                     Buy Data </span>
                             </a>
                             <!--end::Link-->
@@ -137,7 +137,7 @@
                                     <!--end::Svg Icon-->
                                 </span>
                                 <!--end::Svg Icon-->
-                                <span class="fs-4 fw-bold">
+                                <span class="fs-4 fw-normal">
                                     Buy Airtime </span>
                             </a>
                             <!--end::Link-->
@@ -167,7 +167,7 @@
                                     <!--end::Svg Icon-->
                                 </span>
                                 <!--end::Svg Icon-->
-                                <span class="fs-4 fw-bold">
+                                <span class="fs-4 fw-normal">
                                     Tv Subscription </span>
                             </a>
                             <!--end::Link-->
@@ -195,7 +195,7 @@
                                     <!--end::Svg Icon-->
                                 </span>
                                 <!--end::Svg Icon-->
-                                <span class="fs-4 fw-bold">
+                                <span class="fs-4 fw-normal">
                                     Pay Light Bills </span>
                             </a>
                             <!--end::Link-->
@@ -223,7 +223,7 @@
                                     </g>
                                 </svg><!--end::Svg Icon--></span>
                                 <!--end::Svg Icon-->
-                                <span class="fs-4 fw-bold">
+                                <span class="fs-4 fw-normal">
                                     My Order Analysis </span>
                             </a>
                             <!--end::Link-->
@@ -249,7 +249,7 @@
                                     </g>
                                 </svg><!--end::Svg Icon--></span>
                                 <!--end::Svg Icon-->
-                                <span class="fs-4 fw-bold">
+                                <span class="fs-4 fw-normal">
                                     My Saved Orders </span>
                             </a>
                             <!--end::Link-->
@@ -270,7 +270,7 @@
                                     </g>
                                 </svg><!--end::Svg Icon--></span>
                                 <!--end::Svg Icon-->
-                                <span class="fs-4 fw-bold">
+                                <span class="fs-4 fw-normal">
                                     Pay For Hostel </span>
                             </a>
                             <!--end::Link-->
@@ -313,7 +313,7 @@
                                     <!--end::Svg Icon-->
                                 </span>
                                 <!--end::Svg Icon-->
-                                <span class="fs-4 fw-bold">
+                                <span class="fs-4 fw-normal">
                                     My Transactions </span>
                             </a>
                             <!--end::Link-->
@@ -339,10 +339,10 @@
                     <!--begin::Body-->
                     <div class="card-body d-flex align-items-center">
                         <div>
-                            <h3 class="text-white font-weight-bolder line-height-lg mb-5">
+                            <h4 class="text-white line-height-lg mb-5">
                              Explore your tastebud with
                                 <br>cttaste.
-                            </h3>
+                            </h4>
                             <a href="https://cttaste.com" class="btn btn-success font-weight-bold px-6 py-3">
                                 Order Now </a>
                             {{-- <a href="/airtime" class="btn btn-info font-weight-bold px-6 py-3">Buy

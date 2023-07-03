@@ -24,7 +24,7 @@ class SubscriptionController extends Controller
     }
     public function buydata(Request $request)
     {
-       
+
         $user = Auth::user();
         $hashed_pin = hash('sha256', $request->pin);
         if ($user->pin !== $hashed_pin) {
@@ -33,14 +33,14 @@ class SubscriptionController extends Controller
                 'message' => 'Incorrect Pin!',
                 'auto_refund_status' => 'Nil'
             ];
-        
+
             return response()->json($response);
         }
         $phone_number = $request->phone_number;
-        if(strlen($request->phone_number) == 10) {
-            $phone_number = "0".$request->phone_number;
+        if (strlen($request->phone_number) == 10) {
+            $phone_number = "0" . $request->phone_number;
         }
-      
+
         $data = Data::where('plan_id', $request->plan)->where('network', $request->network)->first();
         if ($data == null) {
             $response = [
@@ -48,9 +48,8 @@ class SubscriptionController extends Controller
                 'message' => 'Invalid Plan!',
                 'auto_refund_status' => 'Nil'
             ];
-        
+
             return response()->json($response);
-           
         }
         //check balance
         if ($user->balance < $data->data_price) {
@@ -59,9 +58,8 @@ class SubscriptionController extends Controller
                 'message' => 'Insufficient balance for the plan you want to get!',
                 'auto_refund_status' => 'Nil'
             ];
-        
+
             return response()->json($response);
-           
         }
 
         //check duplicate
@@ -72,9 +70,8 @@ class SubscriptionController extends Controller
                 'message' => 'Duplicate Transaction!',
                 'auto_refund_status' => 'Nil'
             ];
-        
+
             return response()->json($response);
-           
         }
         //purchase the data
         $curl = curl_init();
@@ -94,7 +91,7 @@ class SubscriptionController extends Controller
                 'client_reference' => 'buy_data_' . Str::random(7), //update this on your script to receive webhook notifications
             ),
             CURLOPT_HTTPHEADER => array(
-                "AuthorizationToken: ".env('EASY_ACCESS_AUTH'), //replace this with your authorization_token
+                "AuthorizationToken: " . env('EASY_ACCESS_AUTH'), //replace this with your authorization_token
                 "cache-control: no-cache"
             ),
         ));
@@ -103,8 +100,8 @@ class SubscriptionController extends Controller
 
         if ($response_json['success'] === "true") {
             $details = $response_json['network'] . " Data Purchase of " . $response_json['dataplan'] . " on " . $request->phone_number;
-            
-           $trans_id = $this->create_transaction('Data Purchase', $response_json['reference_no'], $details, 'debit', $data->data_price, $user->id, 1);
+
+            $trans_id = $this->create_transaction('Data Purchase', $response_json['reference_no'], $details, 'debit', $data->data_price, $user->id, 1);
             $transaction = Transaction::find($trans_id);
             $transaction->phone_number = $phone_number;
             $transaction->network = $request->network;
@@ -114,19 +111,20 @@ class SubscriptionController extends Controller
             // Transaction was successful
             // Do something here
         } else {
-            $reference = 'failed_data_'. Str::random(5);
+            $reference = 'failed_data_' . Str::random(5);
             $this->create_transaction('Data Purchase', $reference, 'Failed data purchase', 'debit', $data->data_price, $user->id, 0);
         }
         $this->check_duplicate("Delete", $user->id);
 
         curl_close($curl);
         return $response;
-      
+
 
         $data['user'] = Auth::user();
         return view('subscription.buydata', $data);
     }
-    public function redo_transaction(Request $request) {
+    public function redo_transaction(Request $request)
+    {
         $user = Auth::user();
         $hashed_pin = hash('sha256', $request->pin);
         if ($user->pin !== $hashed_pin) {
@@ -138,19 +136,19 @@ class SubscriptionController extends Controller
             return response()->json($response);
         }
         $tranx = Transaction::find($request->transaction_id);
-        if($tranx->title == "Airtime Purchase") {
+        if ($tranx->title == "Airtime Purchase") {
             $phone_number = $tranx->phone_number;
-            
+
             if ($user->balance < $tranx->amount) {
                 $response = [
                     'success' => false,
                     'message' => 'Insufficient Balance for airtime you want to get!',
                     'auto_refund_status' => 'Nil'
                 ];
-            
+
                 return response()->json($response);
             }
-    
+
             //check duplicate
             $check = $this->check_duplicate('check', $user->id);
             if ($check == true) {
@@ -159,7 +157,7 @@ class SubscriptionController extends Controller
                     'message' => 'Duplicate transaction, please try again in few minutes time!',
                     'auto_refund_status' => 'Nil'
                 ];
-            
+
                 return response()->json($response);
             }
             //purchase the data
@@ -181,13 +179,13 @@ class SubscriptionController extends Controller
                     'client_reference' => 'buy_airtime_' . Str::random(7), //update this on your script to receive webhook notifications
                 ),
                 CURLOPT_HTTPHEADER => array(
-                    "AuthorizationToken: ".env('EASY_ACCESS_AUTH'), //replace this with your authorization_token
+                    "AuthorizationToken: " . env('EASY_ACCESS_AUTH'), //replace this with your authorization_token
                     "cache-control: no-cache"
                 ),
             ));
             $response = curl_exec($curl);
             $response_json = json_decode($response, true);
-    
+
             if ($response_json['success'] === "true") {
                 $details = $response_json['network'] . " Airtime Purchase of NGN" . $tranx->real_amount . " on " . $phone_number;
                 $trans_id = $this->create_transaction('Airtime Purchase', $response_json['reference_no'], $details, 'debit', $tranx->discounted_amount, $user->id, 1);
@@ -200,20 +198,18 @@ class SubscriptionController extends Controller
                 // Transaction was successful
                 // Do something here
             } else {
-                $reference = 'failed_airtime_'. Str::random(5);
+                $reference = 'failed_airtime_' . Str::random(5);
                 $details = "Airtime Purchase of NGN" . $request->amount . " on " . $request->phone_number;
                 $this->create_transaction('Airtime Purchase', $reference, $response_json['message'], 'debit', $request->discounted_amount, $user->id, 0);
             }
             $this->check_duplicate("Delete", $user->id);
-    
+
             curl_close($curl);
             return $response;
-
-        }
-        elseif($tranx->title == "Data Purchase") {
+        } elseif ($tranx->title == "Data Purchase") {
             $phone_number = $tranx->phone_number;
-           
-          
+
+
             $data = Data::where('plan_id', $tranx->plan_id)->where('network', $tranx->network)->first();
             if ($data == null) {
                 $response = [
@@ -221,9 +217,8 @@ class SubscriptionController extends Controller
                     'message' => 'Invalid Plan!',
                     'auto_refund_status' => 'Nil'
                 ];
-            
+
                 return response()->json($response);
-               
             }
             //check balance
             if ($user->balance < $data->data_price) {
@@ -232,11 +227,10 @@ class SubscriptionController extends Controller
                     'message' => 'Insufficient balance for the plan you want to get!',
                     'auto_refund_status' => 'Nil'
                 ];
-            
+
                 return response()->json($response);
-               
             }
-    
+
             //check duplicate
             $check = $this->check_duplicate('check', $user->id);
             if ($check == true) {
@@ -245,9 +239,8 @@ class SubscriptionController extends Controller
                     'message' => 'Duplicate Transaction!',
                     'auto_refund_status' => 'Nil'
                 ];
-            
+
                 return response()->json($response);
-               
             }
             //purchase the data
             $curl = curl_init();
@@ -267,16 +260,16 @@ class SubscriptionController extends Controller
                     'client_reference' => 'buy_data_' . Str::random(7), //update this on your script to receive webhook notifications
                 ),
                 CURLOPT_HTTPHEADER => array(
-                    "AuthorizationToken: ".env('EASY_ACCESS_AUTH'), //replace this with your authorization_token
+                    "AuthorizationToken: " . env('EASY_ACCESS_AUTH'), //replace this with your authorization_token
                     "cache-control: no-cache"
                 ),
             ));
             $response = curl_exec($curl);
             $response_json = json_decode($response, true);
-    
+
             if ($response_json['success'] === "true") {
                 $details = $response_json['network'] . " Data Purchase of " . $response_json['dataplan'] . " on " . $phone_number;
-                
+
                 $trans_id = $this->create_transaction('Data Purchase', $response_json['reference_no'], $details, 'debit', $data->data_price, $user->id, 1);
                 $transaction = Transaction::find($trans_id);
                 $transaction->phone_number = $phone_number;
@@ -287,24 +280,82 @@ class SubscriptionController extends Controller
                 // Transaction was successful
                 // Do something here
             } else {
-                $reference = 'failed_data_'. Str::random(5);
+                $reference = 'failed_data_' . Str::random(5);
                 $this->create_transaction('Data Purchase', $reference, 'Failed data purchase', 'debit', $data->data_price, $user->id, 0);
             }
             $this->check_duplicate("Delete", $user->id);
-    
+
             curl_close($curl);
             return $response;
-          
-    
+        } elseif ($tranx->title == 'Cable Subscription') {
+        } elseif ($tranx->title == 'Electricity Payment') {
 
-        }
-        elseif($tranx->title == 'Cable Subscription') {
+            // dd($request->all(),$discounted_amount);
+            if ($user->balance < $tranx->discounted_amount) {
+                $response = [
+                    'success' => false,
+                    'message' => 'Insufficient balance for the plan you want to get!',
+                    'auto_refund_status' => 'Nil'
+                ];
 
-        }
-        elseif($tranx->title == 'Electricity Payment') {
+                return response()->json($response);
+            }
 
-        }
-        else {
+            //check duplicate
+            $check = $this->check_duplicate('check', $user->id);
+            if ($check == true) {
+                $response = [
+                    'success' => false,
+                    'message' => 'Duplicate transactions, please try again in few more minuetes!',
+                    'auto_refund_status' => 'Nil'
+                ];
+
+                return response()->json($response);
+            }
+            //purchase the data
+            $curl = curl_init();
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => "https://easyaccessapi.com.ng/api/payelectricity.php",
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => "",
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => "POST",
+                CURLOPT_POSTFIELDS => array(
+                    'company' => $tranx->company,
+                    'metertype' => $tranx->meter_type,
+                    'meterno' => $tranx->meter_number,
+                    'amount' => $tranx->discounted_amount,
+                ),
+                CURLOPT_HTTPHEADER => array(
+                    "AuthorizationToken: " . env('EASY_ACCESS_AUTH'), //replace this with your authorization_token
+                    "cache-control: no-cache"
+                ),
+            ));
+            $response = curl_exec($curl);
+            $response_json = json_decode($response, true);
+
+            if ($response_json['success'] === "true") {
+                file_put_contents(__DIR__ . '/electricitylog.txt', json_encode($response_json, JSON_PRETTY_PRINT), FILE_APPEND);
+
+                $details = "Payment for " . $response_json['message']['content']['transactions']['product_name'] . ", Meter No: " . $request->meter_number . ". Amount : NGN" . $tranx->amount . " " . $response_json['message']['purchased_code'];
+                $this->create_transaction('Electricity Payment', $response_json['message']['requestId'], $details, 'debit', $tranx->amount, $user->id, 1);
+
+                // Transaction was successful
+                // Do something here
+            } else {
+
+                $details = "Failed Electricity Payment, amount: " . $amount;
+                $reference = 'failed_electricity_' . Str::random(10);
+                $this->create_transaction('Electricity Payment', $reference, $details, 'debit', $amount, $user->id, 0);
+            }
+            $this->check_duplicate("Delete", $user->id);
+
+            curl_close($curl);
+            return $response;
+        } else {
             $response = [
                 'success' => false,
                 'message' => 'Invalid Transaction!',
@@ -314,7 +365,7 @@ class SubscriptionController extends Controller
         }
 
 
-        dd($request->all(),$tranx);
+        dd($request->all(), $tranx);
     }
 
     public function buyCable(Request $request)
@@ -327,7 +378,7 @@ class SubscriptionController extends Controller
                 'message' => 'Incorrect Pin!',
                 'auto_refund_status' => 'Nil'
             ];
-        
+
             return response()->json($response);
         }
         if ($request->plan == 'renew') {
@@ -342,9 +393,8 @@ class SubscriptionController extends Controller
                     'message' => 'Invalid Plan!',
                     'auto_refund_status' => 'Nil'
                 ];
-            
+
                 return response()->json($response);
-               
             }
             $amount = $cable->real_price;
         }
@@ -354,9 +404,8 @@ class SubscriptionController extends Controller
                 'message' => 'Insufficient balance for the plan you want to get!',
                 'auto_refund_status' => 'Nil'
             ];
-        
+
             return response()->json($response);
-           
         }
 
         //check duplicate
@@ -367,9 +416,8 @@ class SubscriptionController extends Controller
                 'message' => 'Duplicate Transaction, try again in few minuetes time!',
                 'auto_refund_status' => 'Nil'
             ];
-        
+
             return response()->json($response);
-          
         }
         //purchase the data
         $curl = curl_init();
@@ -388,7 +436,7 @@ class SubscriptionController extends Controller
                 'package' => $request->plan,
             ),
             CURLOPT_HTTPHEADER => array(
-                "AuthorizationToken: ".env('EASY_ACCESS_AUTH'), //replace this with your authorization_token
+                "AuthorizationToken: " . env('EASY_ACCESS_AUTH'), //replace this with your authorization_token
                 "cache-control: no-cache"
             ),
         ));
@@ -398,14 +446,14 @@ class SubscriptionController extends Controller
 
         if ($response_json['success'] === "true") {
             file_put_contents(__DIR__ . '/cablelog.txt', json_encode($response_json, JSON_PRETTY_PRINT), FILE_APPEND);
-       
+
             $details = $response_json['package'] . "subscription made successfully, amount: " . $amount;
             $this->create_transaction('Cable Subscription', $response_json['reference_no'], $details, 'debit', $amount, $user->id, 1);
 
             // Transaction was successful
             // Do something here
         } else {
-            $reference = 'failed_tv_'. Str::random(5);
+            $reference = 'failed_tv_' . Str::random(5);
             $details = "Failed Tv subscription, amount: " . $amount;
             $this->create_transaction('Cable Subscription', $reference, $details, 'debit', $amount, $user->id, 0);
         }
@@ -414,10 +462,11 @@ class SubscriptionController extends Controller
         curl_close($curl);
         return $response;
     }
-    public function notify(Request $request) {
-      
-        $check = ComingSoon::where('email',$request->email)->first();
-        if($check) {
+    public function notify(Request $request)
+    {
+
+        $check = ComingSoon::where('email', $request->email)->first();
+        if ($check) {
             return redirect()->back()->with('message', 'Email address already included in the waiting list, thanks for your anticipation!');
         } else {
             ComingSoon::create(['email' => $request->email]);
@@ -434,9 +483,8 @@ class SubscriptionController extends Controller
                 'message' => 'Incorrect Pin!',
                 'auto_refund_status' => 'Nil'
             ];
-        
+
             return response()->json($response);
-          
         }
         $amount = $request->amount;
         if ($amount >= 1100) {
@@ -451,7 +499,7 @@ class SubscriptionController extends Controller
                 'message' => 'Insufficient balance for the plan you want to get!',
                 'auto_refund_status' => 'Nil'
             ];
-        
+
             return response()->json($response);
         }
 
@@ -463,7 +511,7 @@ class SubscriptionController extends Controller
                 'message' => 'Duplicate transactions, please try again in few more minuetes!',
                 'auto_refund_status' => 'Nil'
             ];
-        
+
             return response()->json($response);
         }
         //purchase the data
@@ -484,7 +532,7 @@ class SubscriptionController extends Controller
                 'amount' => $discounted_amount,
             ),
             CURLOPT_HTTPHEADER => array(
-                "AuthorizationToken: ".env('EASY_ACCESS_AUTH'), //replace this with your authorization_token
+                "AuthorizationToken: " . env('EASY_ACCESS_AUTH'), //replace this with your authorization_token
                 "cache-control: no-cache"
             ),
         ));
@@ -492,11 +540,18 @@ class SubscriptionController extends Controller
         $response_json = json_decode($response, true);
 
         if ($response_json['success'] === "true") {
-            file_put_contents(__DIR__ . '/electricitylog.txt', json_encode( $response_json, JSON_PRETTY_PRINT), FILE_APPEND);
-       
-            $details = "Payment for " . $response_json['message']['content']['transactions']['product_name'] . ", Meter No: " . $request->meter_number . ". Amount : NGN" . $amount ." ". $response_json['message']['purchased_code'];
-            $this->create_transaction('Electricity Payment', $response_json['message']['requestId'], $details, 'debit', $amount, $user->id, 1);
+            file_put_contents(__DIR__ . '/electricitylog.txt', json_encode($response_json, JSON_PRETTY_PRINT), FILE_APPEND);
 
+            $details = "Payment for " . $response_json['message']['content']['transactions']['product_name'] . ", Meter No: " . $request->meter_number . ". Amount : NGN" . $amount . " " . $response_json['message']['purchased_code'];
+            $trans_id = $this->create_transaction('Electricity Payment', $response_json['message']['requestId'], $details, 'debit', $amount, $user->id, 1);
+            $transaction = Transaction::find($trans_id);
+            $transaction->amount = $amount;
+            $transaction->company = $request->company;
+            $transaction->meter_type = $request->meter_type;
+            $transaction->meter_number = $request->meter_number;
+            $transaction->discounted_amount = $discounted_amount;
+            $transaction->redo = 1;
+            $transaction->save();
             // Transaction was successful
             // Do something here
         } else {
@@ -521,13 +576,12 @@ class SubscriptionController extends Controller
                 'message' => 'Incorrect pin!',
                 'auto_refund_status' => 'Nil'
             ];
-        
+
             return response()->json($response);
-           
         }
         $phone_number = $request->phone_number;
-        if(strlen($request->phone_number) == 10) {
-            $phone_number = "0".$request->phone_number;
+        if (strlen($request->phone_number) == 10) {
+            $phone_number = "0" . $request->phone_number;
         }
         if ($user->balance < $request->amount) {
             $response = [
@@ -535,7 +589,7 @@ class SubscriptionController extends Controller
                 'message' => 'Insufficient Balance for airtime you want to get!',
                 'auto_refund_status' => 'Nil'
             ];
-        
+
             return response()->json($response);
         }
 
@@ -547,7 +601,7 @@ class SubscriptionController extends Controller
                 'message' => 'Duplicate transaction, please try again in few minutes time!',
                 'auto_refund_status' => 'Nil'
             ];
-        
+
             return response()->json($response);
         }
         //purchase the data
@@ -569,7 +623,7 @@ class SubscriptionController extends Controller
                 'client_reference' => 'buy_data_' . Str::random(7), //update this on your script to receive webhook notifications
             ),
             CURLOPT_HTTPHEADER => array(
-                "AuthorizationToken: ".env('EASY_ACCESS_AUTH'), //replace this with your authorization_token
+                "AuthorizationToken: " . env('EASY_ACCESS_AUTH'), //replace this with your authorization_token
                 "cache-control: no-cache"
             ),
         ));
@@ -589,7 +643,7 @@ class SubscriptionController extends Controller
             // Transaction was successful
             // Do something here
         } else {
-            $reference = 'failed_airtime_'. Str::random(5);
+            $reference = 'failed_airtime_' . Str::random(5);
             $details = "Airtime Purchase of NGN" . $request->amount . " on " . $request->phone_number;
             $this->create_transaction('Airtime Purchase', $reference, $response_json['message'], 'debit', $request->discounted_amount, $user->id, 0);
         }
@@ -665,7 +719,7 @@ class SubscriptionController extends Controller
     }
     public function fetch_meter_details(Request $request)
     {
-       
+
         $curl = curl_init();
         curl_setopt_array($curl, array(
             CURLOPT_URL => "https://easyaccessapi.com.ng/api/verifyelectricity.php",
@@ -683,7 +737,7 @@ class SubscriptionController extends Controller
                 'amount' => 1000,
             ),
             CURLOPT_HTTPHEADER => array(
-                "AuthorizationToken: ".env('EASY_ACCESS_AUTH'), //replace this with your authorization_token
+                "AuthorizationToken: " . env('EASY_ACCESS_AUTH'), //replace this with your authorization_token
                 "cache-control: no-cache"
             ),
         ));
@@ -713,7 +767,7 @@ class SubscriptionController extends Controller
                 // 'iucno' => '7032054653',
             ),
             CURLOPT_HTTPHEADER => array(
-                "AuthorizationToken: ".env('EASY_ACCESS_AUTH'), //replace this with your authorization_token
+                "AuthorizationToken: " . env('EASY_ACCESS_AUTH'), //replace this with your authorization_token
                 "cache-control: no-cache"
             ),
         ));

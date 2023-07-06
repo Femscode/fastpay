@@ -173,24 +173,24 @@
 
 
                 <!--begin::Landing hero-->
-                <div style='background-image: url(assets/media/logos/fastpay_bg_2.jpg);background-size:cover;background-color:#fff'  class="d-flex flex-column flex-center w-100 min-h-350px min-h-lg-500px px-9">
+                <div style='background-image: url(assets/media/logos/fastpay_bg_3.jpg);background-size:cover;background-color:#fff'  class="d-flex flex-column flex-left w-100 min-h-350px min-h-lg-500px px-9">
                     <!--begin::Heading-->
-                    <div class="text-center mb-5 mb-lg-10 py-10 py-lg-20">
+                    <div class="text-left mb-5 mb-lg-10 py-10 py-lg-20">
                         <!--begin::Title-->
-                        <h1 class="text-dark lh-base fw-bold fs-2x fs-lg-3x mb-15">
-                            Make payment easily <br />
-                            for
+                        <h1 class="text-dark lh-base fw-normal fs-2x fs-lg-3x mb-15">
+                            Pay for Food, Data, Airtime <br />
+                            Electricity Bills & <br>Cable Subscriptions.
 
-                            <span
+                            {{-- <span
                                 style="background: linear-gradient(to right, #640f11 0%, #ebab21 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;">
-                                <span id="kt_landing_hero_text">all CT-Products!</span>
-                            </span>
+                                <span id="kt_landing_hero_text"> & Cable Subscription.</span>
+                            </span> --}}
                         </h1>
                         <!--end::Title-->
 
                         <!--begin::Action-->
-                        <a href="/login" class="btn btn-secondary">Login</a>
-                        <a href="/register" class="btn btn-warning" >Create New Account</a>
+                        <a href="/login" class="btn btn-secondary"><i class='fa fa-plus'></i>Login</a>
+                        <a href="/register" class="btn btn-warning" ><i class='fa fa-user'></i>Register</a>
                         <!--end::Action-->
                     </div>
                     <!--end::Heading-->
@@ -280,12 +280,12 @@
                     <!--begin::Title-->
                     <h3 class="fs-2hx text-dark mb-5 mt-4" id="how-it-works"
                         data-kt-scroll-offset="{default: 100, lg: 150}">
-                        Fast Pay!</h3>
+                        Say 👋 to Fastpay</h3>
                     <!--end::Title-->
 
                     <!--begin::Text-->
                     <div style='color:#640f11' class="fs-5 fw-bold">
-                      Save yourself the stress of waiting for payment confirmation!
+                      Convenient, Affordable and Reliable!
                     </div>
                     <!--end::Text-->
                 </div>
@@ -316,7 +316,7 @@
 
                             <!--begin::Description-->
                             <div class="fw-semibold fs-6 fs-lg-4 text-muted">
-                                Avoid payment confirmation delay, make payment and get your payment confirmed instantly!
+                                Avoid payment confirmation delay, make payment and get your payment confirmed instantly.
                             </div>
                             <!--end::Description-->
                         </div>
@@ -350,7 +350,7 @@
 
                             <!--begin::Description-->
                             <div class="fw-semibold fs-6 fs-lg-4 text-muted">
-                                Don't get scammed, making payment for desired hostel helps protect you from scam and money can be refunded at any given time!
+                                Don't get scammed, making payment for desired hostel helps protect you from scam and money can be refunded at any given time.
                             </div>
                             <!--end::Description-->
                         </div>
@@ -385,7 +385,7 @@
                             <!--begin::Description-->
                             <div class="fw-semibold fs-6 fs-lg-4 text-muted">
 
-                                Get your data, airtime, tv subscription and light bills at the cheapest amount possible!
+                                Get your data, airtime, tv subscription and light bills at the cheapest amount possible.
                             </div>
                             <!--end::Description-->
                         </div>
@@ -1180,10 +1180,10 @@
 
 
         <!--begin::Testimonials Section-->
-        {{-- <div class="mt-20 mb-n20 position-relative z-index-2">
+        <div class="mt-20 mb-n20 position-relative z-index-2">
             <!--begin::Container-->
             <div class="container">
-                <!--begin::Heading-->
+                {{-- <!--begin::Heading-->
                 <div class="text-center mb-17">
                     <!--begin::Title-->
                     <h3 class="fs-2hx text-light mb-5" id="clients" data-kt-scroll-offset="{default: 125, lg: 150}">What
@@ -1413,40 +1413,39 @@
 
                     </div>
                     <!--end::Col-->
-                </div>
+                </div> --}}
                 <!--end::Row-->
 
                 <!--begin::Highlight-->
                 <div class="d-flex flex-stack flex-wrap flex-md-nowrap card-rounded shadow p-8 p-lg-12 mb-n5 mb-lg-n13"
-                    style="background: linear-gradient(90deg, #20AA3E 0%, #03A588 100%);">
+                    style="background: linear-gradient(90deg, #ebab21 0%, #03A588 100%);">
                     <!--begin::Content-->
                     <div class="my-2 me-5">
                         <!--begin::Title-->
                         <div class="fs-1 fs-lg-2qx fw-bold text-white mb-2">
-                            Start With Metronic Today,
+                            Start Saving Big
 
-                            <span class="fw-normal">Speed Up Development!</span>
+                            <span class="fw-normal">on Data, Airtime, Light bills and Cable Subscription!</span>
                         </div>
                         <!--end::Title-->
 
                         <!--begin::Description-->
                         <div class="fs-6 fs-lg-5 text-white fw-semibold opacity-75">
-                            Join over 100,000 Professionals Community to Stay Ahead
+                            Join over 4,500+ Happy Users Today to Stay Ahead.
                         </div>
                         <!--end::Description-->
                     </div>
                     <!--end::Content-->
 
                     <!--begin::Link-->
-                    <a href="https://1.envato.market/EA4JP"
-                        class="btn btn-lg btn-outline border-2 btn-outline-white flex-shrink-0 my-2">Purchase on
-                        Themeforest</a>
+                    <a href="/login"
+                        class="btn btn-lg btn-outline border-2 btn-outline-white flex-shrink-0 my-2">Get Started</a>
                     <!--end::Link-->
                 </div>
                 <!--end::Highlight-->
             </div>
             <!--end::Container-->
-        </div> --}}
+        </div>
         <!--end::Testimonials Section-->
 
 

@@ -40,9 +40,9 @@
                                     <!--end::Svg Icon-->
                                 </span>
                             </div> --}}
-                            <div class="alert-text font-weight-bold">Transfer to your virtual
-                                account below with a charge of ₦50 and get
-                                credited immediately!</div>
+                            <div class="alert-text font-weight-normal">Hurray!!! You can now transfer to your virtual
+                                account below with <span class='font-weight-bold text-danger' style='font-size:25px'>zero</span> charge and get
+                                credited immediately.</div>
 
 
                         </div>

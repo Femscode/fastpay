@@ -49,7 +49,8 @@ class FundingController extends Controller
         $email = $request->input('data.customer.email');
         $r_amountpaid = intval(($request->input('data.amount')) / 100);
         if ($request->input('data.channel') == 'dedicated_nuban') {
-            $amountpaid = $r_amountpaid - 50;
+            // $amountpaid = $r_amountpaid - 50;
+            $amountpaid = $r_amountpaid;
         } elseif ($r_amountpaid < 2500) {
             $amountpaid = $r_amountpaid - intval((0.02 * $r_amountpaid));
         } else {

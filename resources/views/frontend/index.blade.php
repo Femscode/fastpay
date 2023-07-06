@@ -177,7 +177,7 @@
                     <!--begin::Heading-->
                     <div class="text-left mb-5 mb-lg-10 py-10 py-lg-20">
                         <!--begin::Title-->
-                        <h1 class="text-dark lh-base fw-normal fs-2x fs-lg-3x mb-15">
+                        <h1 class="text-dark lh-base fw-bold fs-2x fs-lg-3x mb-15">
                             Pay for Food, Data, Airtime <br />
                             Electricity Bills & <br>Cable Subscriptions.
 

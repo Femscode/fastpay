@@ -40,7 +40,7 @@
                                     <!--end::Svg Icon-->
                                 </span>
                             </div> --}}
-                            <div class="alert-text font-weight-normal">Hurray!!! You can now transfer to your virtual
+                            <div class="alert-text fw-semibold fs-6">Hurray!!! You can now transfer to your virtual
                                 account below with <span class='font-weight-bold text-danger' style='font-size:25px'>zero</span> charge and get
                                 credited immediately.</div>
 
@@ -86,7 +86,7 @@
 
                         </div>
                         <div class="separator separator-content my-8">
-                            <span class=" text-gray-500 fw-bold fs-7">Or fund directly</span>
+                            <span class=" text-gray-500 fw-bold fs-7">Or fund with card</span>
                         </div>
                         <div class="py-2">
                             <form method="POST" action="{{ route('pay') }}" accept-charset="UTF-8"
@@ -156,7 +156,8 @@
     @endif
         $("#u_amount").on('input',function() {
         var amount = parseInt($("#u_amount").val()) * 100;
-        var charges = 0.02 * amount
+        // var charges = 0.02 * amount
+        var charges = 0
       
        
         if(parseInt($("#u_amount").val()) < 2500) {
@@ -164,7 +165,8 @@
         }
         else {
             $("#amount").val(amount + (0.05 * amount) +10000);    
-            var charges =   0.02 * amount + 10000
+            // var charges =   0.02 * amount + 10000
+            var charges =   0
             
         }
         $("#charges").text('Charges : '+ (charges/100).toLocaleString('en-US', { style: 'currency', currency: 'NGN' }))          

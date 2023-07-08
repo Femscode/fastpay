@@ -127,6 +127,7 @@ class UserController extends Controller
     {
         $data['user'] = Auth::user();
         $data['active'] = 'change_pin';
+       
         return view('dashboard.changepin', $data);
     }
     public function forgotpin()

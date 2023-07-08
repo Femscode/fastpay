@@ -186,54 +186,7 @@
                         </div>
                     </form> 
                 </div>
-                <div class="modal fade" id='add_new_payroll' tabindex="-1" aria-hidden="true">
-                    <div class="modal-dialog mw-650px">
-                        <div class="modal-content">
-                            <div class="modal-header pb-0 border-0 justify-content-end">
-                                <div class="btn btn-sm btn-icon btn-active-color-primary"
-                                    data-bs-dismiss="modal">
-                                    <span class="svg-icon svg-icon-1"><svg width="24"
-                                            height="24" viewBox="0 0 24 24" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <rect opacity="0.5" x="6" y="17.3137" width="16"
-                                                height="2" rx="1"
-                                                transform="rotate(-45 6 17.3137)"
-                                                fill="currentColor" />
-                                            <rect x="7.41422" y="6" width="16" height="2" rx="1"
-                                                transform="rotate(45 7.41422 6)"
-                                                fill="currentColor" />
-                                        </svg>
-                                    </span>
-                                </div>
-                            </div>
-
-                            <div class="modal-body scroll-y mx-5 mx-xl-18 pt-0 pb-15">
-                                <div class="text-center mb-13">
-                                    <h1 class="mb-3">Create New Payroll</h1>
-                                </div>
-                                <form method='post' action='{{ route("add_new_payroll") }}'>
-                                    @csrf
-                                    <div class="form-group row">
-                                        <div class="col-lg-12">
-                                            <h2>Title</h2>
-                                            <input name='title' type="text" class="form-control"
-                                                placeholder="Title of the new payroll"
-                                                required />
-                                        </div>
-                                    </div>
-
-                                    <div class="d-flex justify-content-center mt-2">
-                                        <button type="submit"
-                                            class="btn btn-primary btn-block p-3">
-                                            Add
-                                        </button>
-                                    </div>
-                                </form>
-                                <!--begin::Users-->
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
                 <!--begin::Engage widget 1-->
                 <div class="card bgi-position-y-bottom bgi-position-x-end bgi-no-repeat bgi-size-cover min-h-250px bg-body mb-5 mb-xl-8"
                     style="background-position: 100% 50px;background-size: 500px auto;background-image:url('assets/media/misc/city.png')"

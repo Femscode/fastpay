@@ -3,7 +3,7 @@
     <!--begin::Card-->
     <div class="card card-custom">
       <!--begin::Header-->
-    
+
       <!--end::Header-->
       <!--begin::Form-->
       <form class="form" @submit.prevent="buyCable()">
@@ -16,7 +16,11 @@
               <div class="font-weight-bold">Cable Subscription</div>
             </div>
             <div class="col text-end">
-              <a onclick="window.history.back()" class="btn-sm btn btn-secondary">Back</a>
+              <a
+                onclick="window.history.back()"
+                class="btn-sm btn btn-secondary"
+                >Back</a
+              >
             </div>
           </div>
           <!--begin::Form Group-->
@@ -143,35 +147,11 @@
 
                 <!--end::Lable-->
               </div>
+            </div>
+          </div>
 
-              <div class="form-group mt-4">
-                <label>Subscription Type</label>
-                <div class="radio-inline">
-                  <label class="radio radio-lg">
-                    <input
-                      @click="renewPlan"
-                      type="radio"
-                      checked="checked"
-                      name="radios3_1"
-                    />
-                    <span></span>Renew</label
-                  >
-                  <label class="radio radio-lg">
-                    <input @click="fetchPlan" type="radio" name="radios3_1" />
-                    <span></span>Change Plan</label
-                  >
-                </div>
-              </div>
-            </div>
-          </div>
-          <div v-if="!showPlan" class="form-group row m-2">
-            <h6 class="col-md-3">Amount</h6>
-            <div class="col-md-6">
-              You will be charged : NGN {{ renewal_amount }}
-            </div>
-          </div>
-          <div v-else class="form-group row m-2">
-            <h6 class="col-md-3">Change Plan</h6>
+          <div v-if="show_decoder" class="form-group row m-2">
+            <h6 class="col-md-3">Select Package</h6>
             <div class="col-md-6">
               <select required v-model="selectedPlan" class="form-control">
                 <!-- <option value="">Select Plan</option> -->
@@ -188,26 +168,24 @@
           </div>
           <div class="form-group row m-2">
             <div class="col-md-3"></div>
-           
-              <button
-                v-if="showConfirm"
-                @click="confirmDecoder"
-                type="button"
-                class="btn btn-success col-md-6"
-              >
-                Confirm Detail
-              </button>
-          
-          
-              <button
-                v-else
-                :disabled="!transfer_status"
-                type="submit"
-                class="btn btn-success col-md-6"
-              >
-                Buy Token
-              </button>
-          
+
+            <button
+              v-if="showConfirm"
+              @click="confirmDecoder"
+              type="button"
+              class="btn btn-success col-md-6"
+            >
+              Confirm Detail
+            </button>
+
+            <button
+              v-else
+              :disabled="!transfer_status"
+              type="submit"
+              class="btn btn-success col-md-6"
+            >
+              Buy Token
+            </button>
           </div>
         </div>
       </form>
@@ -227,12 +205,11 @@ export default {
       customer_name: "",
       current_plan: "",
       plan_status: "",
-      showConfirm : true,
+      showConfirm: true,
       due_data: "",
       decoder_number: "",
       transfer_status: false,
       showPlan: false,
-      renewal_amount: 0,
       show_decoder: false,
       selectedPlan: null,
       amount: 0,
@@ -253,10 +230,7 @@ export default {
           console.log(error.message);
         });
     },
-    renewPlan() {
-      this.showPlan = false;
-      this.selectedPlan = "renew";
-    },
+
     changePlan() {
       this.fetchPlan;
     },
@@ -265,7 +239,6 @@ export default {
       if (this.cable_type !== "" && this.decoder_number.length >= 10) {
         Swal.fire({
           title: "Fetching decoder details, please wait...",
-          html: '<div class="text-center"><i class="fa fa-spinner fa-spin fa-3x"></i></div>',
           showConfirmButton: false,
           allowOutsideClick: false,
           allowEscapeKey: false,
@@ -287,16 +260,14 @@ export default {
             if (response.data.success == "true") {
               Swal.close();
               this.show_decoder = true;
-              this.showConfirm = false
+              this.showConfirm = false;
               this.customer_name = response.data.message.content.Customer_Name;
               this.current_plan = response.data.message.content.Current_Bouquet;
               this.plan_status = response.data.message.content.Status;
               this.due_date = response.data.message.content.Due_Date;
-              this.renewal_amount =
-                response.data.message.content.Renewal_Amount + 100;
+
               this.transfer_status = true;
-              this.selectedPlan = "renew";
-              this.amount = this.renewal_amount;
+              this.fetchPlan();
             }
           })
           .catch((error) => {
@@ -355,81 +326,79 @@ export default {
             }
           },
         }).then((result) => {
-          if(result.isConfirmed == false) {
-          return;
-
+          if (result.isConfirmed == false) {
+            return;
           }
-        Swal.fire({
-          title: "Purchasing data, please wait...",
-          // html: '<div class="text-center"><i class="fa fa-spinner fa-spin fa-3x"></i></div>',
-          showConfirmButton: false,
-          allowOutsideClick: false,
-          allowEscapeKey: false,
-          didOpen: () => {
-            Swal.showLoading();
-          },
-        });
-        let fd = new FormData();
-        fd.append("cable_type", this.cable_type);
+          Swal.fire({
+            title: "Purchasing data, please wait...",
+            // html: '<div class="text-center"><i class="fa fa-spinner fa-spin fa-3x"></i></div>',
+            showConfirmButton: false,
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            didOpen: () => {
+              Swal.showLoading();
+            },
+          });
+          let fd = new FormData();
+          fd.append("cable_type", this.cable_type);
 
-        fd.append("plan", this.selectedPlan);
-        fd.append("amount", this.renewal_amount);
-        fd.append("decoder_number", this.decoder_number);
-        fd.append("pin", result.value);
-        axios
-          .post("/buyCable", fd)
-          .then((response) => {
-            console.log(response.data);
-            if (response.data.success == "true") {
-              Swal.fire({
-                icon: "success",
-                title: "Purchase successful!",
-                // text: "Updating...",
-                showConfirmButton: true, // updated
-                confirmButtonColor: "#3085d6", // added
-                confirmButtonText: "Ok", // added
-                allowOutsideClick: false, // added to prevent dismissing the modal by clicking outside
-                allowEscapeKey: false, // added to prevent dismissing the modal by pressing Esc key
-              }).then((result) => {
-                if (result.isConfirmed) {
-                  location.reload();
-                }
-              });
-            } else {
-              Swal.fire({
-                icon: "error",
-                title: response.data.message,
-                // text: "Updating...",
-                showConfirmButton: true, // updated
-                confirmButtonColor: "#3085d6", // added
-                confirmButtonText: "Ok", // added
-                allowOutsideClick: false, // added to prevent dismissing the modal by clicking outside
-                allowEscapeKey: false, // added to prevent dismissing the modal by pressing Esc key
-              }).then((result) => {
-                if (result.isConfirmed) {
-                  // location.reload();
-                }
-              });
-            }
-          })
-          .catch((error) => {
-            console.log(error.message);
-            Swal.fire(error.message);
-          });
-          });
+          fd.append("plan", this.selectedPlan);
+
+          fd.append("decoder_number", this.decoder_number);
+          fd.append("pin", result.value);
+          axios
+            .post("/buyCable", fd)
+            .then((response) => {
+              console.log(response.data);
+              if (response.data.success == "true") {
+                Swal.fire({
+                  icon: "success",
+                  title: "Purchase successful!",
+                  // text: "Updating...",
+                  showConfirmButton: true, // updated
+                  confirmButtonColor: "#3085d6", // added
+                  confirmButtonText: "Ok", // added
+                  allowOutsideClick: false, // added to prevent dismissing the modal by clicking outside
+                  allowEscapeKey: false, // added to prevent dismissing the modal by pressing Esc key
+                }).then((result) => {
+                  if (result.isConfirmed) {
+                    location.reload();
+                  }
+                });
+              } else {
+                Swal.fire({
+                  icon: "error",
+                  title: response.data.message,
+                  // text: "Updating...",
+                  showConfirmButton: true, // updated
+                  confirmButtonColor: "#3085d6", // added
+                  confirmButtonText: "Ok", // added
+                  allowOutsideClick: false, // added to prevent dismissing the modal by clicking outside
+                  allowEscapeKey: false, // added to prevent dismissing the modal by pressing Esc key
+                }).then((result) => {
+                  if (result.isConfirmed) {
+                    // location.reload();
+                  }
+                });
+              }
+            })
+            .catch((error) => {
+              console.log(error.message);
+              Swal.fire(error.message);
+            });
+        });
       } else {
         Swal.fire({
-                title: 'Insufficient balance!,',
-                icon: 'info',
-                html:
-                    'Click ' +
-                    '<a href="https://fastpay.cttaste.com/fundwallet">here</a> ' +
-                    'to fund your wallet.',
-                showCloseButton: true,
-                showCancelButton: true,
-                focusConfirm: false,
-              
-                })
+          title: "Insufficient balance!,",
+          icon: "info",
+          html:
+            "Click " +
+            '<a href="https://fastpay.cttaste.com/fundwallet">here</a> ' +
+            "to fund your wallet.",
+          showCloseButton: true,
+          showCancelButton: true,
+          focusConfirm: false,
+        });
       }
     },
   },

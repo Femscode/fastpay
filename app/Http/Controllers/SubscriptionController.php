@@ -112,7 +112,7 @@ class SubscriptionController extends Controller
             // Do something here
         } else {
             $reference = 'failed_data_' . Str::random(5);
-            $details =   $data->plan_name. " (" .$data->network.")"." purchase of on " . $request->phone_number;
+            $details =   $data->plan_name. " (" .$data->network.")"." data purchase on " . $request->phone_number;
 
             $this->create_transaction('Data Purchase', $reference, $details, 'debit', $data->data_price, $user->id, 0);
         }

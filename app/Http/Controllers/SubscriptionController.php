@@ -424,7 +424,7 @@ class SubscriptionController extends Controller
             return response()->json($response);
         }
         //purchase the data
-        dd($request->all(), env('EASY_ACCESS_AUTH'));
+       
         $curl = curl_init();
         curl_setopt_array($curl, array(
             CURLOPT_URL => "https://easyaccessapi.com.ng/api/paytv.php",

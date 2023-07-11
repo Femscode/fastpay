@@ -283,7 +283,7 @@ class SubscriptionController extends Controller
                 // Do something here
             } else {
                 $reference = 'failed_data_' . Str::random(5);
-                $details =   $data->plan_name. " (" .$data->network.")"." purchase of on " . $request->phone_number;
+                $details =   $data->plan_name. " (" .$data->network.")"." data purchase on " . $request->phone_number;
 
                 $this->create_transaction('Data Purchase', $reference,$details, 'debit', $data->data_price, $user->id, 0);
             }
@@ -424,6 +424,7 @@ class SubscriptionController extends Controller
             return response()->json($response);
         }
         //purchase the data
+        dd($request->all(), env('EASY_ACCESS_AUTH'));
         $curl = curl_init();
         curl_setopt_array($curl, array(
             CURLOPT_URL => "https://easyaccessapi.com.ng/api/paytv.php",

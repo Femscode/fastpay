@@ -14,17 +14,18 @@ use App\Models\DuplicateTransaction;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 Auth::routes();
-Route::any('delete_duplicate', function() {
-  
-    $duplicates = DuplicateTransaction::all();
+Route::any('delete_duplicate', function () {
+
+    $duplicates = DuplicateTransaction::get();
 
     if ($duplicates->isEmpty()) {
         return 0; // List is empty
     }
-    
-    $duplicates->delete();
-    return 1;
 
+    foreach ($duplicates as $duplicate) {
+        $duplicate->delete();
+    }
+    return 1;
 })->name('delete_duplicate');
 // Route::view('/','coming_soon');
 // Route::any('/notify', [App\Http\Controllers\SubscriptionController::class, 'notify'])->name('notify');
@@ -39,10 +40,10 @@ Route::any('addfee', function () {
     }
     return 'fee added';
 });
-Route::view('offline','offline');
+Route::view('offline', 'offline');
 Route::any('fetch_email', function () {
     $datas = User::get()->pluck('email');
-   
+
     return $datas;
 });
 Route::get('authorized/google', [LoginWithGoogleController::class, 'redirectToGoogle']);
@@ -123,7 +124,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::any('/reset-pin-with-token', [App\Http\Controllers\UserController::class, 'resetPinWithToken'])->name('reset-pin-with-token');
     Route::any('/reset-forgot-pin', [App\Http\Controllers\UserController::class, 'resetforgotpin'])->name('reset-forgot-pin');
     Route::any('/print_transaction_receipt/{id}', [App\Http\Controllers\UserController::class, 'print_transaction_receipt'])->name('print_transaction_receipt');
-
 });
 // Email Verification Routes...
 Route::get('/email/verify', function () {

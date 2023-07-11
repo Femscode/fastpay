@@ -178,8 +178,8 @@
                     <div class="text-left mb-5 mb-lg-10 py-10 py-lg-20">
                         <!--begin::Title-->
                         <h1 class="text-dark lh-base fw-bold fs-2x fs-lg-3x mb-15">
-                            Pay for Food, Data, Airtime <br />
-                            Electricity Bills & <br>Cable Subscriptions.
+                            Save Big on Food, Data, <br />
+                            Airtime and Bills Payment.
 
                             {{-- <span
                                 style="background: linear-gradient(to right, #640f11 0%, #ebab21 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;">

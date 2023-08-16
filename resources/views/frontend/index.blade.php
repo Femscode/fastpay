@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 
 <head>
@@ -15,13 +15,14 @@
     <meta property="og:site_name" content="CT_Taste" />
     <link rel="shortcut icon" href="assets/media/logos/fav_01.png" />
 
- 
+
     <link rel="stylesheet" href="assets/googlefonts/inter.css" />
     <!--end::Fonts-->
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    {{-- <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet"> --}}
+    {{--
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet"> --}}
     <link href="assets/googlefonts/ubuntu.css" rel="stylesheet">
 
     @laravelPWA
@@ -30,6 +31,15 @@
     <link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
     <link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
     <!--end::Global Stylesheets Bundle-->
+    <style>
+        #fixedbutton {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            height: 50px;
+            width: 50px;
+        }
+    </style>
 
 
 </head>
@@ -75,8 +85,8 @@
             <div class="bgi-no-repeat bgi-size-contain bgi-position-x-center bgi-position-y-bottom landing-light-bg"
                 style="background-image: url(assets/media/logos/fastpay_bg.jpg);background-size:cover;">
                 <!--begin::Header-->
-                <div style='padding:10px' class="landing-header" data-kt-sticky="true" data-kt-sticky-name="landing-header"
-                    data-kt-sticky-offset="{default: '200px', lg: '300px'}">
+                <div style='padding:10px' class="landing-header" data-kt-sticky="true"
+                    data-kt-sticky-name="landing-header" data-kt-sticky-offset="{default: '200px', lg: '300px'}">
 
                     <!--begin::Container-->
                     <div class="container">
@@ -106,7 +116,7 @@
                                 <a href="landing.html">
                                     <img alt="Logo" src="assets/media/logos/logo-br.png"
                                         class="logo-default h-25px h-lg-30px" />
-                                   
+
                                 </a>
                                 <!--end::Logo image-->
                             </div>
@@ -128,7 +138,8 @@
                                         <!--begin::Menu item-->
                                         <div class="menu-item">
                                             <!--begin::Menu link-->
-                                            <a style='color:#640f11' class="menu-link nav-link active py-3 px-4 px-xxl-6" href="#kt_body"
+                                            <a style='color:#640f11'
+                                                class="menu-link nav-link active py-3 px-4 px-xxl-6" href="#kt_body"
                                                 data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">
                                                 Home </a>
                                             <!--end::Menu link-->
@@ -137,8 +148,9 @@
                                         <!--begin::Menu item-->
                                         <div class="menu-item">
                                             <!--begin::Menu link-->
-                                            <a class="menu-link nav-link  py-3 px-4 px-xxl-6" href="https://cttaste.com/landing"
-                                                data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">
+                                            <a class="menu-link nav-link  py-3 px-4 px-xxl-6"
+                                                href="https://cttaste.com/landing" data-kt-scroll-toggle="true"
+                                                data-kt-drawer-dismiss="true">
                                                 About CT_Taste </a>
                                             <!--end::Menu link-->
                                         </div>
@@ -146,13 +158,14 @@
                                         <!--begin::Menu item-->
                                         <div class="menu-item">
                                             <!--begin::Menu link-->
-                                            <a class="menu-link nav-link  py-3 px-4 px-xxl-6" href="https://cthostel.com"
-                                                data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">
+                                            <a class="menu-link nav-link  py-3 px-4 px-xxl-6"
+                                                href="https://cthostel.com" data-kt-scroll-toggle="true"
+                                                data-kt-drawer-dismiss="true">
                                                 About CT-Hostel </a>
                                             <!--end::Menu link-->
                                         </div>
-                             
-                                   
+
+
                                     </div>
                                     <!--end::Menu-->
                                 </div>
@@ -173,7 +186,8 @@
 
 
                 <!--begin::Landing hero-->
-                <div style='background-image: url(assets/media/logos/fastpay_bg_3.jpg);background-size:cover;background-color:#fff'  class="d-flex flex-column flex-left w-100 min-h-350px min-h-lg-500px px-9">
+                <div style='background-image: url(assets/media/logos/fastpay_bg_3.jpg);background-size:cover;background-color:#fff'
+                    class="d-flex flex-column flex-left w-100 min-h-350px min-h-lg-500px px-9">
                     <!--begin::Heading-->
                     <div class="text-left mb-5 mb-lg-10 py-10 py-lg-20">
                         <!--begin::Title-->
@@ -190,7 +204,7 @@
 
                         <!--begin::Action-->
                         <a href="/login" class="btn btn-secondary"><i class='fa fa-plus'></i>Login</a>
-                        <a href="/register" class="btn btn-warning" ><i class='fa fa-user'></i>Register</a>
+                        <a href="/register" class="btn btn-warning"><i class='fa fa-user'></i>Register</a>
                         <!--end::Action-->
                     </div>
                     <!--end::Heading-->
@@ -260,7 +274,7 @@
             <!--end::Wrapper-->
 
             <!--begin::Curve bottom-->
-            <div style='background:#fff'class="landing-curve landing-light-color ">
+            <div style='background:#fff' class="landing-curve landing-light-color ">
                 <svg viewBox="15 12 1470 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                         d="M0 11C3.93573 11.3356 7.85984 11.6689 11.7725 12H1488.16C1492.1 11.6689 1496.04 11.3356 1500 11V12H1488.16C913.668 60.3476 586.282 60.6117 11.7725 12H0V11Z"
@@ -272,9 +286,9 @@
         <!--end::Header Section-->
 
         <!--begin::How It Works Section-->
-        <div class="mb-n10 mb-lg-n20 z-index-2"  style='background:#fff'>
+        <div class="mb-n10 mb-lg-n20 z-index-2" style='background:#fff'>
             <!--begin::Container-->
-            <div class="container"  >
+            <div class="container">
                 <!--begin::Heading-->
                 <div class="text-center mb-17">
                     <!--begin::Title-->
@@ -285,7 +299,7 @@
 
                     <!--begin::Text-->
                     <div style='color:#640f11' class="fs-5 fw-bold">
-                      Convenient, Affordable and Reliable!
+                        Convenient, Affordable and Reliable!
                     </div>
                     <!--end::Text-->
                 </div>
@@ -350,7 +364,8 @@
 
                             <!--begin::Description-->
                             <div class="fw-semibold fs-6 fs-lg-4 text-muted">
-                                Don't get scammed, making payment for desired hostel helps protect you from scam and money can be refunded at any given time.
+                                Don't get scammed, making payment for desired hostel helps protect you from scam and
+                                money can be refunded at any given time.
                             </div>
                             <!--end::Description-->
                         </div>
@@ -409,30 +424,30 @@
 
                         <!--begin::Item-->
                         <div class="text-center px-5 pt-5 pt-lg-10 px-lg-10">
-                            <img src="assets/media/logos/slider_4.png"
-                                class="card-rounded shadow mh-lg-650px mw-100" alt="" />
+                            <img src="assets/media/logos/slider_4.png" class="card-rounded shadow mh-lg-650px mw-100"
+                                alt="" />
                         </div>
                         <!--end::Item-->
                         <!--begin::Item-->
                         <div class="text-center px-5 pt-5 pt-lg-10 px-lg-10">
-                            <img src="assets/media/logos/slider_3.png"
-                                class="card-rounded shadow mh-lg-650px mw-100" alt="" />
+                            <img src="assets/media/logos/slider_3.png" class="card-rounded shadow mh-lg-650px mw-100"
+                                alt="" />
                         </div>
                         <!--end::Item-->
                         <!--begin::Item-->
                         <div class="text-center px-5 pt-5 pt-lg-10 px-lg-10">
-                            <img src="assets/media/logos/slider_5.png"
-                                class="card-rounded shadow mh-lg-650px mw-100" alt="" />
+                            <img src="assets/media/logos/slider_5.png" class="card-rounded shadow mh-lg-650px mw-100"
+                                alt="" />
                         </div>
                         <div class="text-center px-5 pt-5 pt-lg-10 px-lg-10">
-                            <img src="assets/media/logos/slider_6.png"
-                                class="card-rounded shadow mh-lg-650px mw-100" alt="" />
+                            <img src="assets/media/logos/slider_6.png" class="card-rounded shadow mh-lg-650px mw-100"
+                                alt="" />
                         </div>
                         <!--end::Item-->
                         <!--begin::Item-->
                         <div class="text-center px-5 pt-5 pt-lg-10 px-lg-10">
-                            <img src="assets/media/logos/slider_7.png"
-                                class="card-rounded shadow mh-lg-650px mw-100" alt="" />
+                            <img src="assets/media/logos/slider_7.png" class="card-rounded shadow mh-lg-650px mw-100"
+                                alt="" />
                         </div>
                         <!--end::Item-->
 
@@ -1177,13 +1192,16 @@
         </div>
         <!--end::Pricing Section-->
 
+        <a href="https://wa.me/2349058744473"><img src="{{asset('assets/media/logos/whatsapp.png')}}" alt='whatsapp'
+                id="fixedbutton"></a>
 
 
         <!--begin::Testimonials Section-->
         <div class="mt-20 mb-n20 position-relative z-index-2">
             <!--begin::Container-->
             <div class="container">
-                {{-- <!--begin::Heading-->
+                {{--
+                <!--begin::Heading-->
                 <div class="text-center mb-17">
                     <!--begin::Title-->
                     <h3 class="fs-2hx text-light mb-5" id="clients" data-kt-scroll-offset="{default: 125, lg: 150}">What
@@ -1438,8 +1456,8 @@
                     <!--end::Content-->
 
                     <!--begin::Link-->
-                    <a href="/login"
-                        class="btn btn-lg btn-outline border-2 btn-outline-white flex-shrink-0 my-2">Get Started</a>
+                    <a href="/login" class="btn btn-lg btn-outline border-2 btn-outline-white flex-shrink-0 my-2">Get
+                        Started</a>
                     <!--end::Link-->
                 </div>
                 <!--end::Highlight-->
@@ -1494,10 +1512,11 @@
 
                                 <!--begin::Text-->
                                 <span class="fw-normal fs-4 text-gray-900">
-                                   We have team of developers and designers that can bring your idea/business to reality!
+                                    We have team of developers and designers that can bring your idea/business to
+                                    reality!
 
-                                    <a href="https://wa.me/2349058744473" 
-                                        class="text-hover-secondary text-white">Click to reach out.</a>
+                                    <a href="https://wa.me/2349058744473" class="text-hover-secondary text-white">Click
+                                        to reach out.</a>
                                 </span>
                                 <!--end::Text-->
                             </div>
@@ -1517,22 +1536,22 @@
 
                                     <!--begin::Link-->
                                     <a href="https://cttaste.com"
-                                         class="text-hover-secondary text-white fs-5 mb-6">CT_Taste</a>
+                                        class="text-hover-secondary text-white fs-5 mb-6">CT_Taste</a>
                                     <!--end::Link-->
 
                                     <!--begin::Link-->
                                     <a href="https://cthostel.com"
-                                         class="text-hover-secondary text-white fs-5 mb-6">CT_Hostel</a>
+                                        class="text-hover-secondary text-white fs-5 mb-6">CT_Hostel</a>
                                     <!--end::Link-->
 
                                     <!--begin::Link-->
                                     <a href="https://ctstake.com"
-                                         class="text-hover-secondary text-white fs-5 mb-6">CT_Stake</a>
+                                        class="text-hover-secondary text-white fs-5 mb-6">CT_Stake</a>
                                     <!--end::Link-->
 
                                     <!--begin::Link-->
                                     <a href="https://egbami.tech"
-                                         class="text-hover-secondary text-white fs-5 mb-6">Egbami Of CTHostel</a>
+                                        class="text-hover-secondary text-white fs-5 mb-6">Egbami Of CTHostel</a>
                                     <!--end::Link-->
 
                                     <!--end::Link-->
@@ -1546,9 +1565,10 @@
                                     <!--end::Subtitle-->
 
                                     <!--begin::Link-->
-                                    
-                                   
-                                    <a href="https://www.facebook.com/107641935325820/posts/pfbid02HNSTgXffyTr5iEeSqs1aiXhNmN9RDaLcfCZTJC63EsVRXz36y7aw8RfSNHqRRhncl/?sfnsn=scwspmo" class="mb-6">
+
+
+                                    <a href="https://www.facebook.com/107641935325820/posts/pfbid02HNSTgXffyTr5iEeSqs1aiXhNmN9RDaLcfCZTJC63EsVRXz36y7aw8RfSNHqRRhncl/?sfnsn=scwspmo"
+                                        class="mb-6">
                                         <img src="assets/media/svg/brand-logos/facebook-4.svg" class="h-20px me-2"
                                             alt="" />
 
@@ -1556,7 +1576,7 @@
                                     </a>
                                     <!--end::Link-->
 
-                                 
+
 
                                     <!--begin::Link-->
                                     <a href="https://twitter.com/ct_taste?s=20&t=izEI3zXAe5nU69qdNJINTA" class="mb-6">
@@ -1573,8 +1593,7 @@
                                         <img src="assets/media/svg/brand-logos/instagram-2-1.svg" class="h-20px me-2"
                                             alt="" />
 
-                                        <span
-                                            class="text-white text-hover-primary fs-5 mb-6">Instagram</span>
+                                        <span class="text-white text-hover-primary fs-5 mb-6">Instagram</span>
                                     </a>
                                     <!--end::Link-->
                                 </div>
@@ -1619,8 +1638,7 @@
                             </li>
 
                             <li class="menu-item mx-5">
-                                <a href="mailto:support@cttaste.com" target="_blank"
-                                    class="menu-link px-2">Support</a>
+                                <a href="mailto:support@cttaste.com" target="_blank" class="menu-link px-2">Support</a>
                             </li>
 
                             <li class="menu-item">

@@ -32,6 +32,15 @@
     <!--begin::Global Stylesheets Bundle(mandatory for all pages)-->
     <link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
     <link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+    <style>
+        #fixedbutton {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            height: 50px;
+            width: 50px;
+        }
+    </style>
 
     @yield('header')
 </head>
@@ -593,6 +602,8 @@
                         <!--begin::Main-->
                         @yield('content')
                         <!--end:::Main-->
+                        <a href="https://wa.me/2349058744473"><img src="{{asset('assets/media/logos/whatsapp.png')}}" alt='whatsapp'
+                            id="fixedbutton"></a>
                     </div>
                     <div id="kt_app_footer"
                         class="app-footer  d-flex flex-column flex-md-row align-items-center flex-center flex-md-stack py-2 py-lg-4 ">

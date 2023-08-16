@@ -723,8 +723,8 @@
                                                     <p class="">Token</p>
                                                     <div class="input-group mb-4">
 
-                                                        <input placeholder="*******" maxlength="7" required type="password"
-                                                            name='token' class="form-control"
+                                                        <input placeholder="*******" maxlength="7" required
+                                                            type="password" name='token' class="form-control"
                                                             aria-label="Current Password">
 
                                                     </div>
@@ -766,7 +766,7 @@
                                                 </div>
                                             </form>
                                         </div>
-                                     
+
                                         <!--begin::Engage widget 1-->
                                         <div class="card bgi-position-y-bottom bgi-position-x-end bgi-no-repeat bgi-size-cover min-h-250px bg-body mb-5 mb-xl-8"
                                             style="background-position: 100% 50px;background-size: 500px auto;background-image:url('assets/media/misc/city.png')"

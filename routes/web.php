@@ -64,7 +64,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/setpin', [App\Http\Controllers\HomeController::class, 'setpin'])->name('setpin');
     Route::get('profile', [App\Http\Controllers\HomeController::class, 'profile'])->name('profile');
     Route::get('fundwallet', [App\Http\Controllers\HomeController::class, 'fundwallet'])->name('fundwallet');
-    Route::get('withdraw', [App\Http\Controllers\HomeController::class, 'withdraw'])->name('withdraw');
+    // Route::get('withdraw', [App\Http\Controllers\HomeController::class, 'withdraw'])->name('withdraw');
     Route::any('confirm_account', [HomeController::class, 'confirm_account'])->name('confirm_account');
     Route::any('make_transfer', [HomeController::class, 'make_transfer'])->name('make_transfer');
 

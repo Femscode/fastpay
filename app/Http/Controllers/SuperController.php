@@ -6,6 +6,7 @@ use App\Models\Data;
 use App\Models\User;
 use App\Models\Cable;
 use App\Models\Transaction;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -25,6 +26,26 @@ class SuperController extends Controller
             ->latest()->get();
 
         return view('super.index', $data);
+    }
+    public function notifications() {
+        $data['user'] = $user =  Auth::user();
+        if ($user->email !== 'fasanyafemi@gmail.com') {
+            return redirect()->route('dashboard');
+        }
+        $data['active'] = 'super';
+        $data['notification'] = Notification::find(1);
+
+        return view('super.notifications', $data);
+
+    }
+    public function save_notifications(Request $request) {
+        $this->validate($request, [
+            'info' => 'required'
+        ]);
+        $notify = Notification::find(1);
+        $notify->info = $request->info;
+        $notify->save();
+        return redirect()->back()->with('message', "Notification Updated Successfully!");
     }
 
     public function data_price() {

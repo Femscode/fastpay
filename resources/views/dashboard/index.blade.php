@@ -10,6 +10,10 @@
     <!--begin::Content-->
     <div id="kt_app_content" class="app-content  flex-column-fluid ">
         <!--begin::Row-->
+        @if (!empty($notification))
+        <input id='notification' value='{{  $notification  }}' type='hidden'/>
+      
+        @endif
         <div class="row g-5 g-xl-8">
             <!--begin::Col-->
             <div class="col-xl-4">
@@ -55,7 +59,7 @@
                         <!--begin::Card-->
                         <div class="card card-stretch custom-box shadow-lg">
                             <!--begin::Link-->
-                            <a href="/pay_cttaste"  style='border-left:5px solid #ebab21 ';
+                            <a href="/pay_cttaste" style='border-left:5px solid #ebab21 ' ;
                                 class="btn btn-flex btn-text-gray-800 btn-icon-gray-400 btn-active-color-primary bg-body flex-column justfiy-content-start align-items-start text-start w-100 p-10">
                                 <!--begin::Svg Icon | path: icons/duotune/technology/teh008.svg-->
                                 <span class="svg-icon svg-icon-primary svg-icon-2x">
@@ -95,16 +99,25 @@
                         <!--begin::Card-->
                         <div class="card card-stretch custom-box shadow-lg">
                             <!--begin::Link-->
-                            <a href="/data"  style='border-left:5px solid #FF4500 ';
+                            <a href="/data" style='border-left:5px solid #FF4500 ' ;
                                 class="btn btn-flex btn-text-gray-800 btn-icon-gray-400 btn-active-color-primary bg-body flex-column justfiy-content-start align-items-start text-start w-100 p-10">
                                 <!--begin::Svg Icon | path: icons/duotune/technology/teh008.svg-->
-                                <span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo8/dist/../src/media/svg/icons/Devices/LTE2.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                        <rect x="0" y="0" width="24" height="24"/>
-                                        <path d="M16.4508979,17.4029496 L15.1784978,15.8599014 C16.324501,14.9149052 17,13.5137472 17,12 C17,10.4912085 16.3289582,9.09418404 15.1893841,8.14910121 L16.466112,6.60963188 C18.0590936,7.93073905 19,9.88958759 19,12 C19,14.1173586 18.0528606,16.0819686 16.4508979,17.4029496 Z M19.0211112,20.4681628 L17.7438102,18.929169 C19.7927036,17.2286725 21,14.7140097 21,12 C21,9.28974232 19.7960666,6.77820732 17.7520315,5.07766256 L19.031149,3.54017812 C21.5271817,5.61676443 23,8.68922234 23,12 C23,15.3153667 21.523074,18.3916375 19.0211112,20.4681628 Z M7.54910207,17.4029496 C5.94713944,16.0819686 5,14.1173586 5,12 C5,9.88958759 5.94090645,7.93073905 7.53388797,6.60963188 L8.81061588,8.14910121 C7.67104182,9.09418404 7,10.4912085 7,12 C7,13.5137472 7.67549895,14.9149052 8.82150222,15.8599014 L7.54910207,17.4029496 Z M4.9788888,20.4681628 C2.47692603,18.3916375 1,15.3153667 1,12 C1,8.68922234 2.47281829,5.61676443 4.96885102,3.54017812 L6.24796852,5.07766256 C4.20393339,6.77820732 3,9.28974232 3,12 C3,14.7140097 4.20729644,17.2286725 6.25618985,18.929169 L4.9788888,20.4681628 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"/>
-                                        <path d="M11,14.2919782 C10.1170476,13.9061998 9.5,13.0251595 9.5,12 C9.5,10.6192881 10.6192881,9.5 12,9.5 C13.3807119,9.5 14.5,10.6192881 14.5,12 C14.5,13.0251595 13.8829524,13.9061998 13,14.2919782 L13,20 C13,20.5522847 12.5522847,21 12,21 C11.4477153,21 11,20.5522847 11,20 L11,14.2919782 Z" fill="#000000"/>
-                                    </g>
-                                </svg><!--end::Svg Icon--></span>
+                                <span class="svg-icon svg-icon-primary svg-icon-2x">
+                                    <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo8/dist/../src/media/svg/icons/Devices/LTE2.svg--><svg
+                                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                        width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <rect x="0" y="0" width="24" height="24" />
+                                            <path
+                                                d="M16.4508979,17.4029496 L15.1784978,15.8599014 C16.324501,14.9149052 17,13.5137472 17,12 C17,10.4912085 16.3289582,9.09418404 15.1893841,8.14910121 L16.466112,6.60963188 C18.0590936,7.93073905 19,9.88958759 19,12 C19,14.1173586 18.0528606,16.0819686 16.4508979,17.4029496 Z M19.0211112,20.4681628 L17.7438102,18.929169 C19.7927036,17.2286725 21,14.7140097 21,12 C21,9.28974232 19.7960666,6.77820732 17.7520315,5.07766256 L19.031149,3.54017812 C21.5271817,5.61676443 23,8.68922234 23,12 C23,15.3153667 21.523074,18.3916375 19.0211112,20.4681628 Z M7.54910207,17.4029496 C5.94713944,16.0819686 5,14.1173586 5,12 C5,9.88958759 5.94090645,7.93073905 7.53388797,6.60963188 L8.81061588,8.14910121 C7.67104182,9.09418404 7,10.4912085 7,12 C7,13.5137472 7.67549895,14.9149052 8.82150222,15.8599014 L7.54910207,17.4029496 Z M4.9788888,20.4681628 C2.47692603,18.3916375 1,15.3153667 1,12 C1,8.68922234 2.47281829,5.61676443 4.96885102,3.54017812 L6.24796852,5.07766256 C4.20393339,6.77820732 3,9.28974232 3,12 C3,14.7140097 4.20729644,17.2286725 6.25618985,18.929169 L4.9788888,20.4681628 Z"
+                                                fill="#000000" fill-rule="nonzero" opacity="0.3" />
+                                            <path
+                                                d="M11,14.2919782 C10.1170476,13.9061998 9.5,13.0251595 9.5,12 C9.5,10.6192881 10.6192881,9.5 12,9.5 C13.3807119,9.5 14.5,10.6192881 14.5,12 C14.5,13.0251595 13.8829524,13.9061998 13,14.2919782 L13,20 C13,20.5522847 12.5522847,21 12,21 C11.4477153,21 11,20.5522847 11,20 L11,14.2919782 Z"
+                                                fill="#000000" />
+                                        </g>
+                                    </svg>
+                                    <!--end::Svg Icon-->
+                                </span>
                                 <!--end::Svg Icon-->
                                 <span class="fs-4 fw-normal">
                                     Buy Data </span>
@@ -117,7 +130,7 @@
                         <!--begin::Card-->
                         <div class="card card-stretch custom-box shadow-lg">
                             <!--begin::Link-->
-                            <a href="/airtime"  style='border-bottom:5px solid brown'
+                            <a href="/airtime" style='border-bottom:5px solid brown'
                                 class="btn btn-flex btn-text-gray-800 btn-icon-gray-400 btn-active-color-primary bg-body flex-column justfiy-content-start align-items-start text-start w-100 p-10">
                                 <!--begin::Svg Icon | path: icons/duotune/technology/teh008.svg-->
                                 <span class="svg-icon svg-icon-primary svg-icon-2x">
@@ -148,7 +161,7 @@
                         <!--begin::Card-->
                         <div class="card card-stretch custom-box shadow-lg">
                             <!--begin::Link-->
-                            <a href="/cable"  style='border-bottom:5px solid #8A2BE2 '
+                            <a href="/cable" style='border-bottom:5px solid #8A2BE2 '
                                 class="btn btn-flex btn-text-gray-800 btn-icon-gray-400 btn-active-color-primary bg-body flex-column justfiy-content-start align-items-start text-start w-100 p-10">
                                 <!--begin::Svg Icon | path: icons/duotune/technology/teh008.svg-->
                                 <span class="svg-icon svg-icon-primary svg-icon-2x">
@@ -178,7 +191,7 @@
                         <!--begin::Card-->
                         <div class="card card-stretch custom-box shadow-lg">
                             <!--begin::Link-->
-                            <a href="/electricity"  style='border-top:5px solid #00BFFF'
+                            <a href="/electricity" style='border-top:5px solid #00BFFF'
                                 class="btn btn-flex btn-text-gray-800 btn-icon-gray-400 btn-active-color-primary bg-body flex-column justfiy-content-start align-items-start text-start w-100 p-10">
                                 <!--begin::Svg Icon | path: icons/duotune/technology/teh008.svg-->
                                 <span class="svg-icon svg-icon-primary svg-icon-2x">
@@ -205,23 +218,29 @@
                     <!--end::Col-->
 
                     <!--begin::Col-->
-                  
+
                     {{-- <div class="col-6">
                         <!--begin::Card-->
                         <div class="card card-stretch custom-box shadow-lg">
                             <!--begin::Link-->
-                            <a href="/analysis"  style='border-left:5px solid purple'
+                            <a href="/analysis" style='border-left:5px solid purple'
                                 class="btn btn-flex btn-text-gray-800 btn-icon-gray-400 btn-active-color-primary bg-body flex-column justfiy-content-start align-items-start text-start w-100 p-10">
                                 <!--begin::Svg Icon | path: icons/duotune/technology/teh004.svg-->
-                                <span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo8/dist/../src/media/svg/icons/Media/Equalizer.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                        <rect x="0" y="0" width="24" height="24"/>
-                                        <rect fill="#000000" opacity="0.3" x="13" y="4" width="3" height="16" rx="1.5"/>
-                                        <rect fill="#000000" x="8" y="9" width="3" height="11" rx="1.5"/>
-                                        <rect fill="#000000" x="18" y="11" width="3" height="9" rx="1.5"/>
-                                        <rect fill="#000000" x="3" y="13" width="3" height="7" rx="1.5"/>
-                                    </g>
-                                </svg><!--end::Svg Icon--></span>
+                                <span class="svg-icon svg-icon-primary svg-icon-2x">
+                                    <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo8/dist/../src/media/svg/icons/Media/Equalizer.svg--><svg
+                                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                        width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <rect x="0" y="0" width="24" height="24" />
+                                            <rect fill="#000000" opacity="0.3" x="13" y="4" width="3" height="16"
+                                                rx="1.5" />
+                                            <rect fill="#000000" x="8" y="9" width="3" height="11" rx="1.5" />
+                                            <rect fill="#000000" x="18" y="11" width="3" height="9" rx="1.5" />
+                                            <rect fill="#000000" x="3" y="13" width="3" height="7" rx="1.5" />
+                                        </g>
+                                    </svg>
+                                    <!--end::Svg Icon-->
+                                </span>
                                 <!--end::Svg Icon-->
                                 <span class="fs-4 fw-normal">
                                     My Order Analysis </span>
@@ -230,7 +249,7 @@
                         </div>
                         <!--end::Card-->
                     </div> --}}
-              
+
                     <!--end::Col-->
 
                     <!--begin::Col-->
@@ -238,16 +257,26 @@
                         <!--begin::Card-->
                         <div class="card card-stretch custom-box shadow-lg">
                             <!--begin::Link-->
-                            <a href="/saved_orders"  style='border-bottom:5px solid #CC99FF  '
+                            <a href="/saved_orders" style='border-bottom:5px solid #CC99FF  '
                                 class="btn btn-flex btn-text-gray-800 btn-icon-gray-400 btn-active-color-primary bg-body flex-column justfiy-content-start align-items-start text-start w-100 p-10">
                                 <!--begin::Svg Icon | path: icons/duotune/abstract/abs025.svg-->
-                                <span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo8/dist/../src/media/svg/icons/Cooking/Frying-pan.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                        <rect x="0" y="0" width="24" height="24"/>
-                                        <path d="M7.0365148,2.21226948 L7.74351388,2.19992877 L10.0646842,8.08940609 C10.6609841,9.60239072 9.91786435,11.3123037 8.40487972,11.9086037 C8.06104051,12.0441181 7.69476342,12.1136927 7.32518316,12.1136927 C5.71931048,12.1136927 4.41749347,10.8118757 4.41749347,9.20600299 C4.41749347,8.82960553 4.4905735,8.45678844 4.63267698,8.10824627 L7.0365148,2.21226948 Z M7.32518316,10.6851213 C8.12149664,10.6851213 8.76703627,10.045528 8.76703627,9.25654983 C8.76703627,8.46757161 8.12149664,7.8279784 7.32518316,7.8279784 C6.52886967,7.8279784 5.88333004,8.46757161 5.88333004,9.25654983 C5.88333004,10.045528 6.52886967,10.6851213 7.32518316,10.6851213 Z" fill="#000000" opacity="0.3" transform="translate(7.344027, 7.156811) rotate(-584.000000) translate(-7.344027, -7.156811) "/>
-                                        <path d="M9.93933983,19.9246212 C7.20566979,17.1909512 7.20566979,12.7587963 9.93933983,10.0251263 C12.6730099,7.29145622 17.1051647,7.29145622 19.8388348,10.0251263 C22.5725048,12.7587963 22.5725048,17.1909512 19.8388348,19.9246212 C17.1051647,22.6582912 12.6730099,22.6582912 9.93933983,19.9246212 Z M15,20.5 C18.0375661,20.5 20.5,18.0375661 20.5,15 C20.5,11.9624339 18.0375661,9.5 15,9.5 C11.9624339,9.5 9.5,11.9624339 9.5,15 C9.5,18.0375661 11.9624339,20.5 15,20.5 Z M15,19.5 C12.5147186,19.5 10.5,17.4852814 10.5,15 C10.5,12.5147186 12.5147186,10.5 15,10.5 C17.4852814,10.5 19.5,12.5147186 19.5,15 C19.5,17.4852814 17.4852814,19.5 15,19.5 Z" fill="#000000"/>
-                                    </g>
-                                </svg><!--end::Svg Icon--></span>
+                                <span class="svg-icon svg-icon-primary svg-icon-2x">
+                                    <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo8/dist/../src/media/svg/icons/Cooking/Frying-pan.svg--><svg
+                                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                        width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <rect x="0" y="0" width="24" height="24" />
+                                            <path
+                                                d="M7.0365148,2.21226948 L7.74351388,2.19992877 L10.0646842,8.08940609 C10.6609841,9.60239072 9.91786435,11.3123037 8.40487972,11.9086037 C8.06104051,12.0441181 7.69476342,12.1136927 7.32518316,12.1136927 C5.71931048,12.1136927 4.41749347,10.8118757 4.41749347,9.20600299 C4.41749347,8.82960553 4.4905735,8.45678844 4.63267698,8.10824627 L7.0365148,2.21226948 Z M7.32518316,10.6851213 C8.12149664,10.6851213 8.76703627,10.045528 8.76703627,9.25654983 C8.76703627,8.46757161 8.12149664,7.8279784 7.32518316,7.8279784 C6.52886967,7.8279784 5.88333004,8.46757161 5.88333004,9.25654983 C5.88333004,10.045528 6.52886967,10.6851213 7.32518316,10.6851213 Z"
+                                                fill="#000000" opacity="0.3"
+                                                transform="translate(7.344027, 7.156811) rotate(-584.000000) translate(-7.344027, -7.156811) " />
+                                            <path
+                                                d="M9.93933983,19.9246212 C7.20566979,17.1909512 7.20566979,12.7587963 9.93933983,10.0251263 C12.6730099,7.29145622 17.1051647,7.29145622 19.8388348,10.0251263 C22.5725048,12.7587963 22.5725048,17.1909512 19.8388348,19.9246212 C17.1051647,22.6582912 12.6730099,22.6582912 9.93933983,19.9246212 Z M15,20.5 C18.0375661,20.5 20.5,18.0375661 20.5,15 C20.5,11.9624339 18.0375661,9.5 15,9.5 C11.9624339,9.5 9.5,11.9624339 9.5,15 C9.5,18.0375661 11.9624339,20.5 15,20.5 Z M15,19.5 C12.5147186,19.5 10.5,17.4852814 10.5,15 C10.5,12.5147186 12.5147186,10.5 15,10.5 C17.4852814,10.5 19.5,12.5147186 19.5,15 C19.5,17.4852814 17.4852814,19.5 15,19.5 Z"
+                                                fill="#000000" />
+                                        </g>
+                                    </svg>
+                                    <!--end::Svg Icon-->
+                                </span>
                                 <!--end::Svg Icon-->
                                 <span class="fs-4 fw-normal">
                                     My Saved Orders </span>
@@ -260,15 +289,22 @@
                         <!--begin::Card-->
                         <div class="card card-stretch custom-box shadow-lg">
                             <!--begin::Link-->
-                            <a href="#"  style='border-top:5px solid #2E8B57'
+                            <a href="#" style='border-top:5px solid #2E8B57'
                                 class="btn btn-flex btn-text-gray-800 btn-icon-gray-400 btn-active-color-primary bg-body flex-column justfiy-content-start align-items-start text-start w-100 p-10">
                                 <!--begin::Svg Icon | path: icons/duotune/abstract/abs025.svg-->
-                                <span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo8/dist/../src/media/svg/icons/Home/Home.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                        <rect x="0" y="0" width="24" height="24"/>
-                                        <path d="M3.95709826,8.41510662 L11.47855,3.81866389 C11.7986624,3.62303967 12.2013376,3.62303967 12.52145,3.81866389 L20.0429,8.41510557 C20.6374094,8.77841684 21,9.42493654 21,10.1216692 L21,19.0000642 C21,20.1046337 20.1045695,21.0000642 19,21.0000642 L4.99998155,21.0000673 C3.89541205,21.0000673 2.99998155,20.1046368 2.99998155,19.0000673 L2.99999828,10.1216672 C2.99999935,9.42493561 3.36258984,8.77841732 3.95709826,8.41510662 Z M10,13 C9.44771525,13 9,13.4477153 9,14 L9,17 C9,17.5522847 9.44771525,18 10,18 L14,18 C14.5522847,18 15,17.5522847 15,17 L15,14 C15,13.4477153 14.5522847,13 14,13 L10,13 Z" fill="#000000"/>
-                                    </g>
-                                </svg><!--end::Svg Icon--></span>
+                                <span class="svg-icon svg-icon-primary svg-icon-2x">
+                                    <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo8/dist/../src/media/svg/icons/Home/Home.svg--><svg
+                                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                        width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <rect x="0" y="0" width="24" height="24" />
+                                            <path
+                                                d="M3.95709826,8.41510662 L11.47855,3.81866389 C11.7986624,3.62303967 12.2013376,3.62303967 12.52145,3.81866389 L20.0429,8.41510557 C20.6374094,8.77841684 21,9.42493654 21,10.1216692 L21,19.0000642 C21,20.1046337 20.1045695,21.0000642 19,21.0000642 L4.99998155,21.0000673 C3.89541205,21.0000673 2.99998155,20.1046368 2.99998155,19.0000673 L2.99999828,10.1216672 C2.99999935,9.42493561 3.36258984,8.77841732 3.95709826,8.41510662 Z M10,13 C9.44771525,13 9,13.4477153 9,14 L9,17 C9,17.5522847 9.44771525,18 10,18 L14,18 C14.5522847,18 15,17.5522847 15,17 L15,14 C15,13.4477153 14.5522847,13 14,13 L10,13 Z"
+                                                fill="#000000" />
+                                        </g>
+                                    </svg>
+                                    <!--end::Svg Icon-->
+                                </span>
                                 <!--end::Svg Icon-->
                                 <span class="fs-4 fw-normal">
                                     Pay For Hostel </span>
@@ -281,7 +317,7 @@
                         <!--begin::Card-->
                         <div class="card card-stretch custom-box shadow-lg">
                             <!--begin::Link-->
-                            <a href="/transactions"  style='border-left:5px solid #FF4081     '
+                            <a href="/transactions" style='border-left:5px solid #FF4081     '
                                 class="btn btn-flex btn-text-gray-800 btn-icon-gray-400 btn-active-color-primary bg-body flex-column justfiy-content-start align-items-start text-start w-100 p-10">
                                 <!--begin::Svg Icon | path: icons/duotune/abstract/abs025.svg-->
                                 <span class="svg-icon svg-icon-primary svg-icon-2x">
@@ -340,7 +376,7 @@
                     <div class="card-body d-flex align-items-center">
                         <div>
                             <h4 class="text-white line-height-lg mb-5">
-                             Explore your tastebud with
+                                Explore your tastebud with
                                 <br>cttaste.
                             </h4>
                             <a href="https://cttaste.com" class="btn btn-success font-weight-bold px-6 py-3">
@@ -358,15 +394,18 @@
                     <div class="card-body d-flex flex-column align-items-start justify-content-start">
                         <div class="p-1 flex-grow-1">
                             <h3 class="text-white font-weight-bolder line-height-lg mb-5">
-                                Kindly follow our 
+                                Kindly follow our
                                 <br>social media pages
                             </h3>
-                            <a href='https://www.facebook.com/107641935325820/posts/pfbid02HNSTgXffyTr5iEeSqs1aiXhNmN9RDaLcfCZTJC63EsVRXz36y7aw8RfSNHqRRhncl/?sfnsn=scwspmo' class='btn btn-sm btn-primary'>Facebook</a>
-                            <a href='https://twitter.com/ct_taste?s=20&t=izEI3zXAe5nU69qdNJINTA' class='btn btn-sm btn-info'>Twitter</a>
-                            <a href='https://www.instagram.com/ct_taste/?igshid=YmMyMTA2M2Y%3D' class='btn btn-sm btn-warning'>Instagram</a>
+                            <a href='https://www.facebook.com/107641935325820/posts/pfbid02HNSTgXffyTr5iEeSqs1aiXhNmN9RDaLcfCZTJC63EsVRXz36y7aw8RfSNHqRRhncl/?sfnsn=scwspmo'
+                                class='btn btn-sm btn-primary'>Facebook</a>
+                            <a href='https://twitter.com/ct_taste?s=20&t=izEI3zXAe5nU69qdNJINTA'
+                                class='btn btn-sm btn-info'>Twitter</a>
+                            <a href='https://www.instagram.com/ct_taste/?igshid=YmMyMTA2M2Y%3D'
+                                class='btn btn-sm btn-warning'>Instagram</a>
                             {{-- <a href='btn btn-sm'>Facebook</a> --}}
-                          
-                               
+
+
                         </div>
 
                         <span class="svg-icon svg-icon-lg svg-icon-warning">
@@ -414,4 +453,18 @@
 
 
 @section('script')
+<script>
+    $(document).ready(function() {
+        var notification = $("#notification").val();
+        if (notification.length > 0) {
+            // Notification exists, do something with it
+           
+            Swal.fire(notification)
+        } else {
+            // No notification
+            console.log("No notification found.");
+        }
+    })
+</script>
+
 @endsection

@@ -111,6 +111,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::any('/data_price', [App\Http\Controllers\SuperController::class, 'data_price'])->name('data_price');
     Route::any('/update_data', [App\Http\Controllers\SuperController::class, 'update_data'])->name('update_data');
     Route::any('/cable_price', [App\Http\Controllers\SuperController::class, 'cable_price'])->name('cable_price');
+    Route::get('/notifications', [App\Http\Controllers\SuperController::class, 'notifications'])->name('notifications');
+    Route::post('/save_notifications', [App\Http\Controllers\SuperController::class, 'save_notifications'])->name('save_notifications');
     Route::any('/update_cable', [App\Http\Controllers\SuperController::class, 'update_cable'])->name('update_cable');
     Route::any('/block_user/{id}', [App\Http\Controllers\SuperController::class, 'block_user'])->name('block_user');
 });

@@ -10,6 +10,7 @@ use App\Models\MySession;
 use App\Models\ComingSoon;
 use App\Models\Transaction;
 use Illuminate\Support\Str;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 use App\Traits\TransactionTrait;
 use Illuminate\Support\Facades\DB;
@@ -34,7 +35,7 @@ class HomeController extends Controller
     public function analysis(Request $request)
     {
         $data['user'] = $user = Auth::user();
-        if($request->has('phone')) {
+        if ($request->has('phone')) {
             $phone1 = $request->phone;
             $phone2 = "0" . $request->phone;
             $phone3 = "+234" . $request->phone;
@@ -42,8 +43,7 @@ class HomeController extends Controller
             $phone5 = "234" . $request->phone;
             $phone6 = "234" . substr($request->phone, 0);
             $data['phone'] = $request->phone;
-        }
-        else {
+        } else {
             $data['active'] = 'analysis';
             $phone1 = $user->phone;
             $phone2 = "0" . $user->phone;
@@ -55,7 +55,7 @@ class HomeController extends Controller
         }
         $data['active'] = 'analysis';
 
-       
+
         $orders = DB::connection('mysql2')->table('orders')
             ->whereIn('phone', [$phone1, $phone2, $phone3, $phone4, $phone5, $phone6])
             ->get();
@@ -81,7 +81,7 @@ class HomeController extends Controller
         })->sortByDesc('total_price');
         // dd($orders);
 
-      
+
         // dd($data, $orders, $user);
         return view('dashboard.analysis', $data);
         dd($user);
@@ -139,6 +139,10 @@ class HomeController extends Controller
 
             if ($user->user_type == 'user') {
                 $data['banks'] = Bank::all();
+                $notification = Notification::find(1);
+                if (strlen($notification->info) >= 3) {
+                    $data['notification'] = $notification->info;
+                }
                 return view('dashboard.index', $data);
             } else {
                 return view('dashboard.index', $data);

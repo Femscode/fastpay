@@ -140,6 +140,7 @@ class HomeController extends Controller
             if ($user->user_type == 'user') {
                 $data['banks'] = Bank::all();
                 $notification = Notification::find(1);
+                dd(strlen($notification));
                 if (strlen($notification->info) >= 3) {
                     $data['notification'] = $notification->info;
                 }

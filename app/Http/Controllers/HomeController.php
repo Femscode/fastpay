@@ -140,8 +140,8 @@ class HomeController extends Controller
             if ($user->user_type == 'user') {
                 $data['banks'] = Bank::all();
                 $notification = Notification::find(1);
-                dd(strlen($notification->info));
-                if (strlen($notification->info) >= 3) {
+               
+                if (strlen($notification->info) >= 10) {
                     $data['notification'] = $notification->info;
                 }
                 return view('dashboard.index', $data);

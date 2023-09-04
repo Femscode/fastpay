@@ -11,7 +11,7 @@
     <div id="kt_app_content" class="app-content  flex-column-fluid ">
         <!--begin::Row-->
         @if (!empty($notification))
-        <input id='notification' value='{{  $notification  }}' type='hidden'/>
+        <input id='notification' value='{!!  $notification  !!}' type='hidden'/>
       
         @endif
         <div class="row g-5 g-xl-8">

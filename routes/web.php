@@ -4,16 +4,52 @@ use App\Models\Data;
 use App\Models\User;
 use App\Models\Cable;
 use App\Models\Payee;
+use Illuminate\Support\Str;
 use Illuminate\Http\Client\Request;
+use App\Models\DuplicateTransaction;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginWithGoogleController;
-use App\Models\DuplicateTransaction;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 Auth::routes();
+Route::any('test_flw',function() {
+    $user = Auth::user();
+
+    $curl = curl_init();
+
+    curl_setopt_array($curl, array(
+        CURLOPT_URL => 'https://api.flutterwave.com/v3/virtual-account-numbers',
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'POST',
+        CURLOPT_POSTFIELDS => '{
+"email": '. $user->email.',
+"is_permanent": true,
+
+"tx_ref": '.Str::random(4).',
+"phonenumber": '.$user->phone.',
+"firstname": '.$user->name.',
+"lastname": '.$user->name.',
+"narration": "Your virtual account"
+}',
+        CURLOPT_HTTPHEADER => array(
+            'Content-Type: application/json',
+            'Authorization: Bearer {FLWSECK_TEST-e48a3a97bfc6ebde9cf882118a5b1b86-X}'
+        ),
+    ));
+
+    $response = curl_exec($curl);
+
+    curl_close($curl);
+    dd($response);
+});
 Route::any('delete_duplicate', function () {
 
     $duplicates = DuplicateTransaction::get();

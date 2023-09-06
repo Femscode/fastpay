@@ -2,10 +2,11 @@
 
 namespace App\Traits;
 
-use App\Models\DuplicateTransaction;
 use App\Models\User;
+use Flutterwave;
 use App\Models\Transaction;
 use Illuminate\Support\Str;
+use App\Models\DuplicateTransaction;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 
@@ -92,7 +93,12 @@ trait TransactionTrait
     public function reserve_account_paystack()
     {
         $user = Auth::user();
+
+        // generate virtual account from flutterwaves
+
         //generate virtual from paystack
+
+
         $full_name = str_word_count($user->name, 1); // Split the full name into an array of words
 
         $firstName = $full_name[0]; // First name is the first word
@@ -112,7 +118,7 @@ trait TransactionTrait
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            "Authorization: Bearer ".env('PAYSTACK_SECRET_KEY'),
+            "Authorization: Bearer " . env('PAYSTACK_SECRET_KEY'),
             "Cache-Control: no-cache",
         ));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -137,7 +143,7 @@ trait TransactionTrait
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            "Authorization: Bearer ".env('PAYSTACK_SECRET_KEY'),
+            "Authorization: Bearer " . env('PAYSTACK_SECRET_KEY'),
             "Cache-Control: no-cache",
         ));
 
@@ -148,7 +154,7 @@ trait TransactionTrait
         $result = curl_exec($ch);
         $c_response = json_decode($result, true);
         // dd($c_response);
-       
+
         if ($c_response['status'] == false) {
             return 0;
         }
@@ -192,7 +198,7 @@ trait TransactionTrait
 
             $nuser->save();
             $tranx->after = $nuser->balance;
-            
+
             $tranx->status = 1;
             $tranx->save();
         } elseif ($title == 'Account Funding') {
@@ -205,8 +211,7 @@ trait TransactionTrait
             $tranx->status = 1;
             $tranx->save();
             return $tranx->id;
-        } 
-        elseif ($title == 'Bonus Credited') {
+        } elseif ($title == 'Bonus Credited') {
 
             $nuser = User::find($user);
             $nuser->bonus += $amount;
@@ -216,9 +221,7 @@ trait TransactionTrait
             $tranx->status = 1;
             $tranx->save();
             return $tranx->id;
-        } 
-        
-        elseif ($title == 'Account Funded Through Transfer') {
+        } elseif ($title == 'Account Funded Through Transfer') {
 
             $nuser = User::find($user);
             $nuser->balance += $amount;
@@ -256,8 +259,7 @@ trait TransactionTrait
             }
 
             return $tranx->id;
-        }
-        elseif ($title == 'Funds Withdraw') {
+        } elseif ($title == 'Funds Withdraw') {
 
             $nuser = User::find($user);
             if ($status == 1) {
@@ -274,8 +276,7 @@ trait TransactionTrait
             }
 
             return $tranx->id;
-        }
-        elseif ($title == 'Data Purchase') {
+        } elseif ($title == 'Data Purchase') {
             $nuser = User::find($user);
             if ($status == 1) {
                 $nuser->balance -= $amount;

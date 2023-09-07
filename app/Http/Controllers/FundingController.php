@@ -68,7 +68,7 @@ class FundingController extends Controller
                 'amount' => intval($amount),
                 'firstname' =>$first_name,
                 'lastname' => $last_name,
-                'narration' => 'Fastpay/'.$first_name .''. $last_name,
+                'narration' => 'Fastpay/'.$first_name .'-'. $last_name,
             ]);
             
             // You can then access the response body and status code like this:
@@ -132,19 +132,23 @@ class FundingController extends Controller
     public function webhook_payment(Request $request)
     {
         file_put_contents(__DIR__ . '/flwlog.txt', json_encode($request->all(), JSON_PRETTY_PRINT), FILE_APPEND);
-        $email = $request->input('data.customer.email');
-        $r_amountpaid = intval($request->input('data.amount'));
+        $response_data = json_decode($request->all, true);
+
+        // Access the user's email address
+        $email = $response_data["data"]["customer"]["email"];
+      
+        $r_amountpaid = intval($response_data["data"]["amount"]);
         
         $amountpaid = $r_amountpaid;
         
         $user = User::where('email', $email)->firstOrFail();
         $details = "Account credited with NGN" . $amountpaid;
         file_put_contents(__DIR__ . '/gethere.txt', json_encode($request->all(), JSON_PRETTY_PRINT), FILE_APPEND);
-        $this->create_transaction('Account Funding', $request->input('data.flw_ref'), $details, 'credit', $amountpaid, $user->id, 1);
+        $this->create_transaction('Account Funding', $response_data["data"]["flw_ref"], $details, 'credit', $amountpaid, $user->id, 1);
         if ($user->first_time == 0) {
             $bonus = intval(0.1 * $amountpaid);
             $details = "You've received a welcome bonus of NGN" . $bonus;
-            $this->create_transaction('Bonus Credited', $request->input('data.flw_ref'), $details, 'credit',  $bonus, $user->id, 1);
+            $this->create_transaction('Bonus Credited', $response_data["data"]["flw_ref"], $details, 'credit',  $bonus, $user->id, 1);
             $user->first_time = 1;
             $user->save();
         }

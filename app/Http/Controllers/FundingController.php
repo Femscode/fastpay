@@ -65,7 +65,7 @@ class FundingController extends Controller
                 // 'bvn' => 12345678901,
                 'tx_ref' => $trx_ref,
                 'phonenumber' => $user->phone,
-                'amount' => intval($amount),
+                'amount' => $amount,
                 'firstname' =>$first_name,
                 'lastname' => $last_name,
                 'narration' => 'Fastpay/'.$first_name .'-'. $last_name,

@@ -18,93 +18,43 @@
                 <!--begin::Card-->
                 <div class="card card-custom">
                     <!--begin::Header-->
-               
+
                     <!--end::Header-->
                     <!--begin::Form-->
 
                     <div class="card-body">
                         <!--begin::Heading-->
-                        <div class="alert bg-light-info alert-custom alert-light-info fade show mb-2" role="alert">
-                            {{-- <div class="alert-icon">
-                                <span class="svg-icon svg-icon-3x svg-icon-info">
-                                    <!--begin::Svg Icon | path:/metronic/theme/html/demo2/dist/assets/media/svg/icons/Code/Info-circle.svg-->
-                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                        width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <rect x="0" y="0" width="24" height="24"></rect>
-                                            <circle fill="#000000" opacity="0.3" cx="12" cy="12" r="10"></circle>
-                                            <rect fill="#000000" x="11" y="10" width="2" height="7" rx="1"></rect>
-                                            <rect fill="#000000" x="11" y="7" width="2" height="2" rx="1"></rect>
-                                        </g>
-                                    </svg>
-                                    <!--end::Svg Icon-->
-                                </span>
-                            </div> --}}
-                            <div class="alert-text fw-semibold fs-6">Hurray!!! You can now transfer to your virtual
-                                account below with <span class='font-weight-bold text-danger' style='font-size:25px'>zero</span> charge and get
-                                credited immediately.</div>
 
 
-                        </div>
-                        <div class="card card-dashed bg-light-secondary flex-row flex-stack flex-wrap p-6">
-                            <!--begin::Info-->
-                            <div class="d-flex flex-column py-2">
-                                <!--begin::Owner-->
-                                <div class="d-flex align-items-center fs-4 fw-bold mb-5">
-                                    {{ $user->account_name ?? "No account generated yet" }}
-                                </div>
-                                <!--end::Owner-->
-
-                                <!--begin::Wrapper-->
-                                <div class="d-flex align-items-center">
-                                    <!--begin::Icon-->
-                                    @if($user->bank_name == 'Wema Bank')
-                                    <img src="assets/media/logos/wema.png" style='width:50px;height:50px' alt=""
-                                        class="me-4">
-                                    @else
-                                    <img src="assets/media/logos/access.png" style='width:50px;height:50px' alt=""
-                                        class="me-4">
-
-                                    @endif
-
-                                    <!--end::Icon-->
-
-                                    <!--begin::Details-->
-                                    <div>
-                                        <div class="fs-4 fw-bold">{{ $user->account_no ?? "No account generated
-                                            yet!" }}</div>
-                                        <div class="fs-6 fw-semibold text-gray-400">{{ $user->bank_name ?? "No
-                                            account generated yet!" }}</div>
-                                    </div>
-                                    <!--end::Details-->
-                                </div>
-                                <!--end::Wrapper-->
-                            </div>
-                            <!--end::Info-->
-
-
-
-                        </div>
-                        <div class="separator separator-content my-8">
-                            <span class=" text-gray-500 fw-bold fs-7">Or fund with card</span>
+                        <div class="text-center my-8">
+                            <span class=" text-gray-500 fw-bold fs-4">-- FUND WALLET --</span>
                         </div>
                         <div class="py-2">
-                            <form method="POST" action="{{ route('pay') }}" accept-charset="UTF-8"
+                            <form method="POST" action="{{ route('checkout') }}" accept-charset="UTF-8"
                                 class="form-horizontal" role="form">@csrf
                                 <div class="row" style="margin-bottom:40px;">
                                     <div class="col-md-12 col-md-offset-2">
 
                                         <input required type="number" min='150' id='u_amount' class="form-control"
                                             placeholder="Amount" aria-label="Amount">
-                                        <input type="hidden" name="email" value="{{ $user->email }}"> {{-- required
-                                        --}}
+
 
                                         <input type="hidden" id='amount' name="amount">
-                                        <input type="hidden" name="quantity" value="1">
-                                        <input type="hidden" name="currency" value="NGN">
+
                                         <input type="hidden" name="metadata"
                                             value="{{ json_encode($array = ['phone' => $user->phone,]) }}">
-                                        <input type="hidden" name="reference" value="{{ Paystack::genTranxRef() }}">
+                                        <div>
+
+
+                                            <input required type='radio' name='type' value='transfer' />
+                                            <label class="form-check-label" for="Pay with bank transfer">
+                                                Automatic Bank Transfer
+                                            </label>
+                                            <input required type='radio' name='type' value='card' />
+                                            <label class="form-check-label" for="Pay with card">
+                                                Pay With Credit Card
+                                            </label>
+                                        </div>
                                         <div class='alert alert-success mt-2'>
                                             <div class='text-danger' id='charges'>
                                                 Charges : ₦0.00

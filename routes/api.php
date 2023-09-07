@@ -25,4 +25,4 @@ Route::post('/save_preference', [UserController::class, 'save_preference'])->nam
 
 
 
-Route::any('paystack/webhook', [App\Http\Controllers\FundingController::class, 'webhook_payment'])->name('handlewebhook');
+Route::any('flw/webhook', [App\Http\Controllers\FundingController::class, 'webhook_payment'])->name('handlewebhook');

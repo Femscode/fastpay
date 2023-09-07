@@ -33,6 +33,64 @@ class FundingController extends Controller
         }
     }
 
+    public function checkout(Request $request) {
+        $this->validate($request, [
+            'type' => 'required',
+            'amount' => 'required',
+        ]);
+        $data['user'] = $user = Auth::user();
+        $data['amount'] = $amount = $request->amount / 100;
+        $data['active'] = 'fundwallet';
+        if($request->type == 'card') {
+            $data['public_key'] = env('FLW_PUBLIC_KEY');
+            $data['callback_url'] = 'https://fastpay.cttaste.com/payment/callback';
+            return view('dashboard.pay_with_card',$data);
+
+        }
+        else {
+            $str_name = explode(" ",$user->name);
+            $first_name = $str_name[0];
+            $last_name = end($str_name);
+            // return view('dashboard.direct_transfer',$data);
+
+       
+            $trx_ref = Str::random(7);
+            $response = Http::withHeaders([
+                'Content-Type' => 'application/json',
+                'Authorization' => 'Bearer '.env('FLW_SECRET_KEY'), // Replace with your actual secret key
+            ])
+            ->post('https://api.flutterwave.com/v3/virtual-account-numbers/', [
+                'email' => $user->email,
+                'is_permanent' => false,
+                // 'bvn' => 12345678901,
+                'tx_ref' => $trx_ref,
+                'phonenumber' => $user->phone,
+                'amount' => intval($amount),
+                'firstname' =>$first_name,
+                'lastname' => $last_name,
+                'narration' => 'Virtual Account Generation For Payment',
+            ]);
+            
+            // You can then access the response body and status code like this:
+            $responseBody = $response->body(); // Get the response body as a string
+            $responseStatusCode = $response->status(); // Get the HTTP status code
+            
+            // You can also convert the JSON response to an array or object if needed:
+            $responseData = $response->json(); // Converts JSON response to an array
+            // dd($responseData, 'here');
+            $data['bank_name'] = $responseData['data']['bank_name'] ;
+            $data['account_no'] = $responseData['data']['account_number'];
+            $data['amount'] = $responseData['data']['amount'];
+            $data['expiry_date'] = $responseData['data']['expiry_date'];
+            return view('dashboard.direct_transfer',$data);
+
+        }
+        // dd($request->all(), $request->amount/100);
+
+    }
+    public function handleFLWCallback() {
+        return redirect()->route('dashboard');
+    }
     public function handleGatewayCallback()
     {
         $paymentDetails = Paystack::getPaymentData();
@@ -43,9 +101,37 @@ class FundingController extends Controller
         // you can then redirect or do whatever you want
         return redirect()->route('dashboard');
     }
-    public function webhook_payment(Request $request)
+    public function webhook_payment_for_paystack(Request $request)
     {
         file_put_contents(__DIR__ . '/paystacklog.txt', json_encode($request->all(), JSON_PRETTY_PRINT), FILE_APPEND);
+        $email = $request->input('data.customer.email');
+        $r_amountpaid = intval(($request->input('data.amount')) / 100);
+        if ($request->input('data.channel') == 'dedicated_nuban') {
+            // $amountpaid = $r_amountpaid - 50;
+            $amountpaid = $r_amountpaid;
+        } elseif ($r_amountpaid < 2500) {
+            // $amountpaid = $r_amountpaid - intval((0.02 * $r_amountpaid));
+            $amountpaid = $r_amountpaid;
+        } else {
+            // $amountpaid = $r_amountpaid - intval((0.02 * $r_amountpaid + 100));
+            $amountpaid = $r_amountpaid;
+        }
+        $user = User::where('email', $email)->firstOrFail();
+        $details = "Account credited with NGN" . $amountpaid;
+        $this->create_transaction('Account Funding', $request->input('data.reference'), $details, 'credit', $amountpaid, $user->id, 1);
+        if ($user->first_time == 0) {
+            $bonus = intval(0.1 * $amountpaid);
+            $details = "You've received a welcome bonus of NGN" . $bonus;
+            $this->create_transaction('Bonus Credited', $request->input('data.reference'), $details, 'credit',  $bonus, $user->id, 1);
+            $user->first_time = 1;
+            $user->save();
+        }
+        return response()->json("OK", 200);
+    }
+
+    public function webhook_payment(Request $request)
+    {
+        file_put_contents(__DIR__ . '/flwlog.txt', json_encode($request->all(), JSON_PRETTY_PRINT), FILE_APPEND);
         $email = $request->input('data.customer.email');
         $r_amountpaid = intval(($request->input('data.amount')) / 100);
         if ($request->input('data.channel') == 'dedicated_nuban') {

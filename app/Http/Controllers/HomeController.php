@@ -200,7 +200,7 @@ class HomeController extends Controller
         $data['user'] = $user = Auth::user();
         $data['active'] = 'fundwallet';
 
-        $reserve = $this->reserve_account_paystack();
+        // $reserve = $this->reserve_account_paystack();
         if ($user->account_no == null) {
             $reserve = $this->reserve_account_paystack();
         }

@@ -96,6 +96,62 @@ trait TransactionTrait
 
         // generate virtual account from flutterwaves
 
+        $response = Http::withHeaders([
+            'Content-Type' => 'application/json',
+            'Authorization' => 'Bearer FLWSECK_TEST-e48a3a97bfc6ebde9cf882118a5b1b86-X', // Replace with your actual secret key
+        ])
+        ->post('https://api.flutterwave.com/v3/virtual-account-numbers', [
+            'email' => 'fasanyafemi@gmail.com',
+            'is_permanent' => false,
+            // 'bvn' => 12345678901,
+            'tx_ref' => 'JPOL',
+            'phonenumber' => '09058744473',
+            'amount' => 100,
+            'firstname' => 'Fasanya',
+            'lastname' => 'Femi',
+            'narration' => 'Fasanya femi virtual account',
+        ]);
+        
+        // You can then access the response body and status code like this:
+        $responseBody = $response->body(); // Get the response body as a string
+        $responseStatusCode = $response->status(); // Get the HTTP status code
+        
+        // You can also convert the JSON response to an array or object if needed:
+        $responseData = $response->json(); // Converts JSON response to an array
+        dd($responseData, 'here');
+        
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://api.flutterwave.com/v3/virtual-account-numbers',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => '{
+                "email": "developers@flutterwavego.com",
+                "is_permanent": true,
+                "bvn": 12345678901,
+                "tx_ref": "VA12",
+                "phonenumber": 08109328188,
+                "firstname": "Angela",
+                "lastname": "Ashley",
+                "narration": "Angela Ashley-Osuzoka"
+}',
+            CURLOPT_HTTPHEADER => array(
+                'Content-Type: application/json',
+                'Authorization: Bearer {FLWSECK-6783766a1d9252ff39a03922d2261ba3-18a6c26a2fbvt-X}'
+            ),
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+        dd($response);
         //generate virtual from paystack
 
 

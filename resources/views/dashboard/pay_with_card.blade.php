@@ -50,7 +50,7 @@
                             <input id='name' value='{{ $user->name }}' type='hidden'/>
                             <input id='email' value='{{ $user->email }}' type='hidden'/>
                             <input id='amount' value='{{ $amount }}' type='hidden'/>
-                            <input id='callback_url' value='{{ $callback_url }}' type='hidden'/>
+                            <input id='redirect_url' value='{{ $callback_url }}' type='hidden'/>
                             <input id='public_key' value='{{ $public_key }}' type='hidden'/>
                           
                             <div class="alert-text fw-semibold fs-6 text-center">You are about to make a total payment of <br>
@@ -101,7 +101,7 @@
     amount: amount,
     currency: "NGN",
     payment_options: "card, mobilemoneyghana, ussd",
-    redirect_url: "https://glaciers.titanic.com/handle-flutterwave-payment",
+    redirect_url: redirect_url,
     meta: {
       consumer_id: 13,
       consumer_mac: "92a3-983jd-1192a",

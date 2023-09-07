@@ -79,7 +79,7 @@
                                             account generated yet!" }}</div>
                                             <div class="fs-6 fw-semibold text-gray-600">
                                               Amount :</div>
-                                              <div class="fs-4 fw-bold">{{ number_format($amount) ?? "No account generated
+                                              <div class="fs-4 fw-bold">NGN{{ number_format($amount) ?? "No account generated
                                                   yet!" }}</div>
                                     </div>
                                     <!--end::Details-->

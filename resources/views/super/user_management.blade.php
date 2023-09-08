@@ -57,7 +57,8 @@
                                     
                                     </td>
                                     <td class='d-flex'>
-                                        <a href='' class='btn btn-success btn-sm m-2'>Fund Wallet</a>
+                                        <a href='tel:{{ $user->phone }}' class='btn btn-secondary btn-sm m-2'>Save</a>
+                                        <a href='https://wa.me/234{{ substr($user->phone,1) }}' class='btn btn-success btn-sm m-2'>Message</a>
                                         <a href='/user_transaction/{{ $user->uuid }}' class='btn btn-info btn-sm m-2'>Transactions</a>
                                         <a href='/user_purchase/{{ $user->uuid }}' class='btn btn-warning btn-sm m-2'>Payment History</a>
                                         @if($user->block == 1)

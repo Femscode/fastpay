@@ -39,7 +39,7 @@ class FundingController extends Controller
             'amount' => 'required',
         ]);
         $data['user'] = $user = Auth::user();
-        $data['amount'] = $amount = $request->amount / 100;
+        $data['amount'] = $amount = $request->amount;
         $data['active'] = 'fundwallet';
         if($request->type == 'card') {
             $data['public_key'] = env('FLW_PUBLIC_KEY');

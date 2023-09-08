@@ -201,9 +201,9 @@ class HomeController extends Controller
         $data['active'] = 'fundwallet';
 
         // $reserve = $this->reserve_account_paystack();
-        if ($user->account_no == null) {
-            $reserve = $this->reserve_account_paystack();
-        }
+        // if ($user->account_no == null) {
+        //     $reserve = $this->reserve_account_paystack();
+        // }
         return view('dashboard.fundwallet', $data);
     }
     public function withdraw()

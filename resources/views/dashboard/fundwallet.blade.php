@@ -35,7 +35,7 @@
                                 <div class="row" style="margin-bottom:40px;">
                                     <div class="col-md-12 col-md-offset-2">
 
-                                        <input required type="number" min='150' id='u_amount' class="form-control"
+                                        <input required type="number" min='100' id='u_amount' class="form-control"
                                             placeholder="Amount" aria-label="Amount">
 
 
@@ -106,19 +106,19 @@
     @endif
         $("#u_amount").on('input',function() {
         var amount = parseInt($("#u_amount").val()) * 100;
-        // var charges = 0.02 * amount
-        var charges = 0
+        var charges = 0.014 * amount
+        // var charges = 0
       
        
-        if(parseInt($("#u_amount").val()) < 2500) {
+        // if(parseInt($("#u_amount").val()) < 2500) {
             $("#amount").val(amount + charges);
-        }
-        else {
-            $("#amount").val(amount + (0.05 * amount) +10000);    
-            // var charges =   0.02 * amount + 10000
-            var charges =   0
+        // }
+        // else {
+        //     $("#amount").val(amount + (0.05 * amount));    
+        //     // var charges =   0.02 * amount + 10000
+        //     var charges =   0
             
-        }
+        // }
         $("#charges").text('Charges : '+ (charges/100).toLocaleString('en-US', { style: 'currency', currency: 'NGN' }))          
         $("#total_payment").text('Total payment : '+ (amount/100 + charges/100).toLocaleString('en-US', { style: 'currency', currency: 'NGN' }))          
         

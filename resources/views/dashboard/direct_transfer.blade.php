@@ -81,6 +81,7 @@
                                               Amount :</div>
                                               <div class="fs-4 fw-bold">NGN{{ number_format($amount) ?? "No account generated
                                                   yet!" }}</div>
+                                                  <span class='text-danger'>Please only make a transfer of the exact amount above!</span>
                                     </div>
                                     <!--end::Details-->
                                 </div>

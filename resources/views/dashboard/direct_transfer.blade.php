@@ -62,8 +62,8 @@
                                 <div class="d-flex align-items-center">
                                     <!--begin::Icon-->
                                    
-                                    <img src="assets/media/logos/social_metronics.png" style='width:100px;height:100px' alt=""
-                                        class="me-4">
+                                    {{-- <img src="assets/media/logos/social_metronics.png" style='width:100px;height:100px' alt=""
+                                        class="me-4"> --}}
                                    
 
                                     <!--end::Icon-->

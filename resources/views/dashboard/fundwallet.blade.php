@@ -35,27 +35,32 @@
                                 <div class="row" style="margin-bottom:40px;">
                                     <div class="col-md-12 col-md-offset-2">
 
-                                        <input required name='amount' type="number" min='100' id='u_amount' class="form-control"
-                                            placeholder="Amount" aria-label="Amount">
+                                        <input required name='amount' type="number" min='100' id='u_amount'
+                                            class="form-control" placeholder="Amount" aria-label="Amount">
 
 
-                                     
+
 
                                         <input type="hidden" name="metadata"
                                             value="{{ json_encode($array = ['phone' => $user->phone,]) }}">
                                         <div>
+                                            <div class="form-check m-4">
+                                                <input class="form-check-input" checked type="radio" name="type"
+                                                    value="transfer">
+                                                <label class="form-check-label" for="Bank Transfer">
+                                                    Automatic Bank Transfer
+                                                </label>
+                                            </div>
+                                            <div class="form-check m-4">
+                                                <input class="form-check-input" type="radio" name="type" value="card">
+                                                <label class="form-check-label" for="Pay With Card">
+                                                    Pay With Credit Card
+                                                </label>
+                                            </div>
 
 
-                                            <input required type='radio' name='type' value='transfer' />
-                                            <label class="form-check-label" for="Pay with bank transfer">
-                                                Automatic Bank Transfer
-                                            </label>
-                                            <input required type='radio' name='type' value='card' />
-                                            <label class="form-check-label" for="Pay with card">
-                                                Pay With Credit Card
-                                            </label>
                                         </div>
-                                      
+
                                         <p class='mt-2 justify-content-center'
                                             style='display:flex;justify-content:center'>
                                             <button class="btn btn-success btn-lg btn-block" type="submit"

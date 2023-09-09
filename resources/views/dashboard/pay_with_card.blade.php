@@ -114,7 +114,7 @@
     customizations: {
       title: "Fastpay Checkout",
       description: "Fast and Easy Payment",
-      logo: "https://www.logolynx.com/images/logolynx/22/2239ca38f5505fbfce7e55bbc0604386.jpeg",
+      logo: "https://fastpay.cttaste.com/assets/media/logos/fav_01.png",
     },
   });
 }

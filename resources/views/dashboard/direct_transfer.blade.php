@@ -115,7 +115,7 @@
 @section('script')
 <script>
     $(document).ready(function() {
-        Swal.fire('info', 'Please do not for any reason use the virtual account generated for future funding, because the account expires every 30Min','info')
+        Swal.fire('PLEASE NOTE!', 'Please do not for any reason use the virtual account generated for future funding, because the account expires every 30 Minuetes','info')
        
 
         @if (session('message'))

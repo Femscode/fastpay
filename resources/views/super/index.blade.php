@@ -43,7 +43,7 @@
 
                                 <tr>
 
-                                    <td>{{ $tranx->reference }}<br><a href='https://wa.me/234{{ substr($tranx->user->phone,1) }}' class='text-danger'>{{ $tranx->user->name ?? ""}}</a></td>
+                                    <td>{{ $tranx->reference }}<br><a href='https://wa.me/234{{ substr($tranx->user->phone ?? '',1) }}' class='text-danger'>{{ $tranx->user->name ?? ""}}</a></td>
                                     <td>{{ $tranx->description }}</td>
                                     <td>₦{{ number_format($tranx->amount) }}</td>
                                     <td>₦{{ number_format($tranx->before) }}</td>

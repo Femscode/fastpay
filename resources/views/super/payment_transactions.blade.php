@@ -48,7 +48,8 @@
                                     <td>₦{{ number_format($tranx->amount) }}</td>
                                     <td>₦{{ number_format($tranx->before) }}</td>
                                     <td>₦{{ number_format($tranx->after) }}</td>
-                                    <td>{{ $tranx->type }}</td>
+                                    <td>{{ Date('d-m-Y',strtotime($tranx->created_at))}} | {{ Date("h:i", strtotime($tranx->created_at)) }}</td>
+                                   
                                     <td>@if($tranx->status == 1)
                                         <span class='badge badge-light-success'>Success</span>
                                         @else

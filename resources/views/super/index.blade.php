@@ -33,7 +33,7 @@
                                     <th scope="col">Amount</th>
                                     <th scope="col">Before</th>
                                     <th scope="col">After</th>
-                                    <th scope="col">Type</th>
+                                    <th scope="col">Date</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Action</th>
                                 </tr>
@@ -48,7 +48,7 @@
                                     <td>₦{{ number_format($tranx->amount) }}</td>
                                     <td>₦{{ number_format($tranx->before) }}</td>
                                     <td>₦{{ number_format($tranx->after) }}</td>
-                                    <td>{{ $tranx->type }}</td>
+                                    <td>{{ Date('d-m-Y',strtotime($tranx->created_at))}} | {{ Date("h:i", strtotime($tranx->created_at)) }}</td>
                                     <td>@if($tranx->status == 1)
                                         <span class='badge badge-light-success'>Success</span>
                                         @else

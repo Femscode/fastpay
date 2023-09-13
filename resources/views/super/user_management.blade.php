@@ -32,9 +32,9 @@
                                     <th scope="col">Phone</th>
                                     <th scope="col">Balance</th>
                                     <th scope="col">Spent</th>
-                                    <th scope="col">Account Details</th>
-                                    <th scope="col">Type</th>
+                                    
                                     <th scope="col">Status</th>
+                                    <th scope="col">Date</th>
                                     <th scope="col">Actions</th>
                                 </tr>
                             </thead>
@@ -47,8 +47,9 @@
                                     <td>{{ $user->phone }}</td>
                                     <td>₦{{ number_format($user->balance) }}</td>
                                     <td>₦{{ number_format($user->total_spent) }}</td>
-                                    <td>{{ $user->account_no }},{{ $user->bank_name }}</td>
-                                    <td>{{ $user->type }}</td>
+                                  
+                                   
+                                  
                                     <td>@if($user->email_verified_at !== null)
                                         <span class='badge badge-light-success'>Verified</span>
                                         @else
@@ -56,6 +57,7 @@
                                         @endif
                                     
                                     </td>
+                                    <td>{{ Date('d-m-Y',strtotime($user->created_at))}}</td>
                                     <td class='d-flex'>
                                         <a href='tel:{{ $user->phone }}' class='btn btn-secondary btn-sm m-2'>Save</a>
                                         <a href='https://wa.me/234{{ substr($user->phone,1) }}' class='btn btn-success btn-sm m-2'>Message</a>

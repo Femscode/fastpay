@@ -64,7 +64,7 @@
                       data-id='{{ $tranx->id }}' class='redo btn btn-secondary btn-sm'>Redo</a>
                     @endif
                   </td>
-                  <td>{{ $tranx->description }}<br>Ref : {{ $tranx->reference }}</td>
+                  <td>{{ $tranx->description }}</td>
                   <td>₦{{ number_format($tranx->amount,2) }}</td>
                   <td>₦{{ number_format($tranx->before,2) }}</td>
                   <td>₦{{ number_format($tranx->after,2) }}</td>

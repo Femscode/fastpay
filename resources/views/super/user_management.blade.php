@@ -43,7 +43,7 @@
 
                                 <tr>
 
-                                    <td>{{ $user->name }}</td>
+                                    <td><a href='tel:{{ $user->phone }}'>{{ $user->name }}</a></td>
                                     <td>{{ $user->phone }}</td>
                                     <td>₦{{ number_format($user->balance) }}</td>
                                     <td>₦{{ number_format($user->total_spent) }}</td>

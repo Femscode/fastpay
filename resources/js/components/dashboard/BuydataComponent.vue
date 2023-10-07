@@ -230,7 +230,8 @@ export default {
             } else {
               Swal.fire({
                 icon: "error",
-                title: response.data.message,
+                // title: response.data.message,
+                title: "Opps, service currently not available and we are currently working on it, try again in 30Min time😢🙏",
                 // text: "Updating...",
                 showConfirmButton: true, // updated
                 confirmButtonColor: "#3085d6", // added

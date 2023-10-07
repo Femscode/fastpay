@@ -73,7 +73,7 @@ class SubscriptionController extends Controller
 
             return response()->json($response);
         }
-        //purchase the data
+        //purchase the data from easyaccess
         $curl = curl_init();
         curl_setopt_array($curl, array(
             CURLOPT_URL => "https://easyaccessapi.com.ng/api/data.php",
@@ -96,6 +96,10 @@ class SubscriptionController extends Controller
             ),
         ));
         $response = curl_exec($curl);
+        // end purchase from easy access
+
+
+        //end purchase from directcoupon 
         $response_json = json_decode($response, true);
 
         if ($response_json['success'] === "true") {
@@ -112,7 +116,7 @@ class SubscriptionController extends Controller
             // Do something here
         } else {
             $reference = 'failed_data_' . Str::random(5);
-            $details =   $data->plan_name. " (" .$data->network.")"." data purchase on " . $request->phone_number;
+            $details =   $data->plan_name . " (" . $data->network . ")" . " data purchase on " . $request->phone_number;
 
             $this->create_transaction('Data Purchase', $reference, $details, 'debit', $data->data_price, $user->id, 0);
         }
@@ -120,10 +124,213 @@ class SubscriptionController extends Controller
 
         curl_close($curl);
         return $response;
+    }
+
+    public function buydata_with_directcoupon(Request $request)
+    {
+
+        $user = Auth::user();
+        $hashed_pin = hash('sha256', $request->pin);
+        if ($user->pin !== $hashed_pin) {
+            $response = [
+                'success' => false,
+                'message' => 'Incorrect Pin!',
+                'auto_refund_status' => 'Nil'
+            ];
+
+            return response()->json($response);
+        }
+        $phone_number = $request->phone_number;
+        if (strlen($request->phone_number) == 10) {
+            $phone_number = "0" . $request->phone_number;
+        }
+
+        $data = Data::where('plan_id', $request->plan)->where('network', $request->network)->first();
+        if ($data == null) {
+            $response = [
+                'success' => false,
+                'message' => 'Invalid Plan!',
+                'auto_refund_status' => 'Nil'
+            ];
+
+            return response()->json($response);
+        }
+        //check balance
+        if ($user->balance < $data->data_price) {
+            $response = [
+                'success' => false,
+                'message' => 'Insufficient balance for the plan you want to get!',
+                'auto_refund_status' => 'Nil'
+            ];
+
+            return response()->json($response);
+        }
+
+        //check duplicate
+        $check = $this->check_duplicate('check', $user->id);
+        if ($check == true) {
+            $response = [
+                'success' => false,
+                'message' => 'Duplicate Transaction!',
+                'auto_refund_status' => 'Nil'
+            ];
+
+            return response()->json($response);
+        }
+        //purchase the data from easyaccess
+        // $curl = curl_init();
+        // curl_setopt_array($curl, array(
+        //     CURLOPT_URL => "https://easyaccessapi.com.ng/api/data.php",
+        //     CURLOPT_RETURNTRANSFER => true,
+        //     CURLOPT_ENCODING => "",
+        //     CURLOPT_MAXREDIRS => 10,
+        //     CURLOPT_TIMEOUT => 0,
+        //     CURLOPT_FOLLOWLOCATION => true,
+        //     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        //     CURLOPT_CUSTOMREQUEST => "POST",
+        //     CURLOPT_POSTFIELDS => array(
+        //         'network' => $request->network,
+        //         'mobileno' => $phone_number,
+        //         'dataplan' => $request->plan,
+        //         'client_reference' => 'buy_data_' . Str::random(7), //update this on your script to receive webhook notifications
+        //     ),
+        //     CURLOPT_HTTPHEADER => array(
+        //         "AuthorizationToken: " . env('EASY_ACCESS_AUTH'), //replace this with your authorization_token
+        //         "cache-control: no-cache"
+        //     ),
+        // ));
+        // $response = curl_exec($curl);
+        // end purchase from easy access
+
+        //start purchase from directcoupon if it is mtn
+        // dd($request->all());
+        if ($request->network == 1) {
+            //get the plan_id 
+            if ($request->plan == 51 || $request->plan == 181 || $request->plan == 46) {
+                $plan_id = 4;
+                $response = $this->purchase_data_from_directcoupon($plan_id, $phone_number);
+            } elseif ($request->plan == 52 || $request->plan == 182 || $request->plan == 47) {
+                $plan_id = 2;
+                $response = $this->purchase_data_from_directcoupon($plan_id, $phone_number);
+            } elseif ($request->plan == 53 || $request->plan == 183 || $request->plan == 48) {
+                $plan_id = 6;
+                $response = $this->purchase_data_from_directcoupon($plan_id, $phone_number);
+            } else {
+                $response = $this->purchase_data_from_easyaccess($request->network, $phone_number, $request->plan);
+            }
+            if ($response !== false) {
+                $reference = 'mtn_data_purchase' . Str::random(5);
+                $details = "MTN Data Purchase of " . $data->plan_name . " on " . $request->phone_number;
+
+                $trans_id = $this->create_transaction('Data Purchase', $reference, $details, 'debit', $data->data_price, $user->id, 1);
+                $transaction = Transaction::find($trans_id);
+                $transaction->phone_number = $phone_number;
+                $transaction->network = $request->network;
+                $transaction->plan_id = $request->plan;
+                $transaction->redo = 1;
+                $transaction->save();
+                $this->check_duplicate("Delete", $user->id);
+                $response = [
+                    'success' => true,
+                    'message' => 'Data Purchase Successful!',
+                    'auto_refund_status' => 'Nil'
+                ];
+                return response()->json($response);
+            } else {
 
 
-        $data['user'] = Auth::user();
-        return view('subscription.buydata', $data);
+                $reference = 'failed_data_' . Str::random(5);
+                $details =   $data->plan_name . " (" . $data->network . ")" . " data purchase on " . $request->phone_number;
+
+                $this->create_transaction('Data Purchase', $reference, $details, 'debit', $data->data_price, $user->id, 0);
+
+                $response = [
+                    'success' => false,
+                    'message' => 'Purchase unsuccessful, contact the administrator using the whatsapp button!',
+                    'auto_refund_status' => 'Nil'
+                ];
+                $this->check_duplicate("Delete", $user->id);
+                return response()->json($response);
+            }
+        } else {
+
+            $response = $this->purchase_data_from_easyaccess($request->network, $phone_number, $request->plan);
+        }
+
+
+        //end purchase from directcoupon 
+        $response_json = json_decode($response, true);
+
+        if ($response_json['success'] === "true") {
+            $details = $response_json['network'] . " Data Purchase of " . $response_json['dataplan'] . " on " . $request->phone_number;
+
+            $trans_id = $this->create_transaction('Data Purchase', $response_json['reference_no'], $details, 'debit', $data->data_price, $user->id, 1);
+            $transaction = Transaction::find($trans_id);
+            $transaction->phone_number = $phone_number;
+            $transaction->network = $request->network;
+            $transaction->plan_id = $request->plan;
+            $transaction->redo = 1;
+            $transaction->save();
+            // Transaction was successful
+            // Do something here
+        } else {
+            $reference = 'failed_data_' . Str::random(5);
+            $details =   $data->plan_name . " (" . $data->network . ")" . " data purchase on " . $request->phone_number;
+
+            $this->create_transaction('Data Purchase', $reference, $details, 'debit', $data->data_price, $user->id, 0);
+        }
+        $this->check_duplicate("Delete", $user->id);
+
+        curl_close($curl);
+        return $response;
+    }
+
+    public function purchase_data_from_directcoupon($plan_id, $phone_number)
+    {
+        $response = Http::withHeaders([
+            // 'Content-Type' => 'application/json',
+            'Authorization' => 'Token 77e6c246591c535715fefd6905810ca4a8dee45a42da6c9332ed40172ab8b3b6', // Replace with your actual secret key
+            // 'Authorization' => 'Bearer ' . env('DIRECT_COUPON_KEY'), // Replace with your actual secret key
+        ])
+            ->post('https://directcoupon.com.ng/api/loadCoupon', [
+                'plan_id' => $plan_id,
+                'phone_number' => $phone_number
+            ]);
+        $response_json = json_decode($response, true);
+
+        // dd($response_json);
+        if ($response['code'] == 'X000') {
+            return $response;
+        } else {
+            return false;
+        }
+    }
+    public function purchase_data_from_easyaccess($network, $phone_number, $plan)
+    {
+        $randm =  Str::random(7);
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://easyaccessapi.com.ng/api/data.php",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => array(
+                'network' => $network,
+                'mobileno' => $phone_number,
+                'dataplan' => $plan,
+                'client_reference' => 'buy_data_' . $randm, //update this on your script to receive webhook notifications
+            ),
+            CURLOPT_HTTPHEADER => array(
+                "AuthorizationToken: " . env('EASY_ACCESS_AUTH'), //replace this with your authorization_token
+                "cache-control: no-cache"
+            ),
+        ));
+        $response = curl_exec($curl);
+        return $response;
     }
     public function redo_transaction(Request $request)
     {
@@ -283,9 +490,9 @@ class SubscriptionController extends Controller
                 // Do something here
             } else {
                 $reference = 'failed_data_' . Str::random(5);
-                $details =   $data->plan_name. " (" .$data->network.")"." data purchase on " . $request->phone_number;
+                $details =   $data->plan_name . " (" . $data->network . ")" . " data purchase on " . $request->phone_number;
 
-                $this->create_transaction('Data Purchase', $reference,$details, 'debit', $data->data_price, $user->id, 0);
+                $this->create_transaction('Data Purchase', $reference, $details, 'debit', $data->data_price, $user->id, 0);
             }
             $this->check_duplicate("Delete", $user->id);
 
@@ -424,7 +631,7 @@ class SubscriptionController extends Controller
             return response()->json($response);
         }
         //purchase the data
-       
+
         $curl = curl_init();
         curl_setopt_array($curl, array(
             CURLOPT_URL => "https://easyaccessapi.com.ng/api/paytv.php",

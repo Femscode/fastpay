@@ -100,26 +100,26 @@ trait TransactionTrait
             'Content-Type' => 'application/json',
             'Authorization' => 'Bearer FLWSECK_TEST-e48a3a97bfc6ebde9cf882118a5b1b86-X', // Replace with your actual secret key
         ])
-        ->post('https://api.flutterwave.com/v3/virtual-account-numbers', [
-            'email' => 'fasanyafemi@gmail.com',
-            'is_permanent' => false,
-            // 'bvn' => 12345678901,
-            'tx_ref' => 'JPOL',
-            'phonenumber' => '09058744473',
-            'amount' => 100,
-            'firstname' => 'Fasanya',
-            'lastname' => 'Femi',
-            'narration' => 'Fasanya femi virtual account',
-        ]);
-        
+            ->post('https://api.flutterwave.com/v3/virtual-account-numbers', [
+                'email' => 'fasanyafemi@gmail.com',
+                'is_permanent' => false,
+                // 'bvn' => 12345678901,
+                'tx_ref' => 'JPOL',
+                'phonenumber' => '09058744473',
+                'amount' => 100,
+                'firstname' => 'Fasanya',
+                'lastname' => 'Femi',
+                'narration' => 'Fasanya femi virtual account',
+            ]);
+
         // You can then access the response body and status code like this:
         $responseBody = $response->body(); // Get the response body as a string
         $responseStatusCode = $response->status(); // Get the HTTP status code
-        
+
         // You can also convert the JSON response to an array or object if needed:
         $responseData = $response->json(); // Converts JSON response to an array
         dd($responseData, 'here');
-        
+
 
         $curl = curl_init();
 
@@ -248,7 +248,24 @@ trait TransactionTrait
             $tranx->after = $nuser->balance;
             $tranx->status = 1;
             $tranx->save();
-        } elseif ($title == 'Payment Received') {
+        } 
+        elseif ($title == 'Data Purchase') {
+            $nuser = User::find($user);
+            if ($status == 1) {
+                $nuser->balance -= $amount;
+                $nuser->total_spent += $amount;
+                $nuser->save();
+                $tranx->after = $nuser->balance;
+                $tranx->save();
+                return $tranx->id;
+            } else {
+                $tranx->description = "Failed Transaction : " . $tranx->description;
+                $tranx->after = $nuser->balance;
+                $nuser->save();
+                $tranx->save();
+            }
+        }
+        elseif ($title == 'Payment Received') {
             $nuser = User::find($user);
             $nuser->balance += $amount;
 
@@ -332,22 +349,7 @@ trait TransactionTrait
             }
 
             return $tranx->id;
-        } elseif ($title == 'Data Purchase') {
-            $nuser = User::find($user);
-            if ($status == 1) {
-                $nuser->balance -= $amount;
-                $nuser->total_spent += $amount;
-                $nuser->save();
-                $tranx->after = $nuser->balance;
-                $tranx->save();
-                return $tranx->id;
-            } else {
-                $tranx->description = "Failed Transaction : " . $tranx->description;
-                $tranx->after = $nuser->balance;
-                $nuser->save();
-                $tranx->save();
-            }
-        } elseif ($title == 'Airtime Purchase') {
+        }  elseif ($title == 'Airtime Purchase') {
             $nuser = User::find($user);
             if ($status == 1) {
                 $nuser->balance -= $amount;

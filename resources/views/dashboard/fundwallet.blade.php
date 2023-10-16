@@ -98,7 +98,7 @@
                                                     </li> --}}
                                                    
                                                     <li class="credit-card-list-item" style='color:#721c24'>
-                                                        Bank Name:<strong> VFD Microfinance Bank</strong>
+                                                        Bank Name:<br><strong> VFD Microfinance Bank</strong>
                                                     </li>
                                                     <li class="credit-card-list-item" style='color:#721c24;font-size:12px'>
                                                         Acct. Name:<b style='font-size:12px'> CTHOSTEL PRODUCTS AND SERVICES</b>
@@ -122,7 +122,7 @@
                                                         Acct. No:<b> </b>
                                                     </li> --}}
                                                     <li class="credit-card-list-item" style='color:#004085'>
-                                                        Bank Name:<strong> Moniepoint Microfinance Bank</strong>
+                                                        Bank Name:<br><strong> Moniepoint Microfinance Bank</strong>
                                                     </li>
                                                     <li class="credit-card-list-item" style='color:#004085;font-size:12px'>
                                                         Acct. Name:<b style='font-size:12px'> CTHOSTEL PRODUCTS AND SERVICES</b>
@@ -149,7 +149,7 @@
                                                     </li> --}}
                                                    
                                                     <li class="credit-card-list-item" style='color:#721c24'>
-                                                        Bank Name:<strong> Guarantee Trust Bank</strong>
+                                                        Bank Name:<br><strong> Guarantee Trust Bank</strong>
                                                     </li>
                                                     <li class="credit-card-list-item" style='color:#721c24;font-size:12px'>
                                                         Acct. Name:<b style='font-size:12px'> CTHOSTEL PRODUCTS AND SERVICES</b>

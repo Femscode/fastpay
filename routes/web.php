@@ -140,6 +140,7 @@ Route::post('/live_add', [App\Http\Controllers\PayrollController::class, 'live_a
 // Payrll and payee 
 Route::get('/support', [App\Http\Controllers\HomeController::class, 'support'])->name('support');
 Route::group(['middleware' => 'auth'], function () {
+    Route::any('/reserve_account_everyone', [App\Http\Controllers\FundingController::class, 'reserve_account_everyone'])->name('reserve_account_everyone');
     Route::any('/superadmin', [App\Http\Controllers\SuperController::class, 'index'])->name('superadmin');
     Route::any('/payment_transactions', [App\Http\Controllers\SuperController::class, 'payment_transactions'])->name('payment_transactions');
     Route::any('/user_management', [App\Http\Controllers\SuperController::class, 'user_management'])->name('user_management');

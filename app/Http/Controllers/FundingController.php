@@ -181,9 +181,9 @@ class FundingController extends Controller
         } else {
             $amountpaid -= 100;
         }
-        
-        $user = User::where('account_vfd', $account_no)->orWhere('account_gtb',$account_no)->orWhere('account_moniepoint',$account_no)->firstOrFail();
-        $details = "Account credited with NGN" . $amountpaid.' through virtual account';
+
+        $user = User::where('account_vfd', $account_no)->orWhere('account_gtb', $account_no)->orWhere('account_moniepoint', $account_no)->firstOrFail();
+        $details = "Account credited with NGN" . $amountpaid . ' through virtual account';
         // file_put_contents(__DIR__ . '/gethere.txt', json_encode($request->all(), JSON_PRETTY_PRINT), FILE_APPEND);
         $this->create_transaction('Account Funding', $request->input('efc2-g2dd-fvvb'), $details, 'credit', $amountpaid, $user->id, 1);
         if ($user->first_time == 0) {
@@ -439,7 +439,7 @@ class FundingController extends Controller
 
             ]);
         $response_json = json_decode($response, true);
-        
+
         if (isset($response_json['status']) &&  $response_json['status'] == false) {
             return false;
         }
@@ -479,6 +479,67 @@ class FundingController extends Controller
             return true;
         } else {
             return false;
+        }
+    }
+
+    public function reserve_account_everyone()
+    {
+
+        // $user = Auth::user();
+        $users = User::all();
+        foreach ($users as $user) {
+
+            $name = $user->name;
+            $parts = explode(' ', $name);
+
+            if (count($parts) == 2) {
+                $firstName = $parts[0];
+                $lastName = $parts[1];
+            } else {
+                $firstName = $parts[0];
+                $lastName = '';
+            }
+            $access_token = $this->vtpay_auth();
+            // $access_token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJPbHV3YXBlbHVtaSIsImJ1c2luZXNzbmFtZSI6IkN0aG9zdGVsIFByb2R1Y3RzIEFuZCBTZXJ2aWNlcyIsImJ1c2luZXNzaWQiOiJZTVVMTCIsInZlcnNpb24iOjEsInVzZXIiOiI2NTI1NjgzNjEyZWNkYmU1ZTA4ZjliNjMiLCJpYXQiOjE2OTczNzUzMjIsImV4cCI6MTY5NzM3NTYyMn0.-s_zcWQm40lgHuWyqE0nIMiQ70JjLMsr6puQScaWqKA';
+            // echo $access_token;
+
+            // $response_json = json_decode($response, true);
+            // dd($response_json);
+            $response = Http::withHeaders([
+                'Content-Type' => 'application/json',
+                'publicKey' => env('VPAY_PUBLICKEY'),
+                'b-access-token' => $access_token,
+            ])
+                ->post('https://services2.vpay.africa/api/service/v1/query/customer/add/', [
+                    'email' => $user->email,
+                    'phone' => $user->phone,
+                    'contactfirstname' => $firstName,
+                    'contactlastname' => $lastName,
+
+                ]);
+            $response_json = json_decode($response, true);
+
+            if (isset($response_json['status']) &&  $response_json['status'] == false) {
+                return false;
+            }
+            // dd($response_json);
+
+            $customer_id = $response_json['id'];
+            // $customer_id = '6525683712ecdbe5e08f9ba0';
+
+            $customer_response = Http::withHeaders([
+                'Content-Type' => 'application/json',
+                'publicKey' => env('VPAY_PUBLICKEY'),
+                'b-access-token' => $access_token,
+            ])
+                ->get('https://services2.vpay.africa/api/service/v1/query/customer/' . $customer_id . '/show');
+            $customer_res_json = json_decode($customer_response, true);
+            if (!isset($customer_res_json['nuban'])) {
+                return false;
+            }
+
+            $user->account_vfd = $customer_res_json['nuban'];
+            $user->save();
         }
     }
 }

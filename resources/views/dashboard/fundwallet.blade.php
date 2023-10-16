@@ -174,6 +174,7 @@
 
                                                 <input required name='amount' type="number" min='100' id='u_amount'
                                                     class="form-control" placeholder="Amount" aria-label="Amount">
+                                                    <input type='hidden' name='type' value='card'/>
 
 
 

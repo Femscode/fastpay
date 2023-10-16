@@ -248,8 +248,7 @@ trait TransactionTrait
             $tranx->after = $nuser->balance;
             $tranx->status = 1;
             $tranx->save();
-        } 
-        elseif ($title == 'Data Purchase') {
+        } elseif ($title == 'Data Purchase') {
             $nuser = User::find($user);
             if ($status == 1) {
                 $nuser->balance -= $amount;
@@ -264,8 +263,7 @@ trait TransactionTrait
                 $nuser->save();
                 $tranx->save();
             }
-        }
-        elseif ($title == 'Payment Received') {
+        } elseif ($title == 'Payment Received') {
             $nuser = User::find($user);
             $nuser->balance += $amount;
 
@@ -349,7 +347,7 @@ trait TransactionTrait
             }
 
             return $tranx->id;
-        }  elseif ($title == 'Airtime Purchase') {
+        } elseif ($title == 'Airtime Purchase') {
             $nuser = User::find($user);
             if ($status == 1) {
                 $nuser->balance -= $amount;

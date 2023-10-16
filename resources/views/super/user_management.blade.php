@@ -16,7 +16,7 @@
                 <div class="card card-custom">
                     <div class="card-header flex-wrap border-0 pt-6 pb-0">
                         <div class="card-title">
-                            <h3 class="card-label">All Users
+                            <h3 class="card-label">All Users (NGN{{ number_format(($users->sum('balance')),2) }})
                             </h3>
                         </div>
                      
@@ -32,6 +32,7 @@
                                     <th scope="col">Phone</th>
                                     <th scope="col">Balance</th>
                                     <th scope="col">Spent</th>
+                                    <th scope="col">Account No</th>
                                     
                                     <th scope="col">Status</th>
                                     <th scope="col">Date</th>
@@ -47,6 +48,7 @@
                                     <td>{{ $user->phone }}</td>
                                     <td>₦{{ number_format($user->balance) }}</td>
                                     <td>₦{{ number_format($user->total_spent) }}</td>
+                                    <td>{{$user->account_vfd ?? "No acct" }}</td>
                                   
                                    
                                   

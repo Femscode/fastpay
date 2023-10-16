@@ -33,7 +33,23 @@ class FundingController extends Controller
         }
     }
 
-    public function checkout(Request $request) {
+    public function oldcheckout(Request $request)
+    {
+        $this->validate($request, [
+
+            'amount' => 'required',
+        ]);
+        $data['user'] = $user = Auth::user();
+        $data['amount'] = $amount = $request->amount;
+        $data['active'] = 'fundwallet';
+
+        $data['public_key'] = env('FLW_PUBLIC_KEY');
+        $data['callback_url'] = 'https://fastpay.cttaste.com/payment/callback';
+        return view('dashboard.pay_with_card', $data);
+    }
+    // this checkout is for temporary virtual accounts and card, to be used with oldfundwallet.blade.php
+    public function checkout(Request $request)
+    {
         $this->validate($request, [
             'type' => 'required',
             'amount' => 'required',
@@ -41,54 +57,52 @@ class FundingController extends Controller
         $data['user'] = $user = Auth::user();
         $data['amount'] = $amount = $request->amount;
         $data['active'] = 'fundwallet';
-        if($request->type == 'card') {
+        if ($request->type == 'card') {
             $data['public_key'] = env('FLW_PUBLIC_KEY');
             $data['callback_url'] = 'https://fastpay.cttaste.com/payment/callback';
-            return view('dashboard.pay_with_card',$data);
-
-        }
-        else {
-            $str_name = explode(" ",$user->name);
+            return view('dashboard.pay_with_card', $data);
+        } else {
+            $str_name = explode(" ", $user->name);
             $first_name = $str_name[0];
             $last_name = end($str_name);
             // return view('dashboard.direct_transfer',$data);
 
-       
+
             $trx_ref = Str::random(7);
             $response = Http::withHeaders([
                 'Content-Type' => 'application/json',
-                'Authorization' => 'Bearer '.env('FLW_SECRET_KEY'), // Replace with your actual secret key
+                'Authorization' => 'Bearer ' . env('FLW_SECRET_KEY'), // Replace with your actual secret key
             ])
-            ->post('https://api.flutterwave.com/v3/virtual-account-numbers/', [
-                'email' => $user->email,
-                'is_permanent' => false,
-                // 'bvn' => 12345678901,
-                'tx_ref' => $trx_ref,
-                'phonenumber' => $user->phone,
-                'amount' => $amount,
-                'firstname' =>$first_name,
-                'lastname' => $last_name,
-                'narration' => 'Fastpay/'.$first_name .'-'. $last_name,
-            ]);
-            
+                ->post('https://api.flutterwave.com/v3/virtual-account-numbers/', [
+                    'email' => $user->email,
+                    'is_permanent' => false,
+                    // 'bvn' => 12345678901,
+                    'tx_ref' => $trx_ref,
+                    'phonenumber' => $user->phone,
+                    'amount' => $amount,
+                    'firstname' => $first_name,
+                    'lastname' => $last_name,
+                    'narration' => 'Fastpay/' . $first_name . '-' . $last_name,
+                ]);
+
             // You can then access the response body and status code like this:
             $responseBody = $response->body(); // Get the response body as a string
             $responseStatusCode = $response->status(); // Get the HTTP status code
-            
+
             // You can also convert the JSON response to an array or object if needed:
             $responseData = $response->json(); // Converts JSON response to an array
             // dd($responseData, 'here');
-            $data['bank_name'] = $responseData['data']['bank_name'] ;
+            $data['bank_name'] = $responseData['data']['bank_name'];
             $data['account_no'] = $responseData['data']['account_number'];
             $data['amount'] = $responseData['data']['amount'];
             $data['expiry_date'] = $responseData['data']['expiry_date'];
-            return view('dashboard.direct_transfer',$data);
-
+            return view('dashboard.direct_transfer', $data);
         }
         // dd($request->all(), $request->amount/100);
 
     }
-    public function handleFLWCallback() {
+    public function handleFLWCallback()
+    {
         return redirect()->route('dashboard');
     }
     public function handleGatewayCallback()
@@ -132,16 +146,36 @@ class FundingController extends Controller
     public function webhook_payment(Request $request)
     {
         file_put_contents(__DIR__ . '/flwlog.txt', json_encode($request->all(), JSON_PRETTY_PRINT), FILE_APPEND);
-        
+
         $email = $request->input('data.customer.email');
         $r_amountpaid = intval($request->input('data.amount'));
-        
+
         $amountpaid = $r_amountpaid;
-        
+
         $user = User::where('email', $email)->firstOrFail();
         $details = "Account credited with NGN" . $amountpaid;
         // file_put_contents(__DIR__ . '/gethere.txt', json_encode($request->all(), JSON_PRETTY_PRINT), FILE_APPEND);
         $this->create_transaction('Account Funding', $request->input('data.id'), $details, 'credit', $amountpaid, $user->id, 1);
+        if ($user->first_time == 0) {
+            $bonus = intval(0.1 * $amountpaid);
+            $details = "You've received a welcome bonus of NGN" . $bonus;
+            $this->create_transaction('Bonus Credited', $request->input('data.id'), $details, 'credit',  $bonus, $user->id, 1);
+            $user->first_time = 1;
+            $user->save();
+        }
+        return response()->json("OK", 200);
+    }
+    public function vpay_webhook_payment(Request $request)
+    {
+        file_put_contents(__DIR__ . '/vpaylog.txt', json_encode($request->all(), JSON_PRETTY_PRINT), FILE_APPEND);
+
+        $account_no = $request->input('account_number');
+        $r_amountpaid = intval($request->input('amount'));
+        $amountpaid = $r_amountpaid;
+        $user = User::where('account_vfd', $account_no)->orWhere('account_gtb',$account_no)->orWhere('account_moniepoint',$account_no)->firstOrFail();
+        $details = "Account credited with NGN" . $amountpaid;
+        // file_put_contents(__DIR__ . '/gethere.txt', json_encode($request->all(), JSON_PRETTY_PRINT), FILE_APPEND);
+        $this->create_transaction('Account Funding', $request->input('efc2-g2dd-fvvb'), $details, 'credit', $amountpaid, $user->id, 1);
         if ($user->first_time == 0) {
             $bonus = intval(0.1 * $amountpaid);
             $details = "You've received a welcome bonus of NGN" . $bonus;
@@ -324,6 +358,117 @@ class FundingController extends Controller
             DB::connection('mysql2')->table('orders')->where('order_id', $request->order_id)->update(['status' => 1, 'payment_time' => Carbon::now()]);
             DB::connection('mysql2')->table('users')->where('id', $rest->id)->update(['balance' => $rest->balance + $amount]);
             return true;
+        }
+    }
+    //functions for the vpay
+    public function fundwallet()
+    {
+
+        $data['user'] = $user = Auth::user();
+        $data['active'] = 'fundwallet';
+        // dd($user);
+
+        // return view('dashboard.fundwallet',$data);
+        // $reserve = $this->reserve_account_paystack();
+        if ($user->account_vfd == null) {
+            $reserve = $this->reserve_account_vpay();
+            if ($reserve == false) {
+                return view('dashboard.oldfundwallet', $data);
+            }
+            // dd($reserve);
+        }
+        return view('dashboard.fundwallet', $data);
+    }
+    private function vtpay_auth()
+    {
+        $response = Http::withHeaders([
+            'Content-Type' => 'application/json',
+            'publicKey' => '0828358a-471f-4256-8fbe-ac453f1a95fd'
+        ])
+            ->post('https://services2.vpay.africa/api/service/v1/query/merchant/login', [
+                'username' => 'fasanyafemi@gmail.com',
+                'password' => 'Spacebar1##',
+            ]);
+        $response_json = json_decode($response, true);
+        // dd($response_json);
+        if ($response_json['status'] == false) {
+            return false;
+        }
+        return $response_json['token'];
+    }
+    private function reserve_account_vpay()
+    {
+
+        $user = Auth::user();
+        $name = $user->name;
+        $parts = explode(' ', $name);
+
+        if (count($parts) == 2) {
+            $firstName = $parts[0];
+            $lastName = $parts[1];
+        } else {
+            $firstName = $parts[0];
+            $lastName = '';
+        }
+        $access_token = $this->vtpay_auth();
+        // $access_token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJPbHV3YXBlbHVtaSIsImJ1c2luZXNzbmFtZSI6IkN0aG9zdGVsIFByb2R1Y3RzIEFuZCBTZXJ2aWNlcyIsImJ1c2luZXNzaWQiOiJZTVVMTCIsInZlcnNpb24iOjEsInVzZXIiOiI2NTI1NjgzNjEyZWNkYmU1ZTA4ZjliNjMiLCJpYXQiOjE2OTczNzUzMjIsImV4cCI6MTY5NzM3NTYyMn0.-s_zcWQm40lgHuWyqE0nIMiQ70JjLMsr6puQScaWqKA';
+        // echo $access_token;
+
+        // $response_json = json_decode($response, true);
+        // dd($response_json);
+        $response = Http::withHeaders([
+            'Content-Type' => 'application/json',
+            'publicKey' => '0828358a-471f-4256-8fbe-ac453f1a95fd',
+            'b-access-token' => $access_token,
+        ])
+            ->post('https://services2.vpay.africa/api/service/v1/query/customer/add/', [
+                'email' => $user->email,
+                'phone' => $user->phone,
+                'contactfirstname' => $firstName,
+                'contactlastname' => $lastName,
+
+            ]);
+        $response_json = json_decode($response, true);
+        
+        if (isset($response_json['status']) &&  $response_json['status'] == false) {
+            return false;
+        }
+        // dd($response_json);
+
+        $customer_id = $response_json['id'];
+        // $customer_id = '6525683712ecdbe5e08f9ba0';
+
+        $customer_response = Http::withHeaders([
+            'Content-Type' => 'application/json',
+            'publicKey' => '0828358a-471f-4256-8fbe-ac453f1a95fd',
+            'b-access-token' => $access_token,
+        ])
+            ->get('https://services2.vpay.africa/api/service/v1/query/customer/' . $customer_id . '/show');
+        $customer_res_json = json_decode($customer_response, true);
+        if (!isset($customer_res_json['nuban'])) {
+            return false;
+        }
+
+        $user->account_vfd = $customer_res_json['nuban'];
+        $user->save();
+
+
+
+        $other_bank_response = Http::withHeaders([
+            'Content-Type' => 'application/json',
+            'publicKey' => '0828358a-471f-4256-8fbe-ac453f1a95fd',
+            'b-access-token' => $access_token,
+        ])
+            ->post('https://services2.vpay.africa/api/service/v1/query/customer/otherbanks/virtualaccount/update/', [
+                'vfdvirtualaccount' => $customer_res_json['virtualaccounts'][0]['nuban'],
+                'banks' => ["000023"],
+                // 'banks' => ["000023",'993,'058]
+            ]);
+        $final_response = json_decode($other_bank_response, true);
+        if (isset($final_response['status']) && $final_response['status'] == true) {
+            return true;
+        } else {
+            return false;
         }
     }
 }

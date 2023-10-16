@@ -194,18 +194,7 @@ class HomeController extends Controller
             return redirect()->back()->with('message', 'Maximum amount of time to resend email reached!');
         }
     }
-    public function fundwallet()
-    {
-
-        $data['user'] = $user = Auth::user();
-        $data['active'] = 'fundwallet';
-
-        // $reserve = $this->reserve_account_paystack();
-        // if ($user->account_no == null) {
-        //     $reserve = $this->reserve_account_paystack();
-        // }
-        return view('dashboard.fundwallet', $data);
-    }
+  
     public function withdraw()
     {
 

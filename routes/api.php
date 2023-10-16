@@ -26,3 +26,4 @@ Route::post('/save_preference', [UserController::class, 'save_preference'])->nam
 
 
 Route::any('flw/webhook', [App\Http\Controllers\FundingController::class, 'webhook_payment'])->name('handlewebhook');
+Route::any('vpay/webhook', [App\Http\Controllers\FundingController::class, 'vpay_webhook_payment'])->name('handlewebhook');

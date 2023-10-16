@@ -89,13 +89,13 @@
                                             <div class="card bg-light-danger p-4 rounded"
                                                 style='border:2px dotted #721c24'>
                                                 <div class="card-header ">
-                                                    <div class="credit-card-title text-center" style='color:#721c24'>VFD
-                                                        MFB</div>
+                                                    {{-- <label>Acct. No</label><br> --}}
+                                                    <div class="credit-card-title text-left" style='color:#721c24'> {{ $user->account_vfd ?? "No account generated yet" }}</div>
                                                 </div>
                                                 <ul class="credit-card-list">
-                                                    <li class="credit-card-list-item" style='color:#721c24'>
+                                                    {{-- <li class="credit-card-list-item" style='color:#721c24'>
                                                         Acct. No:<b> {{ $user->account_vfd ?? "No account generated yet" }}</b>
-                                                    </li>
+                                                    </li> --}}
                                                    
                                                     <li class="credit-card-list-item" style='color:#721c24'>
                                                         Bank Name:<b> VFD Microfinance Bank</b>
@@ -115,12 +115,12 @@
                                                 style='border:2px dotted #004085'>
                                                 <div class="card-header ">
                                                     <div class="credit-card-title text-center" style='color:#004085'>
-                                                        Moniepoint MFB</div>
+                                                        {{ $user->account_moniepoint ?? "No account generated yet!" }}</div>
                                                 </div>
                                                 <ul class="credit-card-list">
-                                                    <li class="credit-card-list-item" style='color:#004085'>
-                                                        Acct. No:<b> {{ $user->account_moniepoint ?? "No account generated yet!" }}</b>
-                                                    </li>
+                                                    {{-- <li class="credit-card-list-item" style='color:#004085'>
+                                                        Acct. No:<b> </b>
+                                                    </li> --}}
                                                     <li class="credit-card-list-item" style='color:#004085'>
                                                         Bank Name:<b> Moniepoint Microfinance Bank</b>
                                                     </li>
@@ -141,12 +141,12 @@
                                                 style='border:2px dotted #721c24'>
                                                 <div class="card-header ">
                                                     <div class="credit-card-title text-center" style='color:#721c24'>
-                                                        GTBank</div>
+                                                        {{ $user->account_gtb ?? "No account generated yet" }}</div>
                                                 </div>
                                                 <ul class="credit-card-list">
-                                                    <li class="credit-card-list-item" style='color:#721c24'>
+                                                    {{-- <li class="credit-card-list-item" style='color:#721c24'>
                                                         Acct. No:<b> {{ $user->account_gtb ?? "No account generated yet" }}</b>
-                                                    </li>
+                                                    </li> --}}
                                                    
                                                     <li class="credit-card-list-item" style='color:#721c24'>
                                                         Bank Name:<b> Guarantee Trust Bank</b>

@@ -182,14 +182,17 @@ class FundingController extends Controller
             $amountpaid -= 100;
         }
 
-        $user = User::where('account_vfd', $account_no)->orWhere('account_gtb', $account_no)->orWhere('account_moniepoint', $account_no)->firstOrFail();
+        $user = User::where('account_vfd', $account_no)
+        ->orWhere('account_gtb', $account_no)
+        ->orWhere('account_moniepoint', $account_no)
+        ->firstOrFail();
         $details = "Account credited with NGN" . $amountpaid . ' through virtual account';
         // file_put_contents(__DIR__ . '/gethere.txt', json_encode($request->all(), JSON_PRETTY_PRINT), FILE_APPEND);
-        $this->create_transaction('Account Funding', $request->input('efc2-g2dd-fvvb'), $details, 'credit', $amountpaid, $user->id, 1);
+        $this->create_transaction('Account Funding', $request->input('session_id'), $details, 'credit', $amountpaid, $user->id, 1);
         if ($user->first_time == 0) {
             $bonus = intval(0.1 * $amountpaid);
             $details = "You've received a welcome bonus of NGN" . $bonus;
-            $this->create_transaction('Bonus Credited', $request->input('data.id'), $details, 'credit',  $bonus, $user->id, 1);
+            $this->create_transaction('Bonus Credited', $request->input('session_id'), $details, 'credit',  $bonus, $user->id, 1);
             $user->first_time = 1;
             $user->save();
         }

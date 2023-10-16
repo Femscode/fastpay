@@ -383,11 +383,11 @@ class FundingController extends Controller
     {
         $response = Http::withHeaders([
             'Content-Type' => 'application/json',
-            'publicKey' => '0828358a-471f-4256-8fbe-ac453f1a95fd'
+            'publicKey' => env('VPAY_PUBLICKEY')
         ])
             ->post('https://services2.vpay.africa/api/service/v1/query/merchant/login', [
-                'username' => 'fasanyafemi@gmail.com',
-                'password' => 'Spacebar1##',
+                'username' => env('VPAY_USERNAME'),
+                'password' => env('VPAY_PASSWORD'),
             ]);
         $response_json = json_decode($response, true);
         // dd($response_json);
@@ -418,7 +418,7 @@ class FundingController extends Controller
         // dd($response_json);
         $response = Http::withHeaders([
             'Content-Type' => 'application/json',
-            'publicKey' => '0828358a-471f-4256-8fbe-ac453f1a95fd',
+            'publicKey' => env('VPAY_PUBLICKEY'),
             'b-access-token' => $access_token,
         ])
             ->post('https://services2.vpay.africa/api/service/v1/query/customer/add/', [
@@ -440,7 +440,7 @@ class FundingController extends Controller
 
         $customer_response = Http::withHeaders([
             'Content-Type' => 'application/json',
-            'publicKey' => '0828358a-471f-4256-8fbe-ac453f1a95fd',
+            'publicKey' => env('VPAY_PUBLICKEY'),
             'b-access-token' => $access_token,
         ])
             ->get('https://services2.vpay.africa/api/service/v1/query/customer/' . $customer_id . '/show');
@@ -456,7 +456,7 @@ class FundingController extends Controller
 
         $other_bank_response = Http::withHeaders([
             'Content-Type' => 'application/json',
-            'publicKey' => '0828358a-471f-4256-8fbe-ac453f1a95fd',
+            'publicKey' => env('VPAY_PUBLICKEY'),
             'b-access-token' => $access_token,
         ])
             ->post('https://services2.vpay.africa/api/service/v1/query/customer/otherbanks/virtualaccount/update/', [

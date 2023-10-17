@@ -182,14 +182,32 @@
                                                     value="{{ json_encode($array = ['phone' => $user->phone,]) }}">
                                               
 
-                                                <p class='mt-2 justify-content-center'
-                                                    style='display:flex;justify-content:center'>
-                                                    <button class="btn btn-success btn-lg btn-block" type="submit"
-                                                        value="Pay Now!">
-                                                        <i class="fa fa-plus-circle fa-lg"></i>
-                                                        Pay With Card
-                                                    </button>
-                                                </p>
+                                                    <div>
+                                                        <div class="form-check m-4">
+                                                            <input class="form-check-input" checked type="radio" name="type"
+                                                                value="transfer">
+                                                            <label class="form-check-label" for="Bank Transfer">
+                                                                Quick/Temporary Bank Transfer
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check m-4">
+                                                            <input class="form-check-input" type="radio" name="type" value="card">
+                                                            <label class="form-check-label" for="Pay With Card">
+                                                                Pay With Credit Card
+                                                            </label>
+                                                        </div>
+            
+                                                        <p class='mt-2 justify-content-center'
+                                                        style='display:flex;justify-content:center'>
+                                                        <button class="btn btn-success btn-lg btn-block" type="submit"
+                                                            value="Pay Now!">
+                                                            <i class="fa fa-plus-circle fa-lg"></i>
+                                                            Fund Wallet
+                                                        </button>
+                                                    </p>
+            
+                                                    </div>
+                                               
 
                                             </div>
                                         </div>

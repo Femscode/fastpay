@@ -381,7 +381,7 @@ class FundingController extends Controller
         $data['active'] = 'fundwallet';
         // dd($user);
 
-        // return view('dashboard.fundwallet',$data);
+        return view('dashboard.oldfundwallet',$data);
         // $reserve = $this->reserve_account_paystack();
         if ($user->account_vfd == null) {
             $reserve = $this->reserve_account_vpay();

@@ -151,9 +151,22 @@ class FundingController extends Controller
         $r_amountpaid = intval($request->input('data.amount'));
 
         $amountpaid = $r_amountpaid;
+        if ($amountpaid <= 200) {
+            $charges = 10;
+            $amountpaid -= $charges;
+        } elseif ($amountpaid < 1000) {
+            $charges = 30;
+            $amountpaid -= $charges;
+        } elseif ($amountpaid < 5000) {
+            $charges = 50;
+            $amountpaid -= $charges;
+        } else {
+            $charges = 100;
+            $amountpaid -= $charges;
+        }
 
         $user = User::where('email', $email)->firstOrFail();
-        $details = "Account credited with NGN" . $amountpaid;
+        $details = "Account credited with NGN" . $amountpaid. "| Charges :".$charges;
         // file_put_contents(__DIR__ . '/gethere.txt', json_encode($request->all(), JSON_PRETTY_PRINT), FILE_APPEND);
         $this->create_transaction('Account Funding', $request->input('data.id'), $details, 'credit', $amountpaid, $user->id, 1);
         if ($user->first_time == 0) {

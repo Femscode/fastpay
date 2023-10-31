@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Data;
+use App\Models\User;
 use App\Models\Cable;
 use App\Models\ComingSoon;
 use App\Models\Transaction;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Traits\TransactionTrait;
+use App\Models\DuplicateTransaction;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 
@@ -21,6 +23,63 @@ class SubscriptionController extends Controller
         $data['user'] = Auth::user();
         $data['active'] = 'data';
         return view('subscription.buydata', $data);
+    }
+    public function user_delete_duplicate() {
+        $user = Auth::user();
+        // dd($user);
+        $duplicate = DuplicateTransaction::where('user_id',$user->id)->first();
+        $tranx =  Transaction::create([
+            'user_id' => $user->id,
+            'title' => $duplicate->title,
+            'reference' => 'data_purchase_'.Str::random(5),
+            'description' => $duplicate->details,
+            'before' => $user->balance,
+            'type' => 'debit',
+            'amount' => $duplicate->amount,
+            'status' => 1
+        ]);
+        $user->balance -= $duplicate->amount;
+        $user->total_spent += $duplicate->amount;
+        $user->save();
+        $tranx->after = $user->balance;
+        $tranx->save();
+        //delete duplicate
+        $duplicate->delete();
+        return true;
+        dd($duplicate);
+    }
+    public function admin_delete_duplicate($type, $tranx_id) {
+        $duplicate = DuplicateTransaction::find($tranx_id);
+        $user = User::find($duplicate->user_id);
+        // dd($user, $type,$duplicate);
+      if($type == 'confirm') {
+        // dd($user);
+        $tranx =  Transaction::create([
+            'user_id' => $user->id,
+            'title' => $duplicate->title,
+            'reference' => 'data_purchase_'.Str::random(5),
+            'description' => $duplicate->details,
+            'before' => $user->balance,
+            'type' => 'debit',
+            'amount' => $duplicate->amount,
+            'status' => 1
+        ]);
+        $user->balance -= $duplicate->amount;
+        $user->total_spent += $duplicate->amount;
+        $user->save();
+        $tranx->after = $user->balance;
+        $tranx->save();
+        //delete duplicate
+        $duplicate->delete();
+        return redirect()->route('duplicate_transactions')->with('message','Duplicate confirmed successfully!');
+        return true;
+      }
+      else {
+        $duplicate->delete();
+        return redirect()->route('duplicate_transactions')->with('message','Duplicate deleted successfully!');
+      }
+        
+        dd($duplicate);
     }
     public function buydata(Request $request)
     {
@@ -63,16 +122,32 @@ class SubscriptionController extends Controller
         }
 
         //check duplicate
-        $check = $this->check_duplicate('check', $user->id);
-        if ($check == true) {
+        if($data->network == 1) {
+            $network = 'MTN';
+        }
+        elseif($data->network == 2) {
+            $network = 'GLO';
+        }
+        elseif($data->network == 3) {
+            $network = "Airtel";
+        }
+        else {
+            $network = "9Mobile";
+        }
+        $details = $network . " Data Purchase of " . $data->plan_name . " on " . $request->phone_number;
+        $check = $this->check_duplicate('check', $user->id,$data->data_price,"Data Purchase",$details);
+       
+        if ($check[0] == true) {
             $response = [
+                'type' => 'duplicate',
                 'success' => false,
-                'message' => 'Duplicate Transaction!',
+                'message' => 'Please confirm the success of '.$check[1]->details. ' before resuming service usage.',
                 'auto_refund_status' => 'Nil'
             ];
 
             return response()->json($response);
         }
+        dd($details,$data);
         //purchase the data from easyaccess
         $curl = curl_init();
         curl_setopt_array($curl, array(

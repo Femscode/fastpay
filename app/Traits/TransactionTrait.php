@@ -12,16 +12,24 @@ use Illuminate\Support\Facades\Http;
 
 trait TransactionTrait
 {
-    public function check_duplicate($type, $user_id)
+    public function check_duplicate($type, $user_id, $amount = null, $title = null, $details = null)
     {
         if ($type == 'check') {
 
             $duplicate = DuplicateTransaction::where('user_id', $user_id)->first();
+            // dd($duplicate);
             if ($duplicate !== null) {
-                return true;
+                return [true,$duplicate];
             }
-            DuplicateTransaction::create(['user_id' => $user_id]);
-            return false;
+           
+            $duplicate = DuplicateTransaction::create([
+                'user_id' => $user_id,
+                'title' => $title,
+                'details' => $details,
+                'amount' => $amount
+            ]);
+          
+            return [false,$duplicate];
         } else {
             $duplicate = DuplicateTransaction::where('user_id', $user_id)->first();
             $duplicate->delete();

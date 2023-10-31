@@ -10,4 +10,7 @@ class DuplicateTransaction extends Model
     use HasFactory;
     protected $guarded = [];
     protected $table = 'duplicate_transactions';
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
 }

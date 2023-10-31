@@ -228,10 +228,80 @@ export default {
                 }
               });
             } else {
+              if(response.data.type == 'duplicate') {
+                Swal.fire({
+  icon: "error",
+  title: response.data.message,
+  showCancelButton: true,
+  cancelButtonColor: "#d33",
+  confirmButtonColor: "#3085d6",
+  confirmButtonText: "Yes, Data Received!",
+  cancelButtonText: "No, Data Not Received!",
+  allowOutsideClick: false,
+  allowEscapeKey: false,
+  customClass: {
+    actions: 'custom-actions-class' // add a custom class to actions for styling
+  },
+  showCloseButton: true, // show a close button to dismiss the modal
+  showLoaderOnConfirm: true, // display a loader animation when Confirm is clicked
+  preConfirm: () => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve();
+      }, 2000); // Add a delay (2 seconds) to simulate a process
+    });
+  },
+}).then((result) => {
+  if (result.isConfirmed) {
+    axios
+          .get("/user_delete_duplicate")
+          .then((response) => {
+            console.log(response);
+            if (response.data == true) {
               Swal.fire({
+      icon: "success",
+      title: "Previous Transaction Verified! You can now proceed with the current transaction",
+      showConfirmButton: true,
+      confirmButtonColor: "#3085d6",
+      confirmButtonText: "Ok"
+    });
+            }
+          })
+          .catch((error) => {
+           
+            console.log(error.message);
+          });
+    // This code block is executed when the "Confirm" button is clicked.
+    
+  } else {
+    // This code block is executed when the "Deny" button is clicked.
+    Swal.fire({
+      title: "Please reach out to the admin to sort out this issue",
+      showCloseButton: true,
+      customClass: {
+        actions: 'custom-actions-class' // add the same custom class for styling
+      },
+      showCancelButton: true,
+      cancelButtonColor: "#3085d6",
+      confirmButtonColor: "#25d366",
+      confirmButtonText: "Chat with Admin",
+      cancelButtonText: "Not Now"
+    }).then((chatResult) => {
+      if (chatResult.isConfirmed) {
+        // Add your code to open a chat with the admin (e.g., redirect to WhatsApp)
+        window.location.href = "https://wa.me/2349058744473";
+      }
+    });
+  }
+});
+
+
+              }
+              else {
+                Swal.fire({
                 icon: "error",
                 // title: response.data.message,
-                title: "Opps, service currently not available and we are currently working on it, try again in 30Min time😢🙏",
+                title: response.data.message,
                 // text: "Updating...",
                 showConfirmButton: true, // updated
                 confirmButtonColor: "#3085d6", // added
@@ -243,6 +313,9 @@ export default {
                   // location.reload();
                 }
               });
+
+              }
+            
             }
           })
           .catch((error) => {

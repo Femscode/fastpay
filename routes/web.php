@@ -50,19 +50,16 @@ Route::any('test_flw',function() {
     curl_close($curl);
     dd($response);
 });
-Route::any('delete_duplicate', function () {
-
-    $duplicates = DuplicateTransaction::get();
-
-    if ($duplicates->isEmpty()) {
-        return 0; // List is empty
-    }
-
-    foreach ($duplicates as $duplicate) {
-        $duplicate->delete();
-    }
-    return 1;
-})->name('delete_duplicate');
+// Route::any('delete_duplicate', function () {
+//     $duplicates = DuplicateTransaction::get();
+//     if ($duplicates->isEmpty()) {
+//         return 0; 
+//     }
+//     foreach ($duplicates as $duplicate) {
+//         $duplicate->delete();
+//     }
+//     return 1;
+// })->name('delete_duplicate');
 // Route::view('/','coming_soon');
 // Route::any('/notify', [App\Http\Controllers\SubscriptionController::class, 'notify'])->name('notify');
 Route::get('/forgot-password', function () {
@@ -134,6 +131,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/fetch_cable_plan/{network}', [App\Http\Controllers\SubscriptionController::class, 'fetch_cable_plan']);
     Route::post('/fetch_meter_details', [App\Http\Controllers\SubscriptionController::class, 'fetch_meter_details']);
     Route::post('/fetch_decoder_details', [App\Http\Controllers\SubscriptionController::class, 'fetch_decoder_details']);
+    Route::any('/user_delete_duplicate', [App\Http\Controllers\SubscriptionController::class, 'user_delete_duplicate']);
 });
 
 Route::post('/live_add', [App\Http\Controllers\PayrollController::class, 'live_add'])->name('live_add');
@@ -152,6 +150,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/save_notifications', [App\Http\Controllers\SuperController::class, 'save_notifications'])->name('save_notifications');
     Route::any('/update_cable', [App\Http\Controllers\SuperController::class, 'update_cable'])->name('update_cable');
     Route::any('/block_user/{id}', [App\Http\Controllers\SuperController::class, 'block_user'])->name('block_user');
+    Route::any('/duplicate_transactions/', [App\Http\Controllers\SuperController::class, 'duplicate_transactions'])->name('duplicate_transactions');
+    Route::any('/admin_delete_duplicate/{type}/{id}', [App\Http\Controllers\SubscriptionController::class, 'admin_delete_duplicate'])->name('admin_delete_duplicate');
 });
 Route::group(['middleware' => 'auth'], function () {
     //new routes

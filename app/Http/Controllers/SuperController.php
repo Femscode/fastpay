@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Data;
 use App\Models\User;
 use App\Models\Cable;
+use App\Models\DuplicateTransaction;
 use App\Models\Transaction;
 use App\Models\Notification;
 use Illuminate\Http\Request;
@@ -36,6 +37,17 @@ class SuperController extends Controller
         $data['notification'] = Notification::find(1);
 
         return view('super.notifications', $data);
+
+    }
+    public function duplicate_transactions() {
+        $data['user'] = $user =  Auth::user();
+        if ($user->email !== 'fasanyafemi@gmail.com') {
+            return redirect()->route('dashboard');
+        }
+        $data['active'] = 'super';
+        $data['duplicate_transactions'] = DuplicateTransaction::latest()->get();
+
+        return view('super.duplicate_transactions', $data);
 
     }
     public function save_notifications(Request $request) {

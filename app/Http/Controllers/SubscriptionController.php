@@ -147,7 +147,7 @@ class SubscriptionController extends Controller
 
             return response()->json($response);
         }
-        dd($details,$data);
+        // dd($details,$data);
         //purchase the data from easyaccess
         $curl = curl_init();
         curl_setopt_array($curl, array(

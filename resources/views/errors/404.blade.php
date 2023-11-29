@@ -206,14 +206,16 @@
                     <!--begin::Title-->
                     <h3 class="fs-2hx text-dark mb-5 mt-4" id="how-it-works"
                         data-kt-scroll-offset="{default: 100, lg: 150}">
-                        We have Rebranded!<br>
-                        Say 👋 to <a style='color:#ebab21' href='https://vtubiz.com'>VTUBIZ.com</a></h3>
+                        We have Rebranded!
+                        {{-- Say 👋 to <a style='color:#ebab21' href='https://vtubiz.com'>VTUBIZ.com</a></h3> --}}
                     <!--end::Title-->
-
+                    
+                    
                     <!--begin::Text-->
                     <div style='color:#640f11' class="fs-5 fw-bold">
                         Better Xperience, Cheaper Products and Reliable Service!
                     </div>
+                    <a class='btn btn-success' href='https://vtubiz.com'>Take Me To The New Website ➜</a>
                     <!--end::Text-->
                 </div>
                 <!--end::Heading-->
@@ -322,7 +324,6 @@
 
                     </div>
                     <!--end::Col-->
-                    <a class='btn btn-success' href='https://vtubiz.com'>Take Me To The New Website ➜</a>
                 </div>
                 <!--end::Row-->
 

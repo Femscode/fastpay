@@ -213,8 +213,8 @@
                     
                     <!--begin::Text-->
                     <div style='color:#640f11' class="fs-5 fw-bold">
-                        Better Xperience, Cheaper Products and Reliable Service!
-                    </div>
+                        Better Xperience, Cheaper Products<br> and Reliable Service!
+                    </div><br>
                     <a class='btn btn-success' href='https://vtubiz.com'>Take Me To The New Website ➜</a>
                     <!--end::Text-->
                 </div>
